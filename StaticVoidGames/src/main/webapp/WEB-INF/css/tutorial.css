@@ -1,0 +1,16 @@
+div#contentPane{
+	margin-left:400;
+}
+
+div#leftTutorialNav{
+	background-color:rgba(0, 0, 0, .75);
+	float:left;
+}
+
+a.current{
+	color:red;
+}
+
+div.tutorialDiv img{
+	max-width:100%;
+}

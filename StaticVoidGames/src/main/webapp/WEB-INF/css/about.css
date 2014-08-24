@@ -1,0 +1,18 @@
+div#contentPane{
+	margin-left:225px;
+}
+
+div#aboutNavigation{
+	background-color:rgba(0, 0, 0, .5);
+	float:left;
+	width:200px;
+	margin-top:25px;
+}
+
+a.current{
+	color:red;
+}
+
+div.aboutDiv img{
+	max-width:100%;
+}

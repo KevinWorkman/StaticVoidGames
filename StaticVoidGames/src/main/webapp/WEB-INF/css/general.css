@@ -1,0 +1,64 @@
+/*This file contains general css classes used throughout the site. */
+/*Try not to let it get overrun by stuff we don't use anymore!*/
+
+/*ALIGNMENT*/
+.centered{
+	text-align:center;
+}
+
+.centeredBlock{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.inlineBlock{
+	display:inline-block;
+}
+
+.floatLeft{
+	float:left;
+}
+
+.floatRight{
+	float:right;
+}
+
+
+
+/*MARGINS*/
+.topMargin{
+	margin-top:25px;
+}
+
+.textPadding{
+	padding:25px;
+}
+
+/*BORDERS*/
+.thinGrayBorder{
+	border:thin solid gray;
+}
+
+/*BACKGROUNDS*/
+.lightBackground{
+	background-color:white;
+}
+
+.darkBackground{
+	background-color:black;
+}
+
+/*TEXT COLOR*/
+.darkText{
+	color:black;
+}
+
+.lightText{
+	color:white;
+}
+
+/*WIDTH*/
+.width75{
+	width:75%;
+}
+

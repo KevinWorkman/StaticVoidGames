@@ -1,0 +1,25 @@
+div.smallGameLink{
+	border:thin solid gray;
+	display:inline-block;
+	margin:10px;
+	max-width:300px;
+	overflow:hidden;
+	background:black;
+	text-align:center;
+	padding:10px;
+}
+
+div.smallGameLink img{
+	height:100px;
+	max-width:100px;
+	vertical-align:top;
+}
+
+div.smallGameLink div.smallGameLinkText{
+	
+	vertical-align:top;
+	overflow:hidden;
+}
+
+
+
