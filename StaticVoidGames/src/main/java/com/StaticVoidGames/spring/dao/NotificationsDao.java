@@ -10,7 +10,7 @@ import com.StaticVoidGames.notifications.Subscription;
 public interface NotificationsDao {
 
 	public int getUnviewedCommentsCount(String user);
-	public List<Comment> getCommentsForSubscription(Subscription s);
+    public List<Comment> getCommentsForSubscriptions(Iterable<Subscription> subscriptions);
 	public List<Comment> getUnviewedCommentsForSubscription(Subscription s);
 	public List<Subscription> getSubscriptionsForMember(String member);
 	public int getUnviewedCommentsCountForSubscription(Subscription s);
