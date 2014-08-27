@@ -137,8 +137,8 @@ public class NotificationsController implements NotificationsControllerInterface
 		System.out.println("Setting member viewed time.");
 		start = System.currentTimeMillis();
 		
-		
-		notificationsDao.setMemberViewedNotificationsTime(loggedInMember, System.currentTimeMillis());
+		//TODO
+		//notificationsDao.setMemberViewedNotificationsTime(loggedInMember, System.currentTimeMillis());
 		
 		System.out.println("Done setting member viewed time.");
 		elapsed = System.currentTimeMillis() - start;
@@ -146,7 +146,8 @@ public class NotificationsController implements NotificationsControllerInterface
 		System.out.println("Setting unviewed notification count.");
 		start = System.currentTimeMillis();
 		
-		model.addAttribute(AttributeNames.notificationCount, notificationsDao.getUnviewedCommentsCount(loggedInMember));
+		//TODO
+		//model.addAttribute(AttributeNames.notificationCount, notificationsDao.getUnviewedCommentsCount(loggedInMember));
 		
 		System.out.println("Done setting unviewed notification count.");
 		elapsed = System.currentTimeMillis() - start;
