@@ -1,12 +1,17 @@
 package com.StaticVoidGames.spring.dao.jpa;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
-
+import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.blog.BlogEntry;
+import com.StaticVoidGames.comments.Comment;
+import com.StaticVoidGames.comments.QComment;
+import com.StaticVoidGames.games.Game;
+import com.StaticVoidGames.members.Member;
+import com.StaticVoidGames.notifications.QSubscription;
+import com.StaticVoidGames.notifications.Subscription;
+import com.StaticVoidGames.spring.dao.NotificationsDao;
+import com.mysema.query.BooleanBuilder;
+import com.mysema.query.jpa.hibernate.HibernateQuery;
+import com.mysema.query.types.Predicate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -15,13 +20,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.StaticVoidGames.TimestampedEvent;
-import com.StaticVoidGames.blog.BlogEntry;
-import com.StaticVoidGames.comments.Comment;
-import com.StaticVoidGames.games.Game;
-import com.StaticVoidGames.members.Member;
-import com.StaticVoidGames.notifications.Subscription;
-import com.StaticVoidGames.spring.dao.NotificationsDao;
+import java.util.*;
 
 /**
  * This whole thing needs to be overhauled, as it is currently WAY too slow.
@@ -84,23 +83,29 @@ public class NotificationsJpaDao implements NotificationsDao{
 		return count;
 	}
 
+    public List<Comment> getCommentsForSubscriptions(Iterable<Subscription> subscriptions) {
+        QComment comment = QComment.comment1;
 
-	@Override
-	public List<Comment> getCommentsForSubscription(Subscription s) {
-		
-		//TODO only return comments that are older than the subscription?
-		//that way old comments aren't listed in the notifications list?
-		
-		List<Comment> notifications = (List<Comment>) sessionFactory.getCurrentSession().createCriteria(Comment.class)
-				.add(Restrictions.eq("thingCommentedOn", s.getEntityId()))
-				.add(Restrictions.ne("commentingMember", s.getMember()))
-				.list();
-		return notifications;
-		
-	}
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        // loop through each subscription
+        for (Subscription subscription : subscriptions) {
+            // create the the comment specific predicate
+            predicate.or(
+                comment.thingCommentedOn.eq(subscription.getEntityId())
+                .and(comment.commentingMember.eq(subscription.getMember()))
+            );
+        }
+
+        return createQuery().from(comment).where(predicate).orderBy(comment.timestamp.desc()).list(comment);
+    }
+
+    private HibernateQuery createQuery() {
+        return new HibernateQuery(sessionFactory.getCurrentSession());
+    }
 
 
-	@Override
+    @Override
 	public List<Comment> getUnviewedCommentsForSubscription(Subscription s) {
 		List<Comment> notifications = (List<Comment>) sessionFactory.getCurrentSession().createCriteria(Comment.class)
 				.add(Restrictions.eq("thingCommentedOn", s.getEntityId()))
@@ -120,12 +125,11 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	@Override
 	public List<Subscription> getSubscriptionsForMember(String member) {
-		
-		List<Subscription> subscriptions = (List<Subscription>) sessionFactory.getCurrentSession().createCriteria(Subscription.class)
-				.add( Restrictions.eq("member", member))
-				.list();
-		
-		return subscriptions;
+        QSubscription subscription = QSubscription.subscription;
+
+        Predicate predicate = subscription.member.eq(member);
+
+		return createQuery().from(subscription).where(predicate).list(subscription);
 	}
 
 	
@@ -152,22 +156,9 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	@Override
 	public List<Comment> getCommentsForMember(String member) {
-		
-		List<Comment> notifications = new ArrayList<Comment>();
-		
-		for(Subscription s : getSubscriptionsForMember(member)){
-			notifications.addAll(getCommentsForSubscription(s));
-		}
-		
-		Collections.sort(notifications, new Comparator<Comment>(){
+        List<Subscription> subscriptions = getSubscriptionsForMember(member);
 
-			@Override
-			public int compare(Comment n1, Comment n2) {
-				return Long.valueOf(n2.getTimestamp()).compareTo(n1.getTimestamp());
-			}
-		});
-		
-		return notifications;
+        return getCommentsForSubscriptions(subscriptions);
 	}
 
 	
