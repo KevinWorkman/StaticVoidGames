@@ -25,7 +25,7 @@
 			<a href="<c:url value="/blog" />">Blog</a>
 			
 			<c:choose>
-				<c:when test="${isLoggedIn and false}">
+				<c:when test="${isLoggedIn}">
 				
 					<a id="notificationsLink" href="<c:url value="/notifications" />">Notifications</a>
 				

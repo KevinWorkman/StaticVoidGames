@@ -12,10 +12,10 @@ import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.hibernate.HibernateQuery;
 import com.mysema.query.types.Predicate;
-import org.hibernate.Session;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * This whole thing needs to be overhauled, as it is currently WAY too slow.
+ * Provides access to Objects related to notifications.
  */
 @Service
 public class NotificationsJpaDao implements NotificationsDao{
@@ -36,51 +36,26 @@ public class NotificationsJpaDao implements NotificationsDao{
 	}
 	
 	@Override
-	public int getUnviewedCommentsCountForSubscription(Subscription s) {
-		Number n = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
-				.add(Restrictions.eq("thingCommentedOn", s.getEntityId()))
-				.add(Restrictions.ne("commentingMember", s.getMember()))
-				.add(Restrictions.gt("timestamp", s.getLastNotificationViewedTimestamp()))
-				.setProjection(Projections.rowCount())
-				.uniqueResult();
-		return n.intValue();
-	}
-	
-	@Override
-	public int getUnviewedCommentsCountNoSession(String user) {
-		Session session = sessionFactory.openSession();
-		
-		int count = 0;
-		
-		for(Subscription s : getSubscriptionsForMember(user, session)){
-			count += getUnviewedCommentsCountForSubscription(s, session);
-		}
-		
-		session.close();
-		
-		return count;
-	}
-
-	private int getUnviewedCommentsCountForSubscription(Subscription s, Session session) {
-		Number n = (Number) session.createCriteria(Comment.class)
-				.add(Restrictions.eq("thingCommentedOn", s.getEntityId()))
-				.add(Restrictions.ne("commentingMember", s.getMember()))
-				.add(Restrictions.gt("timestamp", s.getLastNotificationViewedTimestamp()))
-				.setProjection(Projections.rowCount())
-				.uniqueResult();
-		return n.intValue();
-	}
-
-	@Override
 	public int getUnviewedCommentsCount(String user) {
 		
-		int count = 0;
 		
-		for(Subscription s : getSubscriptionsForMember(user)){
-			count += getUnviewedCommentsCountForSubscription(s);
-		}
-	
-		return count;
+		List<Subscription> subscriptions = getSubscriptionsForMember(user);
+		
+		 QComment comment = QComment.comment1;
+
+	        BooleanBuilder predicate = new BooleanBuilder();
+
+	        // loop through each subscription
+	        for (Subscription subscription : subscriptions) {
+	            // create the the comment specific predicate
+	            predicate.or(
+	                comment.thingCommentedOn.eq(subscription.getEntityId())
+	                .and(comment.commentingMember.ne(subscription.getMember()))
+	                .and(comment.timestamp.gt(subscription.getLastNotificationViewedTimestamp()))
+	            );
+	        }
+
+	        return createQuery().from(comment).where(predicate).list(comment).size();
 	}
 
     public List<Comment> getCommentsForSubscriptions(Iterable<Subscription> subscriptions) {
@@ -93,7 +68,7 @@ public class NotificationsJpaDao implements NotificationsDao{
             // create the the comment specific predicate
             predicate.or(
                 comment.thingCommentedOn.eq(subscription.getEntityId())
-                .and(comment.commentingMember.eq(subscription.getMember()))
+                .and(comment.commentingMember.ne(subscription.getMember()))
             );
         }
 
@@ -103,25 +78,6 @@ public class NotificationsJpaDao implements NotificationsDao{
     private HibernateQuery createQuery() {
         return new HibernateQuery(sessionFactory.getCurrentSession());
     }
-
-
-    @Override
-	public List<Comment> getUnviewedCommentsForSubscription(Subscription s) {
-		List<Comment> notifications = (List<Comment>) sessionFactory.getCurrentSession().createCriteria(Comment.class)
-				.add(Restrictions.eq("thingCommentedOn", s.getEntityId()))
-				.add(Restrictions.ne("commentingMember", s.getMember()))
-				.add(Restrictions.gt("timestamp", s.getLastNotificationViewedTimestamp())).list();
-		return notifications;
-	}
-
-	private List<Subscription> getSubscriptionsForMember(String member, Session session) {
-		
-		List<Subscription> subscriptions = (List<Subscription>) session.createCriteria(Subscription.class)
-				.add( Restrictions.eq("member", member))
-				.list();
-		
-		return subscriptions;
-	}
 
 	@Override
 	public List<Subscription> getSubscriptionsForMember(String member) {
@@ -136,21 +92,24 @@ public class NotificationsJpaDao implements NotificationsDao{
 	@Override
 	public List<Comment> getUnviewedCommentsForMember(String member) {
 		
-		List<Comment> notifications = new ArrayList<Comment>();
+		List<Subscription> subscriptions = getSubscriptionsForMember(member);
 		
-		for(Subscription s : getSubscriptionsForMember(member)){
-			notifications.addAll(getUnviewedCommentsForSubscription(s));
-		}
-		
-		Collections.sort(notifications, new Comparator<Comment>(){
-			@Override
-			public int compare(Comment n1, Comment n2) {
-				return Long.valueOf(n2.getTimestamp()).compareTo(n1.getTimestamp());
-			}
-			
-		});
-		
-		return notifications;
+	       QComment comment = QComment.comment1;
+
+	        BooleanBuilder predicate = new BooleanBuilder();
+
+	        // loop through each subscription
+	        for (Subscription subscription : subscriptions) {
+	            // create the the comment specific predicate
+	            predicate.or(
+	                comment.thingCommentedOn.eq(subscription.getEntityId())
+	                .and(comment.commentingMember.ne(subscription.getMember()))
+	                .and(comment.timestamp.gt(subscription.getLastNotificationViewedTimestamp()))
+	            );
+	        }
+
+	        return createQuery().from(comment).where(predicate).orderBy(comment.timestamp.desc()).list(comment);
+	  
 	}	
 	
 
@@ -236,14 +195,29 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	@Override
 	public void setMemberViewedNotificationsTime(String member, long time) {
-		List<Subscription> subscriptions = (List<Subscription>) sessionFactory.getCurrentSession().createCriteria(Subscription.class)
-				.add( Restrictions.eq("member", member))
-				.list();
+//		List<Subscription> subscriptions = (List<Subscription>) sessionFactory.getCurrentSession().createCriteria(Subscription.class)
+//				.add( Restrictions.eq("member", member))
+//				.list();
+//		
+//		for(Subscription s : subscriptions){
+//			s.setLastNotificationViewedTimestamp(time);
+//			sessionFactory.getCurrentSession().saveOrUpdate(s);
+//		}
+//		
+		//above approach is way too slow
+		//use HQL instead
 		
-		for(Subscription s : subscriptions){
-			s.setLastNotificationViewedTimestamp(time);
-			sessionFactory.getCurrentSession().saveOrUpdate(s);
+		try{
+			Query query = sessionFactory.getCurrentSession().createQuery("update Subscription S set S.lastNotificationViewedTimestamp = :currentTime where S.member = :memberName");
+			query.setLong("currentTime", time);
+			query.setString("memberName", member);
+			int result = query.executeUpdate();
 		}
+		catch(Exception e){
+			System.out.println("ERROR: " + e.toString());
+		}
+		
+		
 	}	
 	
 	public long getNextId() {
