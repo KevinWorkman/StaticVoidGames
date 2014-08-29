@@ -114,8 +114,8 @@ public class MemberController implements MemberControllerInterface{
 	}
 	
 	@Override
-	public String editMemberSubmit(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String memberName, @RequestParam("profilePicture") MultipartFile profilePicture) {
-
+	public String editMemberSubmit(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String memberName, @RequestParam("profilePicture") MultipartFile profilePicture, @RequestParam("email") String email, @RequestParam("tag") String tag,  @RequestParam("description") String description,  @RequestParam(required=false, value="includeInLocalDatabase") Boolean includeInLocalDatabase){
+	
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 
 		if(loggedInMember == null || !loggedInMember.equals(memberName)){
@@ -123,29 +123,37 @@ public class MemberController implements MemberControllerInterface{
 		}
 		
 		Member member = memberDao.getMember(memberName);
-		String tag = request.getParameter("tag");
 		
+		if(profilePicture != null){
+		System.out.println("Image: " + profilePicture.getOriginalFilename());
+		}
+		else{
+			System.out.println("IMAGE IS NULL");
+		}
 
-		String awsAccessKey = env.getProperty("aws.accessKey");
-		String awsSecretKey = env.getProperty("aws.secretKey");
+//		String awsAccessKey = env.getProperty("aws.accessKey");
+//		String awsSecretKey = env.getProperty("aws.secretKey");
+//		
+//		String bucket = env.getProperty("s3.bucket");
+//		String key = "users/" + memberName + "/" + profilePicture.getOriginalFilename();
+//
+//		ObjectMetadata meta = new ObjectMetadata();
+//		meta.setContentLength(profilePicture.getSize());
+//
+//		try{
+//			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+//			s3.putObject(bucket, key, profilePicture.getInputStream(), meta);
+//			s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+//			member.setImageUrl(profilePicture.getOriginalFilename());
+//		}
+//		catch(Exception e){
+//			//TODO: let user know something went wrong
+//			e.printStackTrace();
+//		}
 		
-		String bucket = env.getProperty("s3.bucket");
-		String key = "users/" + memberName + "/" + profilePicture.getOriginalFilename();
-
-		ObjectMetadata meta = new ObjectMetadata();
-		meta.setContentLength(profilePicture.getSize());
-
-		try{
-			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
-			s3.putObject(bucket, key, profilePicture.getInputStream(), meta);
-			s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
-			member.setImageUrl(profilePicture.getOriginalFilename());
-		}
-		catch(Exception e){
-			//TODO: let user know something went wrong
-			e.printStackTrace();
-		}
-				
+		member.setEmail(email);
+		member.setDescription(description);
+		member.setIncludeInLocalDatabase(includeInLocalDatabase!= null? includeInLocalDatabase : false);
 		member.setTag(tag);
 		memberDao.updateMember(member);
 

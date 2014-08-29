@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
  * Class encapsulating a registered member.
@@ -60,6 +61,8 @@ public class Member implements TimestampedEvent{
 	 * The time (MS since epoch) that this member registered.
 	 */
 	private long joinTimestamp;
+	
+	private boolean includeInLocalDatabase = true;
 	
 	/**
 	 * @deprecated the old-style password hash.
@@ -120,6 +123,24 @@ public class Member implements TimestampedEvent{
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getParsedDescription(){
+		
+		if(description == null){
+			return "This user has not entered a description yet.";
+		}
+		
+		return PageDownUtils.getSanitizedHtml(description);
+	}
+	
+	public String getParsedTag(){
+		
+		if(tag == null){
+			return "Static Void Gamer";
+		}
+		
+		return PageDownUtils.getSanitizedHtml(tag);
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -179,6 +200,16 @@ public class Member implements TimestampedEvent{
 	@Override
 	public String getMember() {
 		return memberName;
+	}
+
+
+	public boolean isIncludeInLocalDatabase() {
+		return includeInLocalDatabase;
+	}
+
+
+	public void setIncludeInLocalDatabase(boolean includeInLocalDatabase) {
+		this.includeInLocalDatabase = includeInLocalDatabase;
 	}
 }
 

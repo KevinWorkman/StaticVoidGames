@@ -101,7 +101,7 @@
 					
 					<p><a href="<c:url value="/members/${commentView.getMember().getMemberName()}" />">${commentView.getMember().getMemberName()}</a></p>
 					<hr/>
-					<p>${commentView.getMember().getTag()}</p>
+					<p>${commentView.getMember().getParsedTag()}</p>
 					
 				</div>
 		

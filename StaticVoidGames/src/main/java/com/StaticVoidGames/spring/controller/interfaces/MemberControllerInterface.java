@@ -26,7 +26,7 @@ public interface MemberControllerInterface {
 	
 	@Transactional
 	@RequestMapping(value = "/{member}/edit", method = RequestMethod.POST)
-	public String editMemberSubmit(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member, @RequestParam("profilePicture") MultipartFile profilePicture);
+	public String editMemberSubmit(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member, @RequestParam("profilePicture") MultipartFile profilePicture, @RequestParam("email") String email, @RequestParam("tag") String tag,  @RequestParam("description") String description,  @RequestParam(required=false, value="includeInLocalDatabase") Boolean includeInLocalDatabase);
 	
 	@Transactional
 	@RequestMapping(value = "/{member}/edit", method = RequestMethod.GET)

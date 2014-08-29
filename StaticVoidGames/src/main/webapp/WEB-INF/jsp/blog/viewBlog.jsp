@@ -47,7 +47,7 @@
 					<img src="<c:url value="${commentView.getMemberPictureUrl() != null ? commentView.getMemberPictureUrl() : '/images/defaultProfilePictures/profile1.jpg'}" />"/>
 					<p><a href="<c:url value="/members/${commentView.getMember().getMemberName()}" />">${commentView.getMember().getMemberName()}</a></p>
 					<hr/>
-					<p>${commentView.getMember().getTag()}</p>
+					<p>${commentView.getMember().getParsedTag()}</p>
 				</div>
 				<hr />
 				<div class="centered">

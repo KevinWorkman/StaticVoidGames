@@ -36,16 +36,16 @@
 	
 	
 	<div class="darkBackground thinGrayBorder topMargin centeredBlock width75 centered">
-		<h1>${memberName}</h1>
+		<h1>${member.getMemberName()}</h1>
 	
 		<img src="${profilePicture}" style="width:200px" />
 	
 		
-		<p>${member.getTag()}</p>
+		<p>${member.getParsedTag()}</p>
 	</div>
 	
 	
-	<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin"> ${member.getDescription()}</div>
+	<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin"> ${member.getParsedDescription()}</div>
 	
 	
 	<c:forEach items="${publishedGames}" var="game">
@@ -64,7 +64,7 @@
 			</a>
 	</c:forEach>
 
-	<c:if test="${isOwner}">
+	<c:if test="${isOwner and not empty unpublishedGames}">
 		<p>Your unpublished games (only you can see this)</p>
 		<c:forEach items="${unpublishedGames}" var="game">
 			<p>
@@ -86,7 +86,7 @@
 					
 					<p><a href="<c:url value="/members/${commentView.getMember().getMemberName()}" />">${commentView.getMember().getMemberName()}</a></p>
 					<hr/>
-					<p>${commentView.getMember().getTag()}</p>
+					<p>${commentView.getMember().getParsedTag()}</p>
 					
 					
 					
