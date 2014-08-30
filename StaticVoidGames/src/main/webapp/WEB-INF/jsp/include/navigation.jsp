@@ -23,6 +23,7 @@
 			<a href="<c:url value="/games/new" />">Upload</a>
 			<a href="<c:url value="/about" />">About</a>
 			<a href="<c:url value="/blog" />">Blog</a>
+			<a href="<c:url value="/irc" />">IRC</a>
 			
 			<c:choose>
 				<c:when test="${isLoggedIn}">
