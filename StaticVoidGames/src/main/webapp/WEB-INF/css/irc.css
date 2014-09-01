@@ -1,0 +1,12 @@
+div#contentPane{
+	width: 99%;
+	height: 75%;
+}
+
+.topMargin{
+	margin-top:5px;
+}
+
+.textPadding{
+	padding:5px;
+}
