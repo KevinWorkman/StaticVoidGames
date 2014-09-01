@@ -16,3 +16,7 @@ a.current{
 div.aboutDiv img{
 	max-width:100%;
 }
+
+div.aboutDiv a{
+	color:blue;
+}

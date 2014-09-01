@@ -8,8 +8,13 @@ body {
 
 
 a{
-	color:lightblue;
+	color:lightBlue;
 	text-decoration:none;
+}
+
+a:hover{
+	color:orange;
+	text-decoration:underline;
 }
 
 #topBar{
@@ -42,7 +47,9 @@ a{
 	padding-left:10px;
 	padding-right:10px;
 	
+
 	
+
 
 
 	

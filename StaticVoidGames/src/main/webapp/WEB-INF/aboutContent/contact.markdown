@@ -1,5 +1,10 @@
-This site is still very much a work in progress. I'm still testing some theories out, trying to figure out what works best. Any feedback is greatly appreciated.
+You can find Static Void Games on both [facebook](https://www.facebook.com/StaticVoidGames) and [twitter](https://twitter.com/StaticVoidGames).
 
-You can find Static Void Games on both facebook and twitter.
+I also hang out on several programming forums:
+
+ - [JavaProgrammingForums.com](http://www.javaprogrammingforums.com/)
+ - [Java-Forums.org](http://www.java-forums.org/)
+ - [Processing Forum](http://forum.processing.org/two/)
+ - [Java-Gaming.org](http://www.java-gaming.org/)
 
 If all else fails, please do not hesitate to send me an email at kevin@StaticVoidGames.com!
