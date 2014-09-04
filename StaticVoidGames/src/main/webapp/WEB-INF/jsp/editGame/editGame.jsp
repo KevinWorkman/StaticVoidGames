@@ -71,6 +71,11 @@
 					<input class="editGameSubmitButton" name="submit" type="submit" value="Submit" />
 				</div>
 		</form:form>
+		
+		    <%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
+    
+    
 	</div>
 </body>
 </html>

@@ -29,6 +29,10 @@
    	<p><input name="submit" type="submit" value="Okay"/></p>
 </div>
 </form>
+
+    <%@ include file="include/advertisement.jsp" %>
+    <%@ include file="include/openSource.jsp" %>
+
 </div>
 </body>
 </html>

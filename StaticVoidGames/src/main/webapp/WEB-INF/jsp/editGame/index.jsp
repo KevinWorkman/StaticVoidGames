@@ -57,6 +57,10 @@
 	 	<div class="editLinkDiv">
 	 		<a href="<c:url value="/games/${gameObj.getGameName()}/edit/rating" />">Content Rating</a>
 		</div>
+		
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
+		
 	</div>      
 </body>
 </html>

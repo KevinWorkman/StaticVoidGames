@@ -24,6 +24,7 @@ import com.StaticVoidGames.spring.dao.BlogEntryDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 
 /**
  * Controller that handles miscellaneous pages: the front page, login, registration, etc.
@@ -52,6 +53,13 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 		model.addAttribute("events", notificationsDao.getEvents(15));
 		model.addAttribute("latestBlog", blogDao.getBlogsOfMember("Kevin").get(0));
 		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/index.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+				}
+		);
+		
 		long elapsed = System.currentTimeMillis() - start;
 		
 		System.out.println("Controller Elapsed: " + elapsed);
@@ -61,6 +69,14 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Override
 	@RequestMapping(value = "/login")
 	public String login(ModelMap model, HttpSession session) {
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/login.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+				}
+		);
+		
 		return "login";
 	}
 	
@@ -107,11 +123,27 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 		
 		model.addAttribute("memberPointsViews", mpvs);
 		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/standings.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+				}
+		);
+		
 		return "points";
 	}
 
 	@Override
 	public String register(ModelMap model, HttpSession session) {
+		
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/register.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+				}
+		);
+		
 		return "register";
 	}
 
@@ -145,6 +177,14 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 
 	@Override
 	public String oldLogin(ModelMap model, HttpSession session) {
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/oldLogin.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+				}
+		);
+		
 		return "oldLogin";
 	}
 

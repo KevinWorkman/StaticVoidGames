@@ -54,6 +54,10 @@
 		
 			<input name="submit" type="submit" value="Submit" />
 		</form>
+		
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
+		
 	</div>
 </div>
 </body>

@@ -23,6 +23,7 @@ import com.StaticVoidGames.spring.controller.interfaces.EditGameControllerInterf
 import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
 import com.StaticVoidGames.spring.util.FormField;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -134,6 +135,13 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		session.setAttribute("gameObj", gameObj);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/index.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
+			}
+		);
 
 		return "editGame/index";
 	}
@@ -336,6 +344,13 @@ public class EditGameController implements EditGameControllerInterface{
 		model.addAttribute("gameForm", gameObj.getGameForm());
 		model.addAttribute("formFields", formFields.get(section));
 		model.addAttribute("gameObj", gameObj);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/editGame.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
+			}
+		);
 
 		return "editGame/editGame";
 	}

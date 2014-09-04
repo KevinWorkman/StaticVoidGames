@@ -20,7 +20,8 @@
 
 	<p>Pick a tutorial from the left!</p>
 
-    <%@ include file="../include/advertisement.jsp" %>
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
    </div>
 </body>
 </html>

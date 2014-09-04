@@ -25,6 +25,7 @@ import com.StaticVoidGames.spring.controller.interfaces.NotificationsControllerI
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 
 /**
  * Controller that handles notifications.
@@ -53,6 +54,14 @@ public class NotificationsController implements NotificationsControllerInterface
 		List<Subscription> subs = notificationsDao.getSubscriptionsForMember(loggedInMember);
 
 		model.addAttribute("subscriptions", subs);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/notifications/yourSubscriptions.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/NotificationsController.java")
+			}
+		);
+		
 
 		return "notifications/yourSubscriptions";
 	}
@@ -162,7 +171,13 @@ public class NotificationsController implements NotificationsControllerInterface
 		elapsed = System.currentTimeMillis() - start;
 		System.out.println("Elapsed: " + elapsed);
 
-
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/notifications/yourNotifications.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/NotificationsController.java")
+			}
+		);
+		
 
 		return "notifications/yourNotifications";
 	}
@@ -202,6 +217,13 @@ public class NotificationsController implements NotificationsControllerInterface
 		System.out.println("Done converting to EventViews.");
 		elapsed = System.currentTimeMillis() - start;
 		System.out.println("Elapsed: " + elapsed);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/notifications/events.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/NotificationsController.java")
+			}
+		);
 
 		return "notifications/events";
 	}

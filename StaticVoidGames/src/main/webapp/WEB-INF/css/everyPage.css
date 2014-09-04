@@ -72,3 +72,14 @@ a:hover{
 	margin-left: auto;
     margin-right: auto;
 }
+
+div.ad{
+	background:black;
+	width: 800;
+	margin-left: auto;
+    margin-right: auto;
+    border: thin solid white;
+    text-align:center;
+    margin-top:20px;
+    padding-top:5px;
+}

@@ -32,7 +32,7 @@ public interface BlogControllerInterface {
 
 	@Transactional
 	@RequestMapping(value="/new", method = RequestMethod.GET)
-    public String newBlogEntry();
+    public String newBlogEntry(ModelMap model);
 
 	@Transactional
 	@RequestMapping(value="/new", method = RequestMethod.POST)

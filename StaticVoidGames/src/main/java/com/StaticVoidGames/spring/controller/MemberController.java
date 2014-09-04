@@ -23,6 +23,7 @@ import com.StaticVoidGames.spring.dao.CommentDao;
 import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -81,6 +82,13 @@ public class MemberController implements MemberControllerInterface{
 		
 		model.addAttribute("commentViews", commentViews);
 		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/showMember.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/MemberController.java")
+			}
+		);
+		
 		return "members/showMember";
 	}
 
@@ -88,6 +96,14 @@ public class MemberController implements MemberControllerInterface{
 	@Transactional
 	public String listMembers(HttpServletRequest request,ModelMap model, HttpSession session) {
 		model.addAttribute("members", memberDao.getAllMembers());
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/listMembers.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/MemberController.java")
+			}
+		);
+		
 		return "members/listMembers";
 	}
 
@@ -109,6 +125,13 @@ public class MemberController implements MemberControllerInterface{
 		}
 
 		model.addAttribute("member", m);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/editMember.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/MemberController.java")
+			}
+		);
 
 		return "members/editMember";
 	}

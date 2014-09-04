@@ -32,6 +32,9 @@
 		</c:forEach>
 
 	</table>
+	
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
 
 </body>
 </html>

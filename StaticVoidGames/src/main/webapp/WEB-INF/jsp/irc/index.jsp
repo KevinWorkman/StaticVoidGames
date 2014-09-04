@@ -48,7 +48,8 @@ function showHide(shID) {
 		<iframe src="https://kiwiirc.com/client/irc.esper.net/?nick=nickname?&theme=cli#StaticVoidGames" style="border:0; width:100%; height:100%;"></iframe>
 	</div>
 
-    <%@ include file="../include/advertisement.jsp" %>
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
    </div>
 </body>
 </html>

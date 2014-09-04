@@ -26,7 +26,13 @@
 		<p>${mpv.getMember().getMemberName()} - ${mpv.getPoints()}</p>
 	</c:forEach>
 	
+	
+	    <%@ include file="include/advertisement.jsp" %>
+    	<%@ include file="include/openSource.jsp" %>
+	
 	</div>
+	
+	
 
 </body>
 </html>

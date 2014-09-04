@@ -27,6 +27,7 @@ import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 
 /**
  * Controller that handles game pages, other than the edit pages.
@@ -57,6 +58,13 @@ public class GameController implements GameControllerInterface{
 		List<Game> games = gameDao.getAllPublishedGames();
 		session.setAttribute("games", games);
 		model.addAttribute("count", games.size());
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/games/listGames.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/GameController.java")
+			}
+		);
 		
 		return "/games/listGames";
 	}
@@ -169,6 +177,14 @@ public class GameController implements GameControllerInterface{
 		}
 		
 		model.addAttribute("commentViews", commentViews);
+		
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/games/viewGame.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/GameController.java")
+			}
+		);
 
 		return "games/viewGame";
 	}
@@ -181,6 +197,13 @@ public class GameController implements GameControllerInterface{
 		if(loggedInMember == null){
 			return "login";
 		}
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/new.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/GameController.java")
+			}
+		);
 		
 		return "editGame/new";
 	}

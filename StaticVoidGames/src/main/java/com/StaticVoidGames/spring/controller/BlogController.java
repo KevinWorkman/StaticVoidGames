@@ -30,6 +30,7 @@ import com.StaticVoidGames.spring.dao.CommentDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 
 /**
  * Controller that handles blogs.
@@ -79,6 +80,13 @@ public class BlogController implements BlogControllerInterface{
 			blogViews.add(blogView);
 		}
 		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/blog/listBlogs.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/BlogController.java")
+				}
+		);
+		
 		
 		model.addAttribute("blogViews", blogViews);
 		return "/blog/listBlogs";
@@ -117,7 +125,6 @@ public class BlogController implements BlogControllerInterface{
 
 	@Override
 	@Transactional
-	@RequestMapping(value="/{blogUrlId}/edit", method = RequestMethod.POST)
 	public String editBlogEntry(HttpServletRequest request, ModelMap model, @PathVariable("blogUrlId") String blogUrlId, HttpSession session) {
 		
 		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
@@ -126,6 +133,13 @@ public class BlogController implements BlogControllerInterface{
 		if(!blog.getMember().equals(loggedInMember)){
 			return "redirect:"+"/blog/" + blog.getUrlName();
 		}
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/blog/editBlog.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/BlogController.java")
+				}
+		);
 		
 		model.addAttribute("blog", blog);
 		model.addAttribute("s3Endpoint", env.getProperty("s3.endpoint"));
@@ -156,7 +170,16 @@ public class BlogController implements BlogControllerInterface{
 	
 	@Transactional
 	@RequestMapping(value="/new", method = RequestMethod.GET)
-    public String newBlogEntry(){	
+    public String newBlogEntry(ModelMap model){	
+		
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/blog/new.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/BlogController.java")
+				}
+		);
+		
 		return "/blog/new";
 	}
 

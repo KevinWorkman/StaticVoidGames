@@ -1,7 +1,4 @@
 <div class="ad">
-Advertisement
-<hr/>
-
 <!-- Project Wonderful Ad Box Loader -->
 <!-- Put this after the <body> tag at the top of your page -->
 <script type="text/javascript">

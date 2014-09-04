@@ -19,6 +19,7 @@
 		${aboutText}
 	</div>
     <%@ include file="../include/advertisement.jsp" %>
+    <%@ include file="../include/openSource.jsp" %>
 </div>
 
 </body>

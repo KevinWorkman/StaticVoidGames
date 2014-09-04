@@ -8,5 +8,8 @@
 		<p><a href="<c:url value="/members/${member.getMemberName()}" />">${member.getMemberName()}</a></p>
 	</c:forEach>
 
+			<%@ include file="../include/advertisement.jsp" %>
+   			<%@ include file="../include/openSource.jsp" %>
+
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.StaticVoidGames.spring.controller.interfaces.AboutControllerInterface;
+import com.StaticVoidGames.spring.util.OpenSourceLink;
 import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
@@ -32,6 +33,14 @@ public class AboutController implements AboutControllerInterface{
 	@Override
 	public String viewAboutPage(ModelMap map,  @PathVariable(value="page") String page) {
 		map.addAttribute("page", page);
+		
+		map.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/about/viewAboutPage.jsp"),
+				new OpenSourceLink("View this page's content.", "https://github.com/KevinWorkman/StaticVoidGames/tree/master/StaticVoidGames/src/main/webapp/WEB-INF/aboutContent/"  + page + ".markdown"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/AboutController.java")
+				}
+		);
 
 		try{
 			File file = new File( servletContext.getRealPath("/WEB-INF/aboutContent/" + page + ".markdown") );
@@ -45,6 +54,9 @@ public class AboutController implements AboutControllerInterface{
 			e.printStackTrace();
 			map.addAttribute("aboutText", "Could not find that about page.");
 		}
+		
+		
+		
 
 		return "about/viewAboutPage";
 	}
