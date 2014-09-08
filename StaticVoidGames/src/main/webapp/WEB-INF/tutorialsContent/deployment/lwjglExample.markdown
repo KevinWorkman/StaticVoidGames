@@ -4,7 +4,7 @@
 
 This tutorial takes you through creating a LWJGL game that uses a library jar
 and OS-specific native files, and exporting it in a way that will allow you to
-package it up as a single file using SvgExe.
+package it up as a single file using JarMatey.
 
 This tutorial assumes you already know how to use LWJGL and how to compile a
 jar that contains your game's code separately from the LWJGL library jar.
@@ -157,55 +157,55 @@ wiki](http://lwjgl.org/wiki/index.php?title=LWJGL_Basics_3_(The_Quad)):
 This program uses LWJGL to draw to OpenGL. It's nothing fancy, but it contains
 input, timing, and native OpenGL calls.
 
-![](Lwjgl1.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Lwjgl1.png)
 
 ### Export
 
-To use SvgExe, you need to compile this code to a .class file or include it in
+To use JarMatey, you need to compile this code to a .class file or include it in
 a .jar file. Since you're using LWJGL, I'm going to assume you know how to do
 that. If not, let me know!
 
 ### LWJGL Jar and Natives
 
-To use SvgExe, you'll also need the LWJGL library jar (lwjgl.jar) as well as
+To use JarMatey, you'll also need the LWJGL library jar (lwjgl.jar) as well as
 the native folder for any OS you want your game to run on. These are all
 available in the standard LWJGL download.
 
 For example, here is the lwjgl.jar you'll need:
 
-![](Lwjgl2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Lwjgl2.png)
 
 As well as the OS-specific native directories:
 
-![](Lwjgl3.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Lwjgl3.png)
 
-### Putting it all together using SvgExe
+### Putting it all together using JarMatey
 
-Now that you have all the basics, you can now use SvgExe to combine these into
+Now that you have all the basics, you can now use JarMatey to combine these into
 a single jar that you can send to other people (or upload here!).
 
-#### Step 0: Download SvgExe
+#### Step 0: Download JarMatey
 
-SvgExe is a single runnable jar that you can download
-[here](http://StaticVoidGames.com/SvgExe/). Download that jar and double-click
+JarMatey is a single runnable jar that you can download
+[here](http://StaticVoidGames.com/JarMatey/). Download that jar and double-click
 it to run the program.
 
-#### Step 1: Add the jars to SvgExe
+#### Step 1: Add the jars to JarMatey
 
-Run SvgExe, and on the first tab, add the LWJGL library jar along with your
+Run JarMatey, and on the first tab, add the LWJGL library jar along with your
 project's class files (which themselves can be in another jar file). I'm just
 using a single class, so mine looks like this:
 
-![](Lwjgl4.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Lwjgl4.png)
 
 #### Step 2: Include the OS-specific natives directories
 
 LWJGL requires OS-specific natives, and luckily they come pre-packaged in OS-
 specific directories that we can just include here:
 
-![](Lwjgl5.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Lwjgl5.png)
 
-SvgExe automatically detects the user's system and extracts the correct
+JarMatey automatically detects the user's system and extracts the correct
 natives.
 
 #### Step 3: Specify your output

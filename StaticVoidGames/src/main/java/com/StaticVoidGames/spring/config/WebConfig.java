@@ -45,6 +45,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		
 		//this gives us access to images inside the tutorialsContent directory
 		registry.addResourceHandler("/tutorialsContent/**").addResourceLocations("/WEB-INF/tutorialsContent/");
+		registry.addResourceHandler("/JarMateyContent/**").addResourceLocations("/WEB-INF/JarMateyContent/");
 		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/js/");
 	}

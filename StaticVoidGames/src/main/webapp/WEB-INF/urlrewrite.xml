@@ -45,6 +45,11 @@
 		<to type="redirect">%{context-path}/tutorials/$1/$2</to>
 	</rule>
 
+	<rule>
+		<from>^/SvgExe(.*)$</from>
+		<to type="redirect">%{context-path}/JarMatey</to>
+	</rule>
+	
 
 	<outbound-rule>
 		<note>

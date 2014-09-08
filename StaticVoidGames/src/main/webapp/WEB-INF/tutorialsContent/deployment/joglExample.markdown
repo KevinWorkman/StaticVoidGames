@@ -4,7 +4,7 @@
 
 This tutorial takes you through creating a JOGL game that uses a the JOGL and
 Gluegen library jars and OS-specific native files, and exporting it in a way
-that will allow you to package it up as a single file using SvgExe.
+that will allow you to package it up as a single file using JarMatey.
 
 This tutorial assumes you already know how to use JOGL and how to compile your
 game's code with JOGL.
@@ -14,10 +14,7 @@ game's code with JOGL.
 Here's an example class that I got from the [JOGL demos
 page](http://jogamp.org/jogl-demos/www/):
 
-    
-    
-    
-    
+  
     import javax.media.opengl.GL2;
     import javax.media.opengl.GLAutoDrawable;
     import javax.media.opengl.GLEventListener;
@@ -449,11 +446,11 @@ page](http://jogamp.org/jogl-demos/www/):
 
 This program uses JOGL to draw some gears using OpenGL. It looks like this:
 
-![](Jogl1.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Jogl1.png)
 
 ### Compile Your Code
 
-To use SvgExe, you need to compile this code to a .class file or include it in
+To use JarMatey, you need to compile this code to a .class file or include it in
 a .jar file. Since you're using JOGL, I'm going to assume you know how to do
 that. If not, let me know!
 
@@ -467,7 +464,7 @@ following:
   * Gears$GearsMouseAdapter.class
 
 You can either package these class files into a jar, or you can just use them
-in SvgExe directly.
+in JarMatey directly.
 
 ### JOGL Jar and Natives
 
@@ -591,24 +588,24 @@ And here is my Gluegen directory structure:
     			
     			
 
-### Putting it all together using SvgExe
+### Putting it all together using JarMatey
 
-Now that you have all the basics, you can use SvgExe to combine these into a
+Now that you have all the basics, you can use JarMatey to combine these into a
 single jar that you can send to other people (or upload here!).
 
-#### Step 0: Download SvgExe
+#### Step 0: Download JarMatey
 
-SvgExe is a single runnable jar that you can download
-[here](http://StaticVoidGames.com/SvgExe/). Download that jar and double-click
+JarMatey is a single runnable jar that you can download
+[here](http://StaticVoidGames.com/JarMatey/). Download that jar and double-click
 it to run the program.
 
-#### Step 1: Add the jars to SvgExe
+#### Step 1: Add the jars to JarMatey
 
-Run SvgExe, and on the first tab, add the JOGL and Gluegen library jars, along
+Run JarMatey, and on the first tab, add the JOGL and Gluegen library jars, along
 with your project's class files (which themselves can be in another jar file).
 Mine looks like this:
 
-![](Jogl2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Jogl2.png)
 
 #### Step 2: Include the OS-specific natives directories
 
@@ -616,14 +613,14 @@ JOGL and Gluegen require OS-specific natives. You can see above how I've laid
 them out in OS and architecture specific directories, and I include the OS-
 specific directories here:
 
-![](Jogl3.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Jogl3.png)
 
 Notice that I have two directories for each operating system: one for JOGL,
 and one for Gluegen. You could combine the natives for a particular OS and
 architecture into one directory, I just happened to keep my JOGL and Gluegen
 natives separate.
 
-SvgExe automatically detects the user's system and extracts the correct
+JarMatey automatically detects the user's system and extracts the correct
 natives.
 
 #### Step 3: Specify your output
@@ -635,7 +632,7 @@ package, make sure to include the package here!
 
 Then you just specify the name and location of the jar file to be created.
 
-![](Jogl4.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Jogl4.png)
 
 #### Step 3: Run your jar!
 

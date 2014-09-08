@@ -4,7 +4,7 @@
 
 This tutorial takes you through creating a Processing sketch that includes
 external files as well as a third party library, and exporting it in a way
-that will allow you to package it up as a single file using SvgExe.
+that will allow you to package it up as a single file using JarMatey.
 
 This tutorial assumes you already know how to include third party libraries
 and external files in your sketch, so we're going to skip over that part and
@@ -42,7 +42,7 @@ shapes that appear to be drawn by hand. This sketch also includes an [image fi
 le](http://photos.kevinworkman.com/Pictures/2013/i-ZwFCKJr/0/S/Stanley1-S.jpg)
 that it draws.
 
-![](AdvancedProcessing1.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/AdvancedProcessing1.png)
 
 I'm going to save this to a sketch named 'AdvancedTest'.
 
@@ -51,11 +51,11 @@ I'm going to save this to a sketch named 'AdvancedTest'.
 To generate some of the files we're going to need, we simply use the "Export
 Application" option, like so:
 
-![](ExportProcessing1.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/ExportProcessing1.png)
 
 This brings up a dialog with several options, pictured here:
 
-![](ExportProcessing2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/ExportProcessing2.png)
 
 On this screen, you can choose whether you want to run in full screen mode,
 but you should NOT check the "embed Java" option.
@@ -70,7 +70,7 @@ Inside that directory, you'll find 4 things:
   * A source directory that contains your Processing sketch converted to Java code. This might be interesting to look at to understand what Processing is doing under the hood, but again, we can ignore it. 
   * A directory named data that includes our cat.jpg image file.
   * A lib directory that contains a bunch of jars, including the third party handy.jar as well as a jar with your sketch name. Since my sketch is named AdvancedTest, the jar is named AdvancedTest.jar. The files handy.jar and AdvancedTest.jar are the files you care about!
-![](AdvancedProcessing2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/AdvancedProcessing2.png)
 
 ### Native Libraries
 
@@ -87,14 +87,14 @@ which gives you access to systems that you normally wouldn't have access to.
 When you export an application, Processing includes the native libraries for
 the current system, but it does not include the native libraries for other
 systems. I've collected all of the native libraries you need by default
-[HERE](http://s3.StaticVoidGames.com/deployment/ProcessingLibrary.jar).
+[HERE](http://StaticVoidGames.com/JarMatey/download).
 Download this jar and save it for use in the next step.
 
 Note: if you're using another library that requires its own native libraries,
 you'll have to make sure you have the native libraries for every system you
 want to run on.
 
-### Putting it all together using SvgExe
+### Putting it all together using JarMatey
 
 Now you should have the jar with your sketch name (mine is AdvancedTest.jar),
 the jars for your third party library (mine is handy.jar), and the
@@ -102,22 +102,22 @@ ProcessingLibrary.jar that contains the Processing natives for every system.
 You also have the data directory that contains any external files used in your
 sketch.
 
-You can now use SvgExe to combine these into a single jar that you can send to
+You can now use JarMatey to combine these into a single jar that you can send to
 other people (or upload here!).
 
-#### Step 0: Download SvgExe
+#### Step 0: Download JarMatey
 
-SvgExe is a single runnable jar that you can download
-[here](http://StaticVoidGames.com/SvgExe/). Download that jar and double-click
+JarMatey is a single runnable jar that you can download
+[here](http://StaticVoidGames.com/JarMatey/download). Download that jar and double-click
 it to run the program.
 
-#### Step 1: Add the jars to SvgExe
+#### Step 1: Add the jars to JarMatey
 
-Run SvgExe, and on the first tab, add your sketch's jar, any third party
+Run JarMatey, and on the first tab, add your sketch's jar, any third party
 library jars, as well as ProcessingLibrary.jar to the list on the left. It
 should look like this:
 
-![](AdvancedProcessing3.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/AdvancedProcessing3.png)
 
 Notice that we aren't including any of the other jars in the lib folder, just
 the one with your sketch name and the third party library jars. Instead, we're
@@ -130,7 +130,7 @@ data directory. To do so, just go to the "External Files" tab and include the
 data directory there. Note that you should include the entire data directory,
 not the files inside of it!
 
-![](AdvancedProcessing4.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/AdvancedProcessing4.png)
 
 #### Step 3: Specify your output
 

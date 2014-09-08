@@ -25,7 +25,7 @@ to come as a single file.
 
 This tutorial takes you through creating a basic Processing sketch and
 exporting it in a way that will allow you to package it up as a single file
-using a program called SvgExe.
+using a program called JarMatey.
 
 ### Example Sketch
 
@@ -97,26 +97,26 @@ Note: if you're using another library that requires its own native libraries,
 you'll have to make sure you have the native libraries for every system you
 want to run on.
 
-### Putting it all together using SvgExe
+### Putting it all together using JarMatey
 
 Now you should have the jar with your sketch name (mine is Test.jar), and the
 ProcessingLibrary.jar that contains the Processing natives for every system.
 
-You can now use SvgExe to combine these into a single jar that you can send to
+You can now use JarMatey to combine these into a single jar that you can send to
 other people (or upload here!).
 
-#### Step 0: Download SvgExe
+#### Step 0: Download JarMatey
 
-SvgExe is a single runnable jar that you can download
-[here](http://StaticVoidGames.com/SvgExe/). Download that jar and double-click
+JarMatey is a single runnable jar that you can download
+[here](http://StaticVoidGames.com/JarMatey/). Download that jar and double-click
 it to run the program.
 
-#### Step 1: Add the jars to SvgExe
+#### Step 1: Add the jars to JarMatey
 
-Run SvgExe, and on the first tab, add your sketch's jar as well as
+Run JarMatey, and on the first tab, add your sketch's jar as well as
 ProcessingLibrary.jar to the list on the left. It should look like this:
 
-![](Processing2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Processing2.png)
 
 Notice that we aren't including any of the other jars in the lib folder, just
 the one with your sketch name. Instead, we're using ProcessingLibrary.jar so
@@ -133,7 +133,7 @@ my sketch Test, so that's what I put in the main class field.
 
 Then you just specify the name and location of the jar file to be created.
 
-![](Processing3.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/Processing3.png)
 
 #### Step 3: Run your jar!
 
@@ -144,4 +144,4 @@ Now you can send this jar file to other people who want to play your game.. or
 you can upload it here! :p
 
 ### If your sketch includes a third party library or external files, check out
-the [Advanced Processing Example](AdvancedProcessingExample.jsp)!
+the Advanced Processing Example!
