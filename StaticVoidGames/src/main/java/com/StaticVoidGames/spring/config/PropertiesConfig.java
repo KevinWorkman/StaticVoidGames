@@ -33,6 +33,12 @@ public class PropertiesConfig {
 
 	@Value("${aws.accessKey}")
 	private String awsAccessKey;
+	
+	@Value("${recaptcha.publicKey}")
+	private String recaptchaPublicKey;
+	
+	@Value("${recaptcha.privateKey}")
+	private String recaptchaPrivateKey;
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

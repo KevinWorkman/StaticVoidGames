@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ErrorConfig{
 
 	@ExceptionHandler(Exception.class)
-	public String handleException () {
-		System.out.println("ERROR");
+	public String handleException (Exception e) {
+		e.printStackTrace();
 		return "index";
 	}
 }

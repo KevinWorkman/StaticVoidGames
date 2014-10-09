@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -182,4 +184,39 @@ public class MemberController implements MemberControllerInterface{
 
 		return "redirect:/members/"+memberName;
 	}
+	
+	
+	@Transactional
+	@RequestMapping(value = "/{member}/activate/{activationId}", method = RequestMethod.GET)
+	public String activateMember(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String memberName, @PathVariable(value="activationId") String activationId, HttpSession session){
+		
+		Member member = memberDao.getMember(memberName);
+		
+		if(member == null){
+			model.addAttribute("activationSuccess", false);
+			model.addAttribute("activationMessage", "Invalid username.");
+			
+			return "members/activation";
+		}
+		
+		if(member.isActivated()){
+			model.addAttribute("activationSuccess", false);
+			model.addAttribute("activationMessage", "Your account was already activated.");
+			return "members/activation";
+		}
+		
+		if(!activationId.equals(member.getActivationId())){
+			model.addAttribute("activationSuccess", false);
+			model.addAttribute("activationMessage", "That activation code is not valid. Make sure you copy it correctly from the activation email!");
+			return "members/activation";
+		}
+		
+		member.setActivated(true);
+		memberDao.updateMember(member);
+		
+		model.addAttribute("activationSuccess", true);
+		return "members/activation";
+	}
+	
+	
 }

@@ -64,6 +64,10 @@ public class Member implements TimestampedEvent{
 	
 	private boolean includeInLocalDatabase = true;
 	
+	
+	private boolean activated = false;
+	private String activationId;
+	
 	/**
 	 * @deprecated the old-style password hash.
 	 */
@@ -210,6 +214,23 @@ public class Member implements TimestampedEvent{
 
 	public void setIncludeInLocalDatabase(boolean includeInLocalDatabase) {
 		this.includeInLocalDatabase = includeInLocalDatabase;
+	}
+
+
+	public void setActivationId(String activationId) {
+		this.activationId = activationId;
+	}
+	
+	public String getActivationId() {
+		return activationId;
+	}
+	
+	public void setActivated(boolean activated){
+		this.activated = activated;
+	}
+	
+	public boolean isActivated(){
+		return activated;
 	}
 }
 

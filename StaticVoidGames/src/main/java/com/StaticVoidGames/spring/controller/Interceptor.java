@@ -35,12 +35,35 @@ public class Interceptor extends HandlerInterceptorAdapter{
 	private List<String> backgroundImageUrls = new ArrayList<String>();
 	
 	public Interceptor(){
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-2WjDL3s/0/O/lights3.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-3NPvKtv/0/O/lights2.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-xc7q5Xx/0/O/lights1.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-gGBQK2k/1/O/lights4.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-fHZpVNs/0/O/lights9.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-gnNp3t9/1/O/Night1.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-2WjDL3s/0/O/lights3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-3NPvKtv/0/O/lights2.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-xc7q5Xx/0/O/lights1.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-gGBQK2k/1/O/lights4.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-fHZpVNs/0/O/lights9.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-gnNp3t9/1/O/Night1.jpg");
+		
+		
+		
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-pF3wBX6/1/X3/RedLeaves-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-NqzMgHD/1/X3/YellowLeaves-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-L2VfVv8/1/X3/GeeseTrees-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2009/i-8js2VN8/0/X3/TallFallTree-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-mHckHFS/0/X3/Leaves4-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-t26rcmj/0/X3/TreePanorama2-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-RHzkX4G/0/X3/Leaves2-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-83W6Gh2/0/X3/TreePanorama5-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-79ztj5k/0/X3/Leaves1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-bNVwcxr/0/X3/Leaves96-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-3x8Gvrw/1/X3/Stanley1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-gL6CZ9D/1/X3/insidePumpkin1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-PTq36v8/1/X3/tree1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-m4j7wpN/1/X3/tree2-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-MTd7J9S/1/X3/tree3-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-PWS9s2p/2/X3/sky1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-SfxrsPB/1/X3/path1-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-bSgG2W2/1/X3/path5-X3.jpg");
+		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-N5Nd76k/1/X3/path7-X3.jpg");
+		
 	}
 
 	@Override
@@ -70,6 +93,10 @@ public class Interceptor extends HandlerInterceptorAdapter{
 			return;
 		}
 		if(request.getRequestURL().toString().endsWith("/oldLogin")){
+			return;
+		}
+		
+		if(request.getRequestURL().toString().contains("/activate/")){
 			return;
 		}
 		

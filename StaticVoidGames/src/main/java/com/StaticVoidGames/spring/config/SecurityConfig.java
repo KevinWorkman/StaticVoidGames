@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth
 		.jdbcAuthentication()
 		.dataSource(dataSource)
-		.usersByUsernameQuery("select memberName, bcryptHash,1 from Members where memberName = ?")
+		.usersByUsernameQuery("select memberName, bcryptHash, activated from Members where memberName = ?")
 		.authoritiesByUsernameQuery(" select memberName,'default' from Members where memberName = ?")
 		.passwordEncoder(new BCryptPasswordEncoder(10));
 	}
@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.formLogin()  
 		.loginUrl("/login") 
 		.successHandler(new LoginSuccessHandler())
+		.failureUrl("/login?error=yep")
 		.permitAll()
 		.and()
 		

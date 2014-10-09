@@ -32,4 +32,9 @@ public interface MemberControllerInterface {
 	@RequestMapping(value = "/{member}/edit", method = RequestMethod.GET)
 	public String editMember(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, HttpSession session);
 	
+	@Transactional
+	@RequestMapping(value = "/{member}/activate/{activationId}", method = RequestMethod.GET)
+	public String activateMember(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, @PathVariable(value="activationId") String activationId, HttpSession session);
+	
+	
 }

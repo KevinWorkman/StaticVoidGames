@@ -241,6 +241,8 @@ public class NotificationsController implements NotificationsControllerInterface
 			if(loggedInMember == null){
 				return "0";
 			}
+			
+			System.out.println("Getting notifications for user: " + loggedInMember);
 
 			return String.valueOf(notificationsDao.getUnviewedCommentsCount(loggedInMember));
 		}

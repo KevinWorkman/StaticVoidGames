@@ -11,15 +11,27 @@
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
 <%@ include file="include/navigation.jsp" %>
 <div id="contentPane">
-<h3>Register</h3>
+
 <form action="<c:url value="/register"/>" method='POST'>
 
-<div class="thinGrayBorder darkBackground">
-<p style="color:red">${registerError}</p>
+<div class="thinGrayBorder darkBackground textPadding topMargin">
 
-    <p>Email:<input type='text' name='email' value=''></p>
-    <p>Username:<input type='text' name='username' value=''></p>
+<h3>Register</h3>
+
+<p style="color:red">${registrationError}</p>
+
+    <p>Email:<input type='text' name='email' value='${email}'></p>
+    
+    <p style="font-size:small;">An activation link will be emailed to you. <b>You must click the link in the email before you can login</b>.
+    <br/><span style="font-size:x-small;">This is annoying, but it's better than dealing with a bunch of spam bots!</span></p>
+   	
+    
+    <p>Username:<input type='text' name='username' value='${username}'></p>
    	<p>Password:<input type='password' name='password'/></p>
+   	
+   	${recaptchaHtml}
+   	
+   
    	<p><input name="submit" type="submit" value="Register"/></p>
 </div>
 </form>

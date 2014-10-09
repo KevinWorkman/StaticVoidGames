@@ -20,7 +20,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 
 /**
  * Provides access to Objects related to notifications.
@@ -40,6 +45,12 @@ public class NotificationsJpaDao implements NotificationsDao{
 		
 		
 		List<Subscription> subscriptions = getSubscriptionsForMember(user);
+		System.out.println("Subscriptions count: " + subscriptions.size());
+		
+		if(subscriptions.isEmpty()){
+			return 0;
+		}
+		
 		
 		 QComment comment = QComment.comment1;
 
@@ -47,6 +58,9 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	        // loop through each subscription
 	        for (Subscription subscription : subscriptions) {
+	        	
+	        	System.out.println("Subscription: " + subscription.getLabel());
+	        	
 	            // create the the comment specific predicate
 	            predicate.or(
 	                comment.thingCommentedOn.eq(subscription.getEntityId())
@@ -59,6 +73,9 @@ public class NotificationsJpaDao implements NotificationsDao{
 	}
 
     public List<Comment> getCommentsForSubscriptions(Iterable<Subscription> subscriptions) {
+    	
+    	
+    	
         QComment comment = QComment.comment1;
 
         BooleanBuilder predicate = new BooleanBuilder();
@@ -94,6 +111,10 @@ public class NotificationsJpaDao implements NotificationsDao{
 		
 		List<Subscription> subscriptions = getSubscriptionsForMember(member);
 		
+		if(subscriptions.isEmpty()){
+			return new ArrayList<Comment>();
+		}
+		
 	       QComment comment = QComment.comment1;
 
 	        BooleanBuilder predicate = new BooleanBuilder();
@@ -116,6 +137,10 @@ public class NotificationsJpaDao implements NotificationsDao{
 	@Override
 	public List<Comment> getCommentsForMember(String member) {
         List<Subscription> subscriptions = getSubscriptionsForMember(member);
+        
+		if(subscriptions.isEmpty()){
+			return new ArrayList<Comment>();
+		}
 
         return getCommentsForSubscriptions(subscriptions);
 	}
@@ -135,7 +160,7 @@ public class NotificationsJpaDao implements NotificationsDao{
 		});
 		
 		List<Comment> comments = (List<Comment>) sessionFactory.getCurrentSession().createCriteria(Comment.class).list();
-		List<Game> games = (List<Game>) sessionFactory.getCurrentSession().createCriteria(Game.class).list();
+		List<Game> games = (List<Game>) sessionFactory.getCurrentSession().createCriteria(Game.class).add(Restrictions.eq("published", true)).list();
 		List<BlogEntry> blogs = (List<BlogEntry>) sessionFactory.getCurrentSession().createCriteria(BlogEntry.class).list();
 		List<Member> members = (List<Member>) sessionFactory.getCurrentSession().createCriteria(Member.class).list();
 		

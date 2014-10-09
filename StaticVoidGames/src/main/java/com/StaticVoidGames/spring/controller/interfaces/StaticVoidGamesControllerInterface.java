@@ -32,7 +32,7 @@ public interface StaticVoidGamesControllerInterface {
 	public String register(ModelMap model, HttpSession session);
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPost(ModelMap model, HttpSession session,  @RequestParam("email") String email, @RequestParam("username") String username, @RequestParam("password") String password);	
+	public String registerPost(HttpServletRequest request, ModelMap model, HttpSession session,  @RequestParam("email") String email, @RequestParam("username") String username, @RequestParam("password") String password);	
 
 	@RequestMapping(value = "/oldLogin", method = RequestMethod.GET)
 	public String oldLogin(ModelMap model, HttpSession session);

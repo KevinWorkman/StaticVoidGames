@@ -37,9 +37,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String loggedInUser = user.getUsername();
 		
-		System.out.println("LOGIN SUCCESS HANDLER");
-		System.out.println("Logged in user: " + loggedInUser);
-
 		request.getSession().setAttribute(AttributeNames.isLoggedIn, true);
 		request.getSession().setAttribute(AttributeNames.loggedInUser, loggedInUser);
 		
