@@ -211,6 +211,13 @@ public class MemberController implements MemberControllerInterface{
 			return "members/activation";
 		}
 		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/activation.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/members/Member.java")
+		}
+				);
+		
 		member.setActivated(true);
 		memberDao.updateMember(member);
 		

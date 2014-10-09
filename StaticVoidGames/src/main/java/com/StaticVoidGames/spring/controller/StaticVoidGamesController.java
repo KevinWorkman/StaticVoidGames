@@ -55,8 +55,6 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Transactional
 	public String viewHomePage(HttpServletRequest request, ModelMap model, HttpSession session){
 
-		long start = System.currentTimeMillis();
-
 		model.addAttribute("events", notificationsDao.getEvents(15));
 		model.addAttribute("latestBlog", blogDao.getBlogsOfMember("Kevin").get(0));
 
