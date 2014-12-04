@@ -121,7 +121,12 @@ public class GameController implements GameControllerInterface{
 			isPlayable = true;
 			model.addAttribute("isJar", true);
 			//TODO jar url should only contain filename, make this relative to s3 endpoint
-			model.addAttribute("jarUrl", gameObj.getJarFileUrl());
+			if(gameObj.getJarFileUrl().startsWith("http://")){
+				model.addAttribute("jarUrl", gameObj.getJarFileUrl());
+			}
+			else{
+				model.addAttribute("jarUrl", "http://s3.staticvoidgames.com/games/" + gameObj.getGameName() + "/" + gameObj.getJarFileUrl());
+			}
 		}
 		else{
 			model.addAttribute("isJar", false);
@@ -131,7 +136,15 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("isOpenSource", true);
 			//TODO source zip url should only contain filename, make this relative to s3 endpoint
 			model.addAttribute("sourceUrl", gameObj.getSourceZipUrl());
-			model.addAttribute("sourceText", gameObj.getSourcePermissionsText());
+			
+			if(gameObj.getSourceZipUrl().startsWith("http://")){
+				model.addAttribute("sourceUrl", gameObj.getSourceZipUrl());
+			}
+			else{
+				model.addAttribute("sourceUrl", "http://s3.staticvoidgames.com/games/" + gameObj.getGameName() + "/" +  gameObj.getSourceZipUrl());
+			}
+		
+			model.addAttribute("sourceText", gameObj.getEscapedSourcePermissionsText());
 		}
 		else{
 			model.addAttribute("isOpenSource", false);
@@ -139,11 +152,20 @@ public class GameController implements GameControllerInterface{
 		
 		if(gameObj.isAndroid()){
 			model.addAttribute("isAndroid", true);
-			model.addAttribute("androidText", gameObj.getAndroidText());
+			model.addAttribute("androidText", gameObj.getEscapedAndroidText());
 			
 			if(gameObj.getApkUrl() != null){
 				model.addAttribute("hasApk", true);
-				model.addAttribute("apkUrl", s3Endpoint + "/games/" + gameObj.getGameName() + "/" + gameObj.getApkUrl());
+			
+				
+				if(gameObj.getApkUrl().startsWith("http://")){
+					model.addAttribute("apkUrl", gameObj.getApkUrl());
+				}
+				else{
+					model.addAttribute("apkUrl", "http://s3.staticvoidgames.com/games/" + gameObj.getGameName() + "/" +  gameObj.getApkUrl());
+				}
+				
+				
 			}
 		}
 		else{
@@ -154,18 +176,35 @@ public class GameController implements GameControllerInterface{
 		model.addAttribute("isPlayable", isPlayable);
 		
 		if(gameObj.getThumbnailUrl() != null){
-			model.addAttribute("thumbnailImage", s3Endpoint + "/games/" + game + "/" + gameObj.getThumbnailUrl());
+						
+			if(gameObj.getThumbnailUrl().startsWith("http://")){
+				model.addAttribute("thumbnailImage", gameObj.getThumbnailUrl());
+			}
+			else{
+				model.addAttribute("thumbnailImage", s3Endpoint + "/games/" + gameObj.getGameName() + "/" +  gameObj.getThumbnailUrl());
+			}
 		}
 		else{
 			//TODO generic thumbnail
 		}
 		
 		if(gameObj.getFaviconUrl() != null){
-			model.addAttribute("faviconImage", s3Endpoint + "/games/" + game + "/" + gameObj.getFaviconUrl());
+			
+			if(gameObj.getFaviconUrl().startsWith("http://")){
+				model.addAttribute("faviconImage", gameObj.getFaviconUrl());
+			}
+			else{
+				model.addAttribute("faviconImage", s3Endpoint + "/games/" + gameObj.getGameName() + "/" +  gameObj.getFaviconUrl());
+			}
 		}
 		
 		if(gameObj.getBackgroundUrl() != null){
-			model.addAttribute("backgroundImage", s3Endpoint + "/games/" + game + "/" + gameObj.getBackgroundUrl());
+			if(gameObj.getBackgroundUrl().startsWith("http://")){
+				model.addAttribute("backgroundImage", gameObj.getBackgroundUrl());
+			}
+			else{
+				model.addAttribute("backgroundImage", s3Endpoint + "/games/" + gameObj.getGameName() + "/" +  gameObj.getBackgroundUrl());
+			}
 		}
 		
 		List<CommentView> commentViews = new ArrayList<CommentView>();

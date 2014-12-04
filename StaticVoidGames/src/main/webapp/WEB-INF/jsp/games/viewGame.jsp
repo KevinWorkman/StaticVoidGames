@@ -87,7 +87,7 @@
 
 
 	<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin">
-		${game.getGameDescription()}
+		${game.getEscapedDescription()}
 	</div>
 
 	<div class="commentScrollPaneDiv">

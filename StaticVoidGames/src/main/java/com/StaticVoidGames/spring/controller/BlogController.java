@@ -95,10 +95,8 @@ public class BlogController implements BlogControllerInterface{
 	@Override
 	@Transactional
 	@RequestMapping("/{blogUrlId}")
-	public String viewBlogEntry(HttpServletRequest request, ModelMap model,
-			@PathVariable("blogUrlId") String blogUrlId, HttpSession session) {
+	public String viewBlogEntry(HttpServletRequest request, ModelMap model, @PathVariable("blogUrlId") String blogUrlId, HttpSession session) {
 		
-		System.out.println("HERE");
 		
 		String s3Endpoint =  env.getProperty("s3.endpoint");
 		

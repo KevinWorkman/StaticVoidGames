@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.PageDownUtils;
 
 
 @Entity
@@ -359,6 +360,10 @@ public class Game implements TimestampedEvent{
 	public void setGameDescription(String gameDescription) {
 		this.gameDescription = gameDescription;
 	}
+	
+	public String getEscapedDescription(){
+		return PageDownUtils.getSanitizedHtml(gameDescription);
+	}
 
 	public String getAppletDescription() {
 		return appletDescription;
@@ -392,6 +397,10 @@ public class Game implements TimestampedEvent{
 		return sourcePermissionsText;
 	}
 	
+	public String getEscapedSourcePermissionsText(){
+		return PageDownUtils.getSanitizedHtml(sourcePermissionsText);
+	}
+	
 	public void setSourcePermissionsText(String sourcePermissionsText){
 		this.sourcePermissionsText = sourcePermissionsText;
 	}
@@ -418,6 +427,10 @@ public class Game implements TimestampedEvent{
 	
 	public String getAndroidText(){
 		return androidText;
+	}
+	
+	public String getEscapedAndroidText(){
+		return PageDownUtils.getSanitizedHtml(androidText);
 	}
 	
 	public void setAndroid(boolean android){

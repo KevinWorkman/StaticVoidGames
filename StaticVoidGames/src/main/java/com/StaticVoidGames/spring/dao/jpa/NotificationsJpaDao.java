@@ -43,9 +43,7 @@ public class NotificationsJpaDao implements NotificationsDao{
 	@Override
 	public int getUnviewedCommentsCount(String user) {
 		
-		
 		List<Subscription> subscriptions = getSubscriptionsForMember(user);
-		System.out.println("Subscriptions count: " + subscriptions.size());
 		
 		if(subscriptions.isEmpty()){
 			return 0;
@@ -58,8 +56,6 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	        // loop through each subscription
 	        for (Subscription subscription : subscriptions) {
-	        	
-	        	System.out.println("Subscription: " + subscription.getLabel());
 	        	
 	            // create the the comment specific predicate
 	            predicate.or(

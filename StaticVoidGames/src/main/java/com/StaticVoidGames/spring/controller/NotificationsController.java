@@ -79,17 +79,14 @@ public class NotificationsController implements NotificationsControllerInterface
 
 		String s3Endpoint = env.getProperty("s3.endpoint");
 
-		System.out.println("In Notification Controller.");
-		System.out.println("Getting all notifications.");
+
 		long start = System.currentTimeMillis();
 
 		List<EventView> allEventViews = new ArrayList<EventView>();
 		List<Comment> allNotifications = notificationsDao.getCommentsForMember(loggedInMember);
 
-		System.out.println("Done getting all notifications.");
+		
 		long elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-		System.out.println("Converting to EventViews.");
 		start = System.currentTimeMillis();
 
 		Map<String, Member> memberMap = new HashMap<String, Member>();
@@ -104,7 +101,6 @@ public class NotificationsController implements NotificationsControllerInterface
 			Member member = memberMap.get(event.getMember());
 
 			if(member == null){
-				System.out.println("NULL MEMBER: " + event.getMember() + " - " + event.getEventText());
 				continue;
 			}
 
@@ -114,24 +110,13 @@ public class NotificationsController implements NotificationsControllerInterface
 
 		model.addAttribute("allEventViews", allEventViews);
 
-		System.out.println("Done converting to EventViews.");
 		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-		System.out.println("Getting unviewed notifications.");
 		start = System.currentTimeMillis();
 
 		List<EventView> unviewedEventViews = new ArrayList<EventView>();
 
 
 		List<Comment> unviewedEvents = notificationsDao.getUnviewedCommentsForMember(loggedInMember);
-
-
-		System.out.println("Done getting unviewed notifications.");
-		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-		System.out.println("Covnerting to EventViews.");
-		start = System.currentTimeMillis();
-
 
 		for(TimestampedEvent event : unviewedEvents){
 			if(!memberMap.containsKey(event.getMember())){
@@ -147,29 +132,14 @@ public class NotificationsController implements NotificationsControllerInterface
 
 		model.addAttribute("unviewedEventViews", unviewedEventViews);
 
-		System.out.println("Done converting to EventViews.");
-		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-
-		System.out.println("Setting unviewed notification count.");
-		start = System.currentTimeMillis();
+		
 
 
 		model.addAttribute(AttributeNames.notificationCount, notificationsDao.getUnviewedCommentsCount(loggedInMember));
 
-		System.out.println("Done setting unviewed notification count.");
-		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-		System.out.println("Setting member viewed time.");
-		start = System.currentTimeMillis();
-
-
 		notificationsDao.setMemberViewedNotificationsTime(loggedInMember, System.currentTimeMillis());
 
-
-		System.out.println("Done setting member viewed time.");
 		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
 
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
@@ -187,15 +157,10 @@ public class NotificationsController implements NotificationsControllerInterface
 
 		String s3Endpoint = env.getProperty("s3.endpoint");
 
-		long start = System.currentTimeMillis();
 
 		Collection<TimestampedEvent> events = notificationsDao.getEvents(20);
 
-		System.out.println("Done getting events.");
-		long elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
-		System.out.println("Converting to EventViews.");
-		start = System.currentTimeMillis();
+		
 
 		List<EventView> eventViews = new ArrayList<EventView>();
 
@@ -203,7 +168,6 @@ public class NotificationsController implements NotificationsControllerInterface
 			Member member = memberDao.getMember(event.getMember());
 
 			if(member == null){
-				System.out.println("NULL MEMBER: " + event.getMember() + " - " + event.getEventText());
 				continue;
 			}
 
@@ -212,11 +176,6 @@ public class NotificationsController implements NotificationsControllerInterface
 		}
 
 		model.addAttribute("eventView", eventViews);
-
-
-		System.out.println("Done converting to EventViews.");
-		elapsed = System.currentTimeMillis() - start;
-		System.out.println("Elapsed: " + elapsed);
 		
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
@@ -242,8 +201,6 @@ public class NotificationsController implements NotificationsControllerInterface
 				return "0";
 			}
 			
-			System.out.println("Getting notifications for user: " + loggedInMember);
-
 			return String.valueOf(notificationsDao.getUnviewedCommentsCount(loggedInMember));
 		}
 		catch(Exception e){

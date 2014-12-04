@@ -38,6 +38,11 @@
 			<h3>Step 4: Add background, thumbnail, and favicon images:</h3>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/images" />">Images</a></div>
 		</div>
+		
+		<div class="editSectionDiv">
+			<h3>Step 5: Publish your game!</h3>
+			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/publish" />">Publish</a></div>
+		</div>
 	
 		<div class="editSectionDiv">
 			<h3>These settings are deprecated but are available for legacy games:</h3>

@@ -148,13 +148,6 @@ public class MemberController implements MemberControllerInterface{
 		}
 		
 		Member member = memberDao.getMember(memberName);
-		
-		if(profilePicture != null){
-		System.out.println("Image: " + profilePicture.getOriginalFilename());
-		}
-		else{
-			System.out.println("IMAGE IS NULL");
-		}
 
 //		String awsAccessKey = env.getProperty("aws.accessKey");
 //		String awsSecretKey = env.getProperty("aws.secretKey");

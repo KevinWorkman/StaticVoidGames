@@ -60,12 +60,12 @@ public class EditGameController implements EditGameControllerInterface{
 		FormField shortDescription = new FormField("Short Description", "Enter a short description shown on thumbnails for your game", "shortDescription", "input");
 		FormField description = new FormField("Description", "Enter a description for your game", "description", "textarea");
 		FormField website = new FormField("Website", "If your game is hosted elsewhere, specify that here", "website", "input");
-		
+
 		FormField jarFile = new FormField("Jar File", "Upload a RUNNABLE jar. Applets and Webstarts are HIGHLY discouraged.", "jarFile", "file");
-		
+
 		FormField sourceFile = new FormField("Source File", "Upload a zip file containing your source. This is optional.", "source", "file");
 		FormField sourcePermissions = new FormField("Source Permissions", "Specify a copyright to apply to your source", "sourcePermissionsText", "textarea");
-	
+
 		FormField faviconFile = new FormField("Favicon", "Upload an optional favicon. This is a 16x16 or 32x32 image that will show as the icon of your game's browser tab.", "faviconFile", "file");
 		FormField backgroundFile = new FormField("Background", "Upload a background image. This is optional.", "backgroundFile", "file");
 		FormField thumbnailFile = new FormField("Thumbnail", "Upload an image to be shown as the game's thumbnail.", "thumbnailFile", "file");
@@ -86,8 +86,8 @@ public class EditGameController implements EditGameControllerInterface{
 		FormField showAdBorder = new FormField("Ad Border", "Show ad border?", "showAdBorder", "checkbox");
 
 		FormField language = new FormField("Language", "What language was your game written in?", "language", "input");
-		
-		FormField published = new FormField("Publish", "Do you want to publish your game? Unpublished games are hidden.", "published", "checkbox");
+
+		FormField published = new FormField("Publish", "Do you want to publish your game?<br/>Unpublished games are not shown on the main game page, but can still be played by anybody you give the link to.<br/>Publish:", "published", "checkbox");
 
 		FormField lwjgl = new FormField("LWJGL", "DEPRECATED: Was your game made with LWJGL?", "lwjgl", "checkbox");
 		FormField signed = new FormField("signed", "DEPRECATED: Is your jar signed?", "signed", "checkbox");
@@ -124,7 +124,7 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		String loggedInMember = (String) session.getAttribute(AttributeNames.loggedInUser);
-		
+
 		if(!gameObj.getMember().equals(loggedInMember)){
 			return "redirect:/games/"+game;
 		}
@@ -135,13 +135,13 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		session.setAttribute("gameObj", gameObj);
-		
+
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
 				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/index.jsp"),
 				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
-			}
-		);
+		}
+				);
 
 		return "editGame/index";
 	}
@@ -169,30 +169,113 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 
+		System.out.println();
+		System.out.println("GameForm.title: " + gameForm.getTitle());
+		System.out.println("GameForm.description: " + gameForm.getDescription());
+		System.out.println("GameForm.shortDescription: " + gameForm.getShortDescription());
+		System.out.println("GameForm.published: " + gameForm.getPublished());
+		System.out.println("GameForm.android: " + gameForm.getAndroid());
+
+
+
+
 		//TODO: probably a smarter way to do this?
-		gameObj.setTitle(gameForm.getTitle());
-		gameObj.setGameDescription(gameForm.getDescription());
-		gameObj.setShortDescription(gameForm.getShortDescription());
-		gameObj.setWebsite(gameForm.getWebsite());
-		gameObj.setMainClass(gameForm.getMainClass());
-		gameObj.setWebstartWidth(gameForm.getWebstartWidth());
-		gameObj.setWebstartHeight(gameForm.getWebstartHeight());
-		gameObj.setAppletClass(gameForm.getAppletClass());
-		gameObj.setAppletWidth(gameForm.getAppletWidth());
-		gameObj.setAppletHeight(gameForm.getAppletHeight());
-		gameObj.setAppletDescription(gameForm.getAppletDescription());
-		gameObj.setJavaVersion(gameForm.getJavaVersion());
-		gameObj.setRating(gameForm.getRating());
-		gameObj.setLanguage(gameForm.getLanguage());
-		gameObj.setAdText(gameForm.getAdText());
-		gameObj.setShowAdBorder(gameForm.isShowAdBorder());
-		gameObj.setPublished(gameForm.isPublished());
-		gameObj.setLwjgl(gameForm.isLwjgl());
-		gameObj.setSigned(gameForm.isSigned());
-		gameObj.setSourcePermissionsText(gameForm.getSourcePermissionsText());
-		gameObj.setApkUrl(gameForm.getApkUrl());
-		gameObj.setAndroidText(gameForm.getAndroidText());
-		gameObj.setAndroid(gameForm.isAndroid());
+
+		if(gameForm.getTitle() != null){
+			gameObj.setTitle(gameForm.getTitle());
+		}
+
+		if(gameForm.getDescription() != null){
+			gameObj.setGameDescription(gameForm.getDescription());
+		}
+
+		if(gameForm.getShortDescription() != null){
+			gameObj.setShortDescription(gameForm.getShortDescription());
+		}
+
+		if(gameForm.getWebsite() != null){
+			gameObj.setWebsite(gameForm.getWebsite());
+		}
+
+		if(gameForm.getMainClass() != null){
+			gameObj.setMainClass(gameForm.getMainClass());
+		}
+
+		if(gameForm.getWebstartWidth() != null){
+			gameObj.setWebstartWidth(gameForm.getWebstartWidth());
+		}
+
+		if(gameForm.getWebstartHeight() != null){
+			gameObj.setWebstartHeight(gameForm.getWebstartHeight());
+		}
+
+		if(gameForm.getAppletClass() != null){
+			gameObj.setAppletClass(gameForm.getAppletClass());
+		}
+
+		if(gameForm.getAppletWidth() != null){
+			gameObj.setAppletWidth(gameForm.getAppletWidth());
+		}
+
+		if(gameForm.getAppletHeight() != null){
+			gameObj.setAppletHeight(gameForm.getAppletHeight());
+		}
+
+		if(gameForm.getAppletDescription() != null){
+			gameObj.setAppletDescription(gameForm.getAppletDescription());
+		}
+
+		if(gameForm.getJavaVersion() != null){
+			gameObj.setJavaVersion(gameForm.getJavaVersion());
+		}
+
+		if(gameForm.getRating() != null){
+			gameObj.setRating(gameForm.getRating());
+		}
+
+		if(gameForm.getLanguage() != null){
+			gameObj.setLanguage(gameForm.getLanguage());
+		}
+
+		if(gameForm.getAdText() != null){
+			gameObj.setAdText(gameForm.getAdText());
+		}
+
+		if(gameForm.getShowAdBorder() != null){
+			gameObj.setShowAdBorder(gameForm.getShowAdBorder());
+		}
+
+		if(gameForm.getPublished() != null){
+			gameObj.setPublished(gameForm.getPublished());
+		}
+
+		if(gameForm.getLwjgl() != null){
+			gameObj.setLwjgl(gameForm.getLwjgl());
+		}
+
+		if(gameForm.getSigned() != null){
+			gameObj.setSigned(gameForm.getSigned());
+		}
+
+		if(gameForm.getSourcePermissionsText() != null){
+			gameObj.setSourcePermissionsText(gameForm.getSourcePermissionsText());
+		}
+
+		if(gameForm.getApkUrl() != null){
+			gameObj.setApkUrl(gameForm.getApkUrl());
+		}
+
+		if(gameForm.getAndroidText() != null){
+			gameObj.setAndroidText(gameForm.getAndroidText());
+		}
+
+		if(gameForm.getAndroid() != null){
+			gameObj.setAndroid(gameForm.getAndroid());
+		}
+
+
+
+
 
 		if(gameForm.getJarFile() != null && !"".equals(gameForm.getJarFile())){
 
@@ -292,10 +375,10 @@ public class EditGameController implements EditGameControllerInterface{
 			String awsSecretKey = env.getProperty("aws.secretKey");
 			String bucket = env.getProperty("s3.bucket");
 			String key = "games/" + game + "/" + gameForm.getThumbnailFile().getOriginalFilename();
-			
+
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(gameForm.getThumbnailFile().getSize());
-			
+
 			try{
 				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getThumbnailFile().getInputStream(), meta);
@@ -344,13 +427,13 @@ public class EditGameController implements EditGameControllerInterface{
 		model.addAttribute("gameForm", gameObj.getGameForm());
 		model.addAttribute("formFields", formFields.get(section));
 		model.addAttribute("gameObj", gameObj);
-		
+
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
 				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/editGame.jsp"),
 				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
-			}
-		);
+		}
+				);
 
 		return "editGame/editGame";
 	}

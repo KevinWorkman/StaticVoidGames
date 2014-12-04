@@ -40,21 +40,21 @@ public class GameForm {
 
 
 	private String adText;
-	private boolean showAdBorder;
+	private Boolean showAdBorder;
 	private String adPlacement;
 
 	private String language;
 
-	private boolean published;
+	private Boolean published;
 
-	private boolean lwjgl;
-	private boolean signed;
+	private Boolean lwjgl;
+	private Boolean signed;
 
 	private String sourcePermissionsText;
 
 	private String apkUrl;
 	private String androidText;
-	private boolean android;
+	private Boolean android;
 
 
 	public String getTitle() {
@@ -209,11 +209,11 @@ public class GameForm {
 		this.adText = adText;
 	}
 
-	public boolean isShowAdBorder() {
+	public Boolean getShowAdBorder() {
 		return showAdBorder;
 	}
 
-	public void setShowAdBorder(boolean showAdBorder) {
+	public void setShowAdBorder(Boolean showAdBorder) {
 		this.showAdBorder = showAdBorder;
 	}
 
@@ -233,27 +233,27 @@ public class GameForm {
 		this.language = language;
 	}
 
-	public boolean isPublished() {
+	public Boolean getPublished() {
 		return published;
 	}
 
-	public void setPublished(boolean published) {
+	public void setPublished(Boolean published) {
 		this.published = published;
 	}
 
-	public boolean isLwjgl() {
+	public Boolean getLwjgl() {
 		return lwjgl;
 	}
 
-	public void setLwjgl(boolean lwjgl) {
+	public void setLwjgl(Boolean lwjgl) {
 		this.lwjgl = lwjgl;
 	}
 
-	public boolean isSigned() {
+	public Boolean getSigned() {
 		return signed;
 	}
 
-	public void setSigned(boolean signed) {
+	public void setSigned(Boolean signed) {
 		this.signed = signed;
 	}
 
@@ -281,11 +281,11 @@ public class GameForm {
 		this.androidText = androidText;
 	}
 
-	public boolean isAndroid() {
+	public Boolean getAndroid() {
 		return android;
 	}
 
-	public void setAndroid(boolean android) {
+	public void setAndroid(Boolean android) {
 		this.android = android;
 	}
 }
