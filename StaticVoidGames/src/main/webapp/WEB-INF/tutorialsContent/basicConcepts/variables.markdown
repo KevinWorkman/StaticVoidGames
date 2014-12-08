@@ -126,5 +126,4 @@ Consider the following statements:
     
 What are the new values of a and b?
 
-###  Next: Learn how to convert between different number types by [Casting
-Primitives](CastingPrimitives.jsp)
+###  Next: Learn how to convert between different number types by [Casting Primitives](CastingPrimitives.jsp)
