@@ -17,7 +17,7 @@ public class GameForm {
 	private String website;
 
 	private MultipartFile jarFile;
-	private MultipartFile sourceFile;
+	private MultipartFile source;
 
 	private MultipartFile faviconFile;
 	private MultipartFile backgroundFile;
@@ -97,12 +97,12 @@ public class GameForm {
 		this.jarFile = jarFile;
 	}
 
-	public MultipartFile getSourceFile() {
-		return sourceFile;
+	public MultipartFile getSource() {
+		return source;
 	}
 
-	public void setSourceZipUrl(MultipartFile sourceFile) {
-		this.sourceFile = sourceFile;
+	public void setSource(MultipartFile source) {
+		this.source = source;
 	}
 
 	public MultipartFile getFaviconFile() {

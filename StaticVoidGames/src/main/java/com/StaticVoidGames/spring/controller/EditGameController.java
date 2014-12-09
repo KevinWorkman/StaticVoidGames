@@ -300,22 +300,32 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 		}
 
-		if(gameForm.getSourceFile() != null && !"".equals(gameForm.getSourceFile())){
+		System.out.println("Here 1");
+		
+		if(gameForm.getSource() != null && !"".equals(gameForm.getSource())){
 
+			System.out.println("Here 2");
+			
 			String awsAccessKey = env.getProperty("aws.accessKey");
 			String awsSecretKey = env.getProperty("aws.secretKey");
 
 			String bucket = env.getProperty("s3.bucket");
-			String key = "games/" + game + "/" + gameForm.getSourceFile().getOriginalFilename();
+			String key = "games/" + game + "/" + gameForm.getSource().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
-			meta.setContentLength(gameForm.getSourceFile().getSize());
+			meta.setContentLength(gameForm.getSource().getSize());
 
 			try{
+				
+				System.out.println("Here 3");
+				
 				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
-				s3.putObject(bucket, key, gameForm.getSourceFile().getInputStream(), meta);
+				s3.putObject(bucket, key, gameForm.getSource().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
-				gameObj.setSourceZipUrl(gameForm.getSourceFile().getOriginalFilename());
+				gameObj.setSourceZipUrl(gameForm.getSource().getOriginalFilename());
+				
+				System.out.println("Here 4");
+				
 			}
 			catch(Exception e){
 				//TODO: let the user know something went wrong

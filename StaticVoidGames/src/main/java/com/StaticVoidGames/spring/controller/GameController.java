@@ -132,7 +132,12 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("isJar", false);
 		}
 		
+		
+		
 		if(gameObj.getSourceZipUrl() != null){
+			
+			
+			
 			model.addAttribute("isOpenSource", true);
 			//TODO source zip url should only contain filename, make this relative to s3 endpoint
 			model.addAttribute("sourceUrl", gameObj.getSourceZipUrl());

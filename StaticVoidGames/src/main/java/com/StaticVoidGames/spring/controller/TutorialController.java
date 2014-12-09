@@ -36,6 +36,16 @@ public class TutorialController implements TutorialControllerInterface {
 			return "redirect:/tutorials/" + category + "/" + tutorial;
 		}
 		
+		if("index".equals(tutorial)){
+			String title = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(StringUtils.capitalize(category)), ' ');
+			model.addAttribute("title", title + " - Static Void Games");
+		}
+		else{
+			String title = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(StringUtils.capitalize(tutorial)), ' ');
+			model.addAttribute("title", title + " - Static Void Games");
+		}
+		
+		
 		model.addAttribute("chapter", category);
 		model.addAttribute("section", tutorial);
 

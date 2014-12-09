@@ -10,7 +10,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  * This class gives access to the properties defined in the properties file
  */
 @Configuration
-@PropertySource("classpath:/local.properties")
+@PropertySource("classpath:/live.properties")
 public class PropertiesConfig {
 
 	@Value( "${database.location}" )

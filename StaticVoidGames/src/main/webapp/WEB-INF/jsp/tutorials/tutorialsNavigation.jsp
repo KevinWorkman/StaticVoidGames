@@ -1,8 +1,22 @@
 
 <div id="leftTutorialNav">
 	<ul>
-		<li><a class="chapterTitle ${'index' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/index" />">Tutorials</a>
+		<li><a class="chapterTitle ${'index' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials" />">Tutorials</a>
 			</li>
+	
+			<li><a class="chapterTitle ${'hourOfCode' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/index" />">Hour of Code</a>
+			<ul class="${'hourOfCode' eq chapter ? 'show' : 'noShow'}">
+				<li><a class="sectionTitle ${'setup' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/setup" />">Setup</a></li>
+				<li><a class="sectionTitle ${'callingFunctions' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/callingFunctions" />">Calling Functions</a></li>
+				<li><a class="sectionTitle ${'variables' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/variables" />">Variables</a></li>
+				<li><a class="sectionTitle ${'writingFunctions' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/writingFunctions" />">Writing Functions</a></li>
+				<li><a class="sectionTitle ${'animation' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/animation" />">Animation</a></li>
+				<li><a class="sectionTitle ${'ifStatements' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/ifStatements" />">If Statements</a></li>
+				<li><a class="sectionTitle ${'input' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/input" />">Input</a></li>
+				<li><a class="sectionTitle ${'pong' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/pong" />" >Pong</a></li>
+				<li><a class="sectionTitle ${'next' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/hourOfCode/next" />">What's Next?</a></li>
+			</ul>
+		</li>
 	
 		<li><a class="chapterTitle ${'intro' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/intro/index" />">Intro to Programming</a>
 			<ul class="${'intro' eq chapter ? 'show' : 'noShow'}">

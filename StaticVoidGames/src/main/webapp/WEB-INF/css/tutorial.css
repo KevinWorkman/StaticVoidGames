@@ -11,6 +11,10 @@ a.current{
 	color:red;
 }
 
+ul.noShow a.current {
+	color: lightBlue;
+}
+
 div.tutorialDiv img{
 	max-width:100%;
 }
