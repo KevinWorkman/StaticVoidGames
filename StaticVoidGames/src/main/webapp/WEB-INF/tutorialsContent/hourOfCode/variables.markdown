@@ -1,6 +1,6 @@
 ##Variables
 
-Now we know how to **call functions** and **pass in arguments** to make the computer do stuff. That's a good start, but it doesn't allow for a lot of variety. We can use **variables** to make out programs more interesting.
+Now we know how to **call functions** and **pass in arguments** to make the computer do stuff. That's a good start, but it doesn't allow for a lot of variety. We can use **variables** to make our programs more interesting.
 
 Let's take our first program:
 
