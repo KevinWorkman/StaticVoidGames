@@ -163,7 +163,7 @@ A JPanel is a rectangular component with the typical properties such as a backgr
     
 Compile and run this code to see this program:
 
-![](http://StaticVoidGames.com/tutorialsContent/swing/JPanels1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/JPanels.png)
 
 This might not seem very useful, but JPanels have one extremely useful functionality: you can add other components to them, exactly like we've been adding components to a JFrame.
 
