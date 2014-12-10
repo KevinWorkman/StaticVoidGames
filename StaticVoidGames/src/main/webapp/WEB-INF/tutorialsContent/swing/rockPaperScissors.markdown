@@ -1,4 +1,4 @@
-#  [Swing](index.jsp)
+#  [Swing](http://StaticVoidGames.com/tutorials/swing/index)
 
 ## Rock Paper Scissors
 
@@ -12,30 +12,16 @@ After this tutorial, you'll be able to:
 
   * Write a simple GUI game!
 
-By now you know how to create a GUI, as well as use nested layouts to create
-non-trivial displays. You also know how to use ActionListeners to update the
-GUI in response to user actions. You've also written a [command-line version
-of rock-paper-scissors](). Now we're going to combine all of that to create
-your first gui game!
+By now you know how to create a GUI, as well as use nested layouts to create non-trivial displays. You also know how to use ActionListeners to update the GUI in response to user actions. You've also written a [command-line version of rock-paper-scissors](http://StaticVoidGames.com/tutorials/basicJava/rockPaperScissors). Now we're going to combine all of that to create your first graphical game!
 
 ### The Model
 
-Remember that we write games using MVC, the model-view-controller pattern.
-This lets us separate the game logic from how we display the game or how the
-user interacts wit the game. This approach makes it easier to work on one
-small piece at a time.
+Remember that we write games using MVC, the model-view-controller pattern. This lets us separate the game logic from how we display the game or how the user interacts wit the game. This approach makes it easier to work on one small piece at a time.
 
-For us, the easiest place to start is the model- because we already wrote it!
-That's the beauty of MVC- by separating the model from how it's displayed (the
-view) and how the user interacts with it (the controller), we can reuse the
-model. In our case, we can take the model we wrote for command-line rock-
-paper-scissors and reuse it for our GUI rock-paper-scissors game.
+For us, the easiest place to start is the model- because we already wrote it! That's the beauty of MVC- by separating the model from how it's displayed (the view) and how the user interacts with it (the controller), we can reuse the model. In our case, we can take the model we wrote for command-line rock-paper-scissors and reuse it for our GUI rock-paper-scissors game.
 
 As a reminder, this is the model we wrote:
 
-    
-    
-    
     public class RockPaperScissorsModel {
     	
     	private int wins = 0;
@@ -120,51 +106,28 @@ As a reminder, this is the model we wrote:
     	}
     }
     
-
-This model contains all of the logic for carrying out a game of rock-paper-
-scissors: it generates a random choice for the computer, determines whether a
-game is a win, loss, or tie, and keeps track of the totals of each case.
+This model contains all of the logic for carrying out a game of rock-paper-scissors: it generates a random choice for the computer, determines whether a game is a win, loss, or tie, and keeps track of the totals of each case.
 
 ### The View
 
-Now that we have a model, we "just" have to decide how to display our game. We
-know we need 3 buttons for rock, paper, and scissors. We also know we need
-JLabels to display the outcome of the game (who chose what, who won) and the
-total wins, losses, and ties.
+Now that we have a model, we "just" have to decide how to display our game. We know we need 3 buttons for rock, paper, and scissors. We also know we need JLabels to display the outcome of the game (who chose what, who won) and the total wins, losses, and ties.
 
-That's a lot of components! It's a good idea to sketch out your GUI before you
-start coding it. Keep in mind that there are MANY different ways to lay your
-components out. Here's what I came up with, but feel free to experiment and
-come up with your own design!
+That's a lot of components! It's a good idea to sketch out your GUI before you start coding it. Keep in mind that there are MANY different ways to lay your components out. Here's what I came up with, but feel free to experiment and come up with your own design!
 
-![](outline1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/outline1.png)
 
-That still might seem like a lot of components to layout in a JFrame. But we
-can use nested layouts to make our lives a little easier by grouping related
-components together.
+That still might seem like a lot of components to layout in a JFrame. But we can use nested layouts to make our lives a little easier by grouping related components together.
 
-In this image, I've highlighted different parts of the program. The outermost
-black line indicates the JFrame, and each colored section represents a JPanel
-inside the JFrame.
+In this image, I've highlighted different parts of the program. The outermost black line indicates the JFrame, and each colored section represents a JPanel inside the JFrame.
 
-![](outline2.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/outline2.png)
 
-We can start to see that the JFrame itself only contains three components that
-we need to worry about: the JPanels that will contain each individual section
-of the GUI. With that in mind, we can start building each section.
+We can start to see that the JFrame itself only contains three components that we need to worry about: the JPanels that will contain each individual section of the GUI. With that in mind, we can start building each section.
 
-Notice that we aren't just diving in and trying to create the whole thing at
-once! Like most of programming, gui development is an iterative process. You
-write a little piece, test that single piece, then add another small piece and
-repeat the process.
+Notice that we aren't just diving in and trying to create the whole thing at once! Like most of programming, gui development is an iterative process. You write a little piece, test that single piece, then add another small piece and repeat the process.
 
-With that in mind, let's start at the top, with the JLabels that display the
-outcome of a single game. For now we're just hardcoding all of our values. We
-can worry about hooking things up later, for now let's just get the layout
-right!
+With that in mind, let's start at the top, with the JLabels that display the outcome of a single game. For now we're just hardcoding all of our values. We can worry about hooking things up later, for now let's just get the layout right!
 
-    
-    
     import java.awt.BorderLayout;
     
     import javax.swing.JFrame;
@@ -199,20 +162,13 @@ right!
     	}
     }
     
+This code creates a JPanel that contains three JLabels, which are organized using a BorderLayout. That JPanel is then added to a JFrame in the BorderLayout.NORTH position. Run this code and you should see something like this:
 
-This code creates a JPanel that contains three JLabels, which are organized
-using a BorderLayout. That JPanel is then added to a JFrame in the
-BorderLayout.NORTH position. Run this code and you should see something like
-this:
-
-![](rpc1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/rpc1.png)
 
 We can now work on the middle JPanel that contains our buttons:
 
-    
-    
     import java.awt.BorderLayout;
-    
     import javax.swing.BoxLayout;
     import javax.swing.JButton;
     import javax.swing.JFrame;
@@ -258,21 +214,12 @@ We can now work on the middle JPanel that contains our buttons:
     	}
     }
     
+Now our JFrame contains two JPanels: one JPanel contains the outcome of a single game, and the other contains the buttons that the user will eventually click to play. To guarantee that the buttons are placed in a single row, we use a BoxLayout to organize them. Run the program with this updated code, and you'll see something like this:
 
-Now our JFrame contains two JPanels: one JPanel contains the outcome of a
-single game, and the other contains the buttons that the user will eventually
-click to play. To guarantee that the buttons are placed in a single row, we
-use a BoxLayout to organize them. Run the program with this updated code, and
-you'll see something like this:
+![](http://StaticVoidGames.com/tutorialsContent/swing/rps2.png)
 
-![](rps2.png)
+The last thing we need to do for the layout is create the JPanel that contains the JLabels displaying the total number of wins, losses, and ties. We'll organize these into a FlowLayout.
 
-The last thing we need to do for the layout is create the JPanel that contains
-the JLabels displaying the total number of wins, losses, and ties. We'll
-organize these into a FlowLayout.
-
-    
-    
     import java.awt.BorderLayout;
     import java.awt.FlowLayout;
     
@@ -281,7 +228,6 @@ organize these into a FlowLayout.
     import javax.swing.JFrame;
     import javax.swing.JLabel;
     import javax.swing.JPanel;
-    
     
     public class RockPaperScissorsGui {
     
@@ -337,30 +283,18 @@ organize these into a FlowLayout.
     	}
     }
     
-    
-
 Now if you run this updated code, you'll see our finished gui prototype:
 
-![](rps2.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/rps2.png)
 
-As you can see, we started out with a complicated design with a bunch of
-components, but broke those components down into individual groups that we
-could organize, then added each group as a single component (a JPanel). This
-is how pretty much all gui development works, so if you can do this, you can
-create anything!
+As you can see, we started out with a complicated design with a bunch of components, but broke those components down into individual groups that we could organize, then added each group as a single component (a JPanel). This is how pretty much all gui development works, so if you can do this, you can create anything!
 
 ### The Controller
 
-Now we have a model and a view, but we don't have a way for the user to
-interact with our GUI. For that, we need to add an ActionListener to each
-JButton. As a first step, let's create a basic ActionListener that just prints
-out the player's choice:
+Now we have a model and a view, but we don't have a way for the user to interact with our GUI. For that, we need to add an ActionListener to each JButton. As a first step, let's create a basic ActionListener that just prints out the player's choice:
 
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
-    
     import javax.swing.JButton;
     
     public class RockPaperScissorsListener implements ActionListener{
@@ -400,14 +334,8 @@ out the player's choice:
     	}
     }
     
+This ActionListener will be added to our three JButtons. Depending on which one is clicked, it will print out a different message. Back in our main class, we create an instance of our ActionListener, pass the three buttons into the constructor, and then add the ActionListener to each button:
 
-This ActionListener will be added to our three JButtons. Depending on which
-one is clicked, it will print out a different message. Back in our main class,
-we create an instance of our ActionListener, pass the three buttons into the
-constructor, and then add the ActionListener to each button:
-
-    
-    
     import java.awt.BorderLayout;
     import java.awt.FlowLayout;
     import java.awt.event.ActionListener;
@@ -417,7 +345,6 @@ constructor, and then add the ActionListener to each button:
     import javax.swing.JFrame;
     import javax.swing.JLabel;
     import javax.swing.JPanel;
-    
     
     public class RockPaperScissorsGui {
     
@@ -481,21 +408,12 @@ constructor, and then add the ActionListener to each button:
     	}
     }
     
-    
+Run this code and test it to make sure the ActionListener is working correctly.
 
-Run this code and test it to make sure the ActionListener is working
-correctly.
+The next step is to add our model to our controller, which just means creating an instance of the RockPaperScissorsModel we already wrote inside the RockPaperScissorsListener, and passing in the player's choice, just like we did for our command-line game!
 
-The next step is to add our model to our controller, which just means creating
-an instance of the RockPaperScissorsModel we already wrote inside the
-RockPaperScissorsListener, and passing in the player's choice, just like we
-did for our command-line game!
+For now, let's keep using print statements. Remember, you should always write code in small steps like this!
 
-For now, let's keep using print statements. Remember, you should always write
-code in small steps like this!
-
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     
@@ -565,17 +483,10 @@ code in small steps like this!
     	}
     }
     
-    
-
-Run this updated code, and you should be see that entire games of rock-paper-
-scissor can be played using the buttons as input and the console as output.
-However, we want to use our GUI as the output, so the last thing we need to do
-is pass the JLabels into the ActionListener.
+Run this updated code, and you should be see that entire games of rock-paper-scissor can be played using the buttons as input and the console as output. However, we want to use our GUI as the output, so the last thing we need to do is pass the JLabels into the ActionListener.
 
 The final version of our ActionListener should look like this:
 
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     
@@ -614,7 +525,6 @@ The final version of our ActionListener should look like this:
     		this.lossesLabel = lossesLabel;
     		this.tiesLabel = tiesLabel;
     		
-    
     	}
     
     	public void actionPerformed(ActionEvent e) {
@@ -662,20 +572,12 @@ The final version of our ActionListener should look like this:
     
     	}
     
-    
     }
     
-    
+The ActionListener now uses the setText() method of our various JLabels instead of the System.out.println() method. This causes our GUI to update whenever a game is played.
 
-The ActionListener now uses the setText() method of our various JLabels
-instead of the System.out.println() method. This causes our GUI to update
-whenever a game is played.
+Now the only thing left to do is pass the JLabels into the ActionListener. Our main method now looks like this:
 
-Now the only thing left to do is pass the JLabels into the ActionListener. Our
-main method now looks like this:
-
-    
-    
     import java.awt.BorderLayout;
     import java.awt.FlowLayout;
     import java.awt.event.ActionListener;
@@ -686,7 +588,6 @@ main method now looks like this:
     import javax.swing.JFrame;
     import javax.swing.JLabel;
     import javax.swing.JPanel;
-    
     
     public class RockPaperScissorsGui {
     
@@ -708,15 +609,12 @@ main method now looks like this:
     		JLabel tiesLabel = new JLabel("Ties: 0", JLabel.CENTER);
     
     		//create the listener and pass the GUI components into it
-    		ActionListener listener = new RockPaperScissorsListener(playerChoiceLabel, computerChoiceLabel, outcomeLabel,
-    				rockButton, paperButton, scissorsButton,
-    				winsLabel, lossesLabel, tiesLabel);
+    		ActionListener listener = new RockPaperScissorsListener(playerChoiceLabel, computerChoiceLabel, outcomeLabel, rockButton, paperButton, scissorsButton, winsLabel, lossesLabel, tiesLabel);
     		
     		//add the listener to the buttons
     		rockButton.addActionListener(listener);
     		paperButton.addActionListener(listener);
     		scissorsButton.addActionListener(listener);
-    
     
     		//top panel
     		JPanel singleGameOutcomePanel = new JPanel();
@@ -756,10 +654,6 @@ main method now looks like this:
     		frame.setVisible(true);	
     	}
     }
-    	}
-    }
-    
-    
 
 ### Exercises
 
@@ -769,4 +663,4 @@ main method now looks like this:
   * Our algorithm that chooses a random option is actually impossible to get an advantage over: ties, wins, and losses will each happen a third of the time. However, since humans are non-random (even if you think you're making a random choice, you probably aren't), it's possible to design a smarter algorithm that outsmarts a human player. Try to implement an algorithm that wins more than 30% of its games!
   * Implement a GUI that plays [Morra](http://en.wikipedia.org/wiki/Morra_(game)), [Matching Pennies](http://en.wikipedia.org/wiki/Matching_pennies), or [Odds and Evens](http://en.wikipedia.org/wiki/Odd_or_Even).
 
-###  Next: [Custom Painting](CustomPainting.jsp)
+###  Next: [Custom Painting](http://StaticVoidGames.com/tutorials/swing/customPainting)
