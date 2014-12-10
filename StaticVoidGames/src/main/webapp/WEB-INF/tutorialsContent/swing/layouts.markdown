@@ -1,4 +1,4 @@
-#  [Swing](index.jsp)
+#Swing
 
 ## Layouts
 
@@ -12,33 +12,18 @@ After this tutorial, you'll be able to:
 
   * Add multiple components to a JFrame in various layouts.
 
-So far we've used very basic GUIs consisting of a window with a single
-component. However, most GUIs are made up of many components, not just a
-single label or button! This tutorial will show you how to add multiple
-components to a window, and how to position them how you want them.
+So far we've used very basic GUIs consisting of a window with a single component. However, most GUIs are made up of many components, not just a single label or button! This tutorial will show you how to add multiple components to a window, and how to position them how you want them.
 
 ### Layout Managers
 
-Take a look at a GUI you use (such as this web browser), and pay attention to
-where the buttons, menus, labels, icons, and other components are. Now resize
-the window. Notice how the components reposition or resize themselves to fit
-into the window. The bounds (the position and size) of a component are
-determined by their layout. There are a ton of different types of layouts.
+Take a look at a GUI you use (such as this web browser), and pay attention to where the buttons, menus, labels, icons, and other components are. Now resize the window. Notice how the components reposition or resize themselves to fit into the window. The bounds (the position and size) of a component are determined by their **layout**. There are a ton of different types of layouts.
 
-When adding multiple components to a window, you have to tell the window how
-to place them, and how to reposition and resize them when the window is
-resized. In other words, you have to give the window a layout.
+When adding multiple components to a window, you have to tell the window how to place them, and how to reposition and resize them when the window is resized. In other words, you have to give the window a layout.
 
-In Java, layouts are handled by objects called Layout Managers. There are a
-bunch of different layout managers, each which behaves a little bit
-differently.
+In Java, layouts are handled by objects called Layout Managers. There are a bunch of different layout managers, each which behaves a little bit differently.
 
-To use a layout manager, pass an instance of one of the layout manger classes
-into the setLayout() funciton. For example, we can use a FlowLayout on our
-JFrame:
+To use a layout manager, pass an instance of one of the layout manger classes into the setLayout() function. For example, we can use a FlowLayout on our JFrame:
 
-    
-    
     import java.awt.FlowLayout;
     
     import javax.swing.JButton;
@@ -71,39 +56,27 @@ JFrame:
     }
     
 
-In this code, we create an instance of JFrame, just like always. Then we
-create an instance of FlowLayout and pass it into the setLayout() function of
-our JFrame. Then we create a label, a checkbox, and a button, and add each to
-the JFrame. Finally, we set the size of the JFrame and show it to the user.
+In this code, we create an instance of JFrame, just like always. Then we create an instance of FlowLayout and pass it into the setLayout() function of our JFrame. Then we create a label, a checkbox, and a button, and add each to the JFrame. Finally, we set the size of the JFrame and show it to the user.
 
 Different layout managers do different things, and FlowLayout is one of the
 simplest: it places the components from left to right in the window, and when
 it runs out of room, it drops down to the next line. So we start with a window
 that looks like this:
 
-![](FlowLayout1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/FlowLayout1.png)
 
-The components are arranged left to right in the order we added them to the
-JFrame. If we make the window smaller, the components will scrunch together,
-and if we make the window too narrow to show the components in a single row,
-the right-most component will go to the next line.
+The components are arranged left to right in the order we added them to the JFrame. If we make the window smaller, the components will scrunch together, and if we make the window too narrow to show the components in a single row, the right-most component will go to the next line.
 
-![](FlowLayout2.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/FlowLayout2.png)
 
-If we make the window even smaller, the components will display in a single
-column instead of a single row.
+If we make the window even smaller, the components will display in a single column instead of a single row.
 
-![](FlowLayout3.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/FlowLayout3.png)
 
-FlowLayout is useful for quick GUI design, or for parts of your GUI that you
-want to react to resizing.
+FlowLayout is useful for quick GUI design, or for parts of your GUI that you want to react to resizing.
 
-Another type of layout manager is BorderLayout. With a BorderLayout, you
-specify which section of the window a component should occupy when you add it
-to the window. We can modify our above program to use a BorderLayout:
+Another type of layout manager is BorderLayout. With a BorderLayout, you specify which section of the window a component should occupy when you add it to the window. We can modify our above program to use a BorderLayout:
 
-    
-    
     import java.awt.BorderLayout;
     
     import javax.swing.JButton;
@@ -139,28 +112,16 @@ to the window. We can modify our above program to use a BorderLayout:
 
 Run this code, and you should see something like this:
 
-![](BorderLayout.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/BorderLayout.png)
 
-When using BorderLayout, the component you place in the CENTER spot will get
-the most room. The other components will take up as little room as they can.
-You also don't have to fill every section of a BorderLayout. For example, you
-might put a menu in the BorderLayout.EAST position and the main section of
-your GUI in the BorderLayout.CENTER position. This is useful for the overall
-design of your GUI.
+When using BorderLayout, the component you place in the CENTER spot will get the most room. The other components will take up as little room as they can. You also don't have to fill every section of a BorderLayout. For example, you might put a menu in the BorderLayout.EAST position and the main section of your GUI in the BorderLayout.CENTER position. This is useful for the overall design of your GUI.
 
 ### JPanel
 
-We've seen a few different kinds of components (such as JButton, JLabel, and
-JCheckBox). Yet another component is a JPanel, and you'll probably end up
-using it quite a bit.
+We've seen a few different kinds of components (such as JButton, JLabel, and JCheckBox). Yet another component is a JPanel, and you'll probably end up using it quite a bit.
 
-A JPanel is a rectangular component with the typical properties such as a
-background color and a border, but it doesn't have any interactive
-functionality like a button or a checkbox. For example, we can use JPanels in
-a BorderLayout:
+A JPanel is a rectangular component with the typical properties such as a background color and a border, but it doesn't have any interactive functionality like a button or a checkbox. For example, we can use JPanels in a BorderLayout:
 
-    
-    
     import java.awt.BorderLayout;
     import java.awt.Color;
     
@@ -200,17 +161,12 @@ a BorderLayout:
         }
     }
     
-
 Compile and run this code to see this program:
 
-![](JPanels1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/JPanels1.png)
 
-This might not seem very useful, but JPanels have one extremely useful
-functionality: you can add other components to them, exactly like we've been
-adding components to a JFrame.
+This might not seem very useful, but JPanels have one extremely useful functionality: you can add other components to them, exactly like we've been adding components to a JFrame.
 
-    
-    
     import java.awt.BorderLayout;
     import java.awt.Color;
     
@@ -266,25 +222,17 @@ adding components to a JFrame.
         	frame.setVisible(true);
         }
     }
-    
-
+   
 Compile and run the above code to see this program:
 
-![](JPanels2.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/JPanels2.png)
 
-This program adds some JButton instances to a few JPanels, splitting the whole
-window up into different sections.
+This program adds some JButton instances to a few JPanels, splitting the whole window up into different sections.
 
 ### Nesting Layouts
 
-The above code adds several JButtons to different JPanels, but the components
-aren't arranged in any particular order. How do we tell a JPanel how to
-position and size its components? That's right, with a layout! More
-specifically, you can set the LayoutManager of a JPanel exactly like you do
-with a JFrame, by calling the setLayout() method.
+The above code adds several JButtons to different JPanels, but the components aren't arranged in any particular order. How do we tell a JPanel how to position and size its components? That's right, with a layout! More specifically, you can set the LayoutManager of a JPanel exactly like you do with a JFrame, by calling the setLayout() method.
 
-    
-    
     import java.awt.BorderLayout;
     import java.awt.Color;
     
@@ -344,43 +292,26 @@ with a JFrame, by calling the setLayout() method.
         	frame.setSize(500, 250);
         	frame.setVisible(true);
         }
-      
     }
-    
-
+   
 This code gives a BorderLayout to each JPanel that contains JButtons.
 
-![](NestingLayouts1.png)
+![](http://StaticVoidGames.com/tutorialsContent/swing/NestingLayouts1.png)
 
-You can even add a JPanel to another JPanel. By nesting JPanels with different
-layouts like that, you can achieve just about any overall layout for your GUI.
+You can even add a JPanel to another JPanel. By nesting JPanels with different layouts like that, you can achieve just about any overall layout for your GUI.
 
-Full disclosure: You can actually add components to any Swing component, but
-for our purposes, we don't need to worry about that. For now, think of a
-JPanel as a rectangular component that you can add other components to.
+Full disclosure: You can actually add components to any Swing component, but for our purposes, we don't need to worry about that. For now, think of a JPanel as a rectangular component that you can add other components to.
 
 ### Null Layout
 
-So far we've looked at using predefined layouts to size and place components.
-These layout managers handle the bounds of components as the window resizes.
-This saves us a lot of work, as it makes moving components around much easier-
-not just when the window is resized, but also if we change our mind about
-where the components should go.
+So far we've looked at using predefined layouts to size and place components. These layout managers handle the bounds of components as the window resizes. This saves us a lot of work, as it makes moving components around much easier- not just when the window is resized, but also if we change our mind about where the components should go.
 
-For example, we might initially place our components in a JPanel with a
-vertical BoxLayout in the west section of a JFrame with a BorderLayout, but
-then change our mind and move the JPanel to the south section of the JFrame
-and change the vertical BoxLayout to a horizontal BoxLayout.
+For example, we might initially place our components in a JPanel with a vertical BoxLayout in the west section of a JFrame with a BorderLayout, but then change our mind and move the JPanel to the south section of the JFrame and change the vertical BoxLayout to a horizontal BoxLayout.
 
-It's okay if not all of those words made sense to you, but the gist is: layout
-managers make your life much easier!
+It's okay if not all of those words made sense to you, but the gist is: layout managers make your life much easier!
 
-That being said, it's also possible to place your components manually. You do
-this using a null layout, or more specifically, by passing null into the
-setLayout() function.
+That being said, it's also possible to place your components manually. You do this using a null layout, or more specifically, by passing null into the setLayout() function.
 
-    
-    
     import javax.swing.JButton;
     import javax.swing.JFrame;
      
@@ -401,14 +332,9 @@ setLayout() function.
         	frame.setVisible(true);
         }
     }
-    
+   
+If you run this code, you'll notice that we can't see the JButton. That's because we're using a null layout, which means we have to set the JButton's size and location!
 
-If you run this code, you'll notice that we can't see the JButton. That's
-because we're using a null layout, which means we have to set the JButton's
-size and location!
-
-    
-    
     import javax.swing.JButton;
     import javax.swing.JFrame;
      
@@ -432,20 +358,12 @@ size and location!
         }
     }
     
+Now that we've set the JButton's size and location, the JButton should display as a rectangle in the middle of the bottom of the JFrame.
 
-Now that we've set the JButton's size and location, the JButton should display
-as a rectangle in the middle of the bottom of the JFrame.
+The coordinates passed into the size and location functions are in pixels, and the coordinate system starts at 0,0 in the upper-left corner of the window. If you're coming from Processing, this is the same coordinate system you're used to by now.
 
-The coordinates passed into the size and location functions are in pixels, and
-the coordinate system starts at 0,0 in the upper-left corner of the window. If
-you're coming from Processing, this is the same coordinate system you're used
-to by now.
+We can add as many components to a null layout as we want, as long as we set the size and location of each.
 
-We can add as many components to a null layout as we want, as long as we set
-the size and location of each.
-
-    
-    
     import javax.swing.JButton;
     import javax.swing.JFrame;
      
@@ -479,19 +397,11 @@ the size and location of each.
         }
     }
     
+A null layout gives you the most control over your GUI, but you lose functionality that automagically works with a layout manager. For example, run the above code and try resizing the window. Notice how the buttons don't move or resize. Also, if we want to rearrange our gui, we have to modify the bounds of every component.
 
-A null layout gives you the most control over your GUI, but you lose
-functionality that automagically works with a layout manager. For example, run
-the above code and try resizing the window. Notice how the buttons don't move
-or resize. Also, if we want to rearrange our gui, we have to modify the bounds
-of every component.
+Long story short, you should know that using a null layout is an option, but you should almost always use an actual layout manager.
 
-Long story short, you should know that using a null layout is an option, but
-you should almost always use an actual layout manager.
-
-To see how other layout managers work, check out
-[this](http://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html)
-page.
+To see how other layout managers work, check out [this](http://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html) page.
 
 ### Exercises
 
@@ -500,4 +410,4 @@ page.
   * Modify the above program to show a checkbox instead of a JLabel. The checkbox should be checked already when the window pops up. The API is your friend!
   * Look carefully at the GUI of some programs you use often. Can you identify the various layouts of different parts of the GUI? What kind of nested layouts might they use?
 
-###  Next: [Listening for Actions](ActionListeners.jsp)
+###  Next: [Listening for Actions](http://StaticVoidGames.com/tutorials/swing/actionListeners)
