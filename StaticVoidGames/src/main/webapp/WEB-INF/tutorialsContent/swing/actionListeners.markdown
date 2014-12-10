@@ -12,17 +12,11 @@ After this tutorial, you'll be able to:
 
   * Listen for user actions, such as clicking on a button.
 
-By now you know how to create a GUI, as well as use nested layouts to create
-non-trivial displays. But what use is a fancy GUI if none of the buttons do
-anything? This tutorial will show you how to detect user actions and update
-the GUI accordingly.
+By now you know how to create a GUI, as well as use nested layouts to create non-trivial displays. But what use is a fancy GUI if none of the buttons do anything? This tutorial will show you how to detect user actions and update the GUI accordingly.
 
 ### OOP Review
 
-Before we get into action listeners, it's probably a good idea to review some
-object oriented principles. If any of this is confusing, go back and read the
-[OOP tutorial](http://StaticVoidGames.com/tutorials/objects/index.jsp) and
-come back!
+Before we get into action listeners, it's probably a good idea to review some object oriented principles. If any of this is confusing, go back and read the [OOP tutorial](http://StaticVoidGames.com/tutorials/objects/index) and come back!
 
 We've been using Objects, so you've seen the basics:
 
@@ -30,9 +24,7 @@ We've been using Objects, so you've seen the basics:
   * A class is a blueprint for creating a particular type of object. For example the Cat class might contain a String name, an int age, and a method named meow().
   * An instance is a specific copy of a class with its own copies of the values and variables in that class. For example we might have one instance of Cat with a name "Stanley" and an age of 6, and another cat instance
 
-And if you went through the [inheritance
-tutorial](http://staticvoidgames.com/tutorials/objects/Inheritance.jsp), you
-should be familiar with more advanced OOP:
+And if you went through the [inheritance tutorial](http://staticvoidgames.com/tutorials/objects/inheritance), you should be familiar with more advanced OOP:
 
   * A class can extend another class to expand the extended class's behavior.
   * An interface is like a class, except none of its methods have been defined. An interface must be implemented by a concrete class.
@@ -40,14 +32,10 @@ should be familiar with more advanced OOP:
 
 ActionListener
 
-With the above OOP concepts in mind, let's meet ActionListener. ActionListener
-is a predefined interface with a single method named actionPerformed().
+With the above OOP concepts in mind, let's meet ActionListener. ActionListener is a predefined interface with a single method named actionPerformed().
 
-Remember that ActionListener is an interface, which means you can't do
-something like this:
+Remember that ActionListener is an interface, which means you can't do something like this:
 
-    
-    
     import java.awt.event.ActionListener;
      
     public class Main{
@@ -63,15 +51,10 @@ something like this:
         }
     }
     
+To create an ActionListener, you first have to implement the ActionListener interface in a concrete class. You could write a class like this:
 
-To create an ActionListener, you first have to implement the ActionListener
-interface in a concrete class. You could write a class like this:
-
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
-    
     
     public class MyListener implements ActionListener{
     
@@ -82,16 +65,10 @@ interface in a concrete class. You could write a class like this:
     
     }
     
-    
+This class extends ActionListener, which means that it must define any methods in ActionListener- in this case only one, the actionPerformed() method.
 
-This class extends ActionListener, which means that it must define any methods
-in ActionListener- in this case only one, the actionPerformed() method.
+We can now create an instance of MyListener, which *is an* ActionListener since it contains the actionPerformed() method.
 
-We can now create an instance of MyListener, which *is an* ActionListener
-since it contains the actionPerformed() method.
-
-    
-    
     public class Main{
      
         public static void main(String[] args) {
@@ -103,21 +80,12 @@ since it contains the actionPerformed() method.
         }
     }
     
-
-This Main class creates an instance of MyListener, which *is an*
-ActionListener. You can run this code, but it doesn't do very much... yet.
+This Main class creates an instance of MyListener, which *is an* ActionListener. You can run this code, but it doesn't do very much... yet.
 
 ### Using an ActionListener in Swing
 
-The reason we're paying so much attention to the ActionListener interface is
-because Swing uses ActionListeners all over the place. Many user actions, such
-as clicking a button, trigger an ActionEvent that you can intercept using an
-ActionListener. This might sound complicated, but all it takes is passing an
-instance of ActionListener into an addActionListener() method. Here's an
-example:
+The reason we're paying so much attention to the ActionListener interface is because Swing uses ActionListeners all over the place. Many user actions, such as clicking a button, trigger an ActionEvent that you can intercept using an ActionListener. This might sound complicated, but all it takes is passing an instance of ActionListener into an addActionListener() method. Here's an example:
 
-    
-    
     import java.awt.FlowLayout;
     
     import javax.swing.JButton;
@@ -147,30 +115,14 @@ example:
         }
     }
     
+This code uses the MyListener class we created above. Now, whenever you click the button, the actionPerformed() method of the instance of MyListener is called, and the "Hello world!" message is printed to the console.
 
-This code uses the MyListener class we created above. Now, whenever you click
-the button, the actionPerformed() method of the instance of MyListener is
-called, and the "Hello world!" message is printed to the console.
-
-We don't really need to worry about how the actionPerformed() method is
-called, or where the ActionEvent instance is created- Swing handles all of
-that for us. All we need to know is that if we pass an instance of
-ActionListener into the addActionListener() method of a Swing component, the
-actionPerformed() method of that instance will be called whenever the user
-takes an action on that component. Different Swing components have different
-actions- JButton's action is triggered when the user clicks the button,
-JCheckBox's action is triggered when the box is checked or unchecked. Consult
-the API for other component actions!
+We don't really need to worry about how the actionPerformed() method is called, or where the ActionEvent instance is created- Swing handles all of that for us. All we need to know is that if we pass an instance of ActionListener into the addActionListener() method of a Swing component, the actionPerformed() method of that instance will be called whenever the user takes an action on that component. Different Swing components have different actions- JButton's action is triggered when the user clicks the button, JCheckBox's action is triggered when the box is checked or unchecked. Consult the API for other component actions!
 
 ### Updating the GUI
 
-Printing to the console is a great way to make sure our code is working, but
-usually you want to provide feedback to the user by updating the GUI. Let's
-start by modifying our MyListener class to keep track of the number of times
-the actionPerformed() method is called:
+Printing to the console is a great way to make sure our code is working, but usually you want to provide feedback to the user by updating the GUI. Let's start by modifying our MyListener class to keep track of the number of times the actionPerformed() method is called:
 
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     
@@ -186,16 +138,10 @@ the actionPerformed() method is called:
     	}
     }
     
-
-Update your code to use this as your ActionListener and see what it does. This
-code uses a class variable called clickCount to keep track of the number of
-times the actionPerformed() method is called. When the method is called, the
-variable is incremented and its value is printed out.
+Update your code to use this as your ActionListener and see what it does. This code uses a class variable called clickCount to keep track of the number of times the actionPerformed() method is called. When the method is called, the variable is incremented and its value is printed out.
 
 We can modify this code to update a label instead of printing to the console:
 
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     import javax.swing.JLabel;
@@ -218,24 +164,15 @@ We can modify this code to update a label instead of printing to the console:
     	}
     }
     
+We've added a constructor that takes an instance of JLabel as an argument. Inside the constructor, that instance of JLabel is saved into a variable that we can access outside of the constructor. Then in the actionPerformed() method, we set the text of the JLabel referenced by the variable, exactly like we did the print statements.
 
-We've added a constructor that takes an instance of JLabel as an argument.
-Inside the constructor, that instance of JLabel is saved into a variable that
-we can access outside of the constructor. Then in the actionPerformed()
-method, we set the text of the JLabel referenced by the variable, exactly like
-we did the print statements.
+Now all we need to do is create an instance of JLabel to pass into the constructor!
 
-Now all we need to do is create an instance of JLabel to pass into the
-constructor!
-
-    
-    
     import java.awt.FlowLayout;
     
     import javax.swing.JButton;
     import javax.swing.JFrame;
     import javax.swing.JLabel;
-    
     
     public class Main{
      
@@ -264,25 +201,14 @@ constructor!
     }
     
 
-This code creates a JLabel and passes it into the MyListener constructor. We
-already wrote the code that updates the text of the JLabel, so if you run this
-code you should see a fully functioning GUI!
+This code creates a JLabel and passes it into the MyListener constructor. We already wrote the code that updates the text of the JLabel, so if you run this code you should see a fully functioning GUI!
 
 ### Multiple Buttons
 
-So far we know how to respond to user input of a single JButton. But often, we
-want to support multiple inputs, not just one. Let's say we want to have two
-buttons: one that increases the click count, and another that decreases it.
-Like much of programming, there are a number of ways to do this!
+So far we know how to respond to user input of a single JButton. But often, we want to support multiple inputs, not just one. Let's say we want to have two buttons: one that increases the click count, and another that decreases it. Like much of programming, there are a number of ways to do this!
 
-One way to support multiple buttons is by using a single instance of
-ActionListener along with the ActionEvent getSource() method, which returns
-the component that generated the action. We can then compare that value to our
-original JButtons to see which button generated the event. Let's see the
-ActionListener first:
+One way to support multiple buttons is by using a single instance of ActionListener along with the ActionEvent getSource() method, which returns the component that generated the action. We can then compare that value to our original JButtons to see which button generated the event. Let's see the ActionListener first:
 
-    
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     
@@ -316,27 +242,15 @@ ActionListener first:
     	}
     }
     
+Our ActionListener's constructor now takes two additional arguments: an instance of JButton to indicate addition, and an instance of JButton to indicate subtraction. We reference these JButton instances in class variables exactly like we did with our JLabel. Then in the actionPerformed() method, we use the ActionEvent.getSource() method to determine which JButton was the source of the event. If it was the add button, we increment the count, and if it was the subtract button, we decrement it. Then we update the text of the JLabel, just like before.
 
-Our ActionListener's constructor now takes two additional arguments: an
-instance of JButton to indicate addition, and an instance of JButton to
-indicate subtraction. We reference these JButton instances in class variables
-exactly like we did with our JLabel. Then in the actionPerformed() method, we
-use the ActionEvent.getSource() method to determine which JButton was the
-source of the event. If it was the add button, we increment the count, and if
-it was the subtract button, we decrement it. Then we update the text of the
-JLabel, just like before.
+To use this ActionListener, we have to update our Main class to include another button:
 
-To use this ActionListener, we have to update our Main class to include
-another button:
-
-    
-    
     import java.awt.FlowLayout;
     
     import javax.swing.JButton;
     import javax.swing.JFrame;
     import javax.swing.JLabel;
-    
     
     public class Main{
      
@@ -366,22 +280,13 @@ another button:
         	frame.setVisible(true);
         }
     }
-    
-
-This code now creates two JButtons and a JLabel and passes them all into the
-MyListener constructor. We then add the ActionListener to each of our JButton
-instances. Notice that we only have a single instance of MyListener! What
-would happen if we had more than one? (Try it and find out!)
+   
+This code now creates two JButtons and a JLabel and passes them all into the MyListener constructor. We then add the ActionListener to each of our JButton instances. Notice that we only have a single instance of MyListener! What would happen if we had more than one? (Try it and find out!)
 
 ### MVC
 
-Another way to handle multiple ActionListeners is to use MVC, or the model-
-view-controller pattern we discussed previously. We already have the view (the
-JLabel) and the controller (the JButtons and the ActionListener), so now all
-we need is a model.
+Another way to handle multiple ActionListeners is to use MVC, or the model-view-controller pattern we discussed previously. We already have the view (the JLabel) and the controller (the JButtons and the ActionListener), so now all we need is a model.
 
-    
-    
     public class CountModel {
     	
     	private int count = 0;
@@ -399,12 +304,7 @@ we need is a model.
     	}
     }
     
-
-This model keeps track of a count value and contains methods for adding and
-subtracting, as well as a method to obtain the count value. Now that we have a
-model, we can write two separate ActionListeners that use it:
-
-    
+This model keeps track of a count value and contains methods for adding and subtracting, as well as a method to obtain the count value. Now that we have a model, we can write two separate ActionListeners that use it:
     
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
@@ -430,7 +330,6 @@ model, we can write two separate ActionListeners that use it:
     }
     
     
-    
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     
@@ -454,19 +353,13 @@ model, we can write two separate ActionListeners that use it:
     	}
     }
     
+These two ActionListeners both use our model. One calls the add() method of our model, and the other calls the subtract() method. Now we just need to create the view and glue the pieces together:
 
-These two ActionListeners both use our model. One calls the add() method of
-our model, and the other calls the subtract() method. Now we just need to
-create the view and glue the pieces together:
-
-    
-    
     import java.awt.FlowLayout;
     
     import javax.swing.JButton;
     import javax.swing.JFrame;
     import javax.swing.JLabel;
-    
     
     public class Main{
      
@@ -500,35 +393,18 @@ create the view and glue the pieces together:
         }
     }
     
-
-In our gui code, we now create an instance of our CountModel, which we then
-pass in to each of our ActionListeners. Finally, we add each ActionListener to
-its corresponding JButton.
+In our gui code, we now create an instance of our CountModel, which we then pass in to each of our ActionListeners. Finally, we add each ActionListener to its corresponding JButton.
 
 ### Anonymous Classes
 
-We've been creating classes that implement ActionListeners, giving those
-classes their own names, and putting them in their own files. This approach
-works perfectly, but it might be overkill for our purposes. For example, in
-our above code, we only use one instance of AddListener and SubtractListener.
-Do we really need to create a whole extra file for each?
+We've been creating classes that implement ActionListeners, giving those classes their own names, and putting them in their own files. This approach works perfectly, but it might be overkill for our purposes. For example, in our above code, we only use one instance of AddListener and SubtractListener. Do we really need to create a whole extra file for each?
 
-The answer is no. Since we only use a single instance of each class, we can
-use anonymous classes instead. An anonymous class is a way to define a
-subclass (in this case an implementation of ActionListener) without giving
-that class its own file, or even a name- that's why they're called anonymous
-classes!
+The answer is no. Since we only use a single instance of each class, we can use anonymous classes instead. An anonymous class is a way to define a subclass (in this case an implementation of ActionListener) without giving that class its own file, or even a name- that's why they're called anonymous classes!
 
-To create an anonymous class, you use the new keyword along with the name of
-the parent class (in this case ActionListener), just like a constructor. You
-then give that particular instance a body by putting curly brackets {} right
-after. Finally, you define any methods from the parent class that you want to
-override.
+To create an anonymous class, you use the new keyword along with the name of the parent class (in this case ActionListener), just like a constructor. You then give that particular instance a body by putting curly brackets {} right after. Finally, you define any methods from the parent class that you want to override.
 
 This might sound confusing, but hopefully an example is more obvious:
 
-    
-    
     import java.awt.FlowLayout;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
@@ -536,7 +412,6 @@ This might sound confusing, but hopefully an example is more obvious:
     import javax.swing.JButton;
     import javax.swing.JFrame;
     import javax.swing.JLabel;
-    
     
     public class Main{
      
@@ -586,15 +461,9 @@ This might sound confusing, but hopefully an example is more obvious:
     }
     
 
-This code does the same thing as our previous program, but now we don't need
-separate AddListener and SubtractListener classes.
+This code does the same thing as our previous program, but now we don't need separate AddListener and SubtractListener classes.
 
-You can use named classes or anonymous classes for cases like these. As a
-general rule, anonymous classes are used for one-time-use cases where they
-don't have to be reused or dealt with in multiple places. Swing listeners are
-a perfect example of that, so you'll probably see a lot of anonymous classes
-in Swing code. But if you're more comfortable with named classes, by all means
-use them instead!
+You can use named classes or anonymous classes for cases like these. As a general rule, anonymous classes are used for one-time-use cases where they don't have to be reused or dealt with in multiple places. Swing listeners are a perfect example of that, so you'll probably see a lot of anonymous classes in Swing code. But if you're more comfortable with named classes, by all means use them instead!
 
 ### Exercises
 
@@ -602,4 +471,4 @@ use them instead!
   * Modify the above program to include a third button that resets the count.
   * Modify your calculator program (the one you wrote for the layout tutorial) so that it actually works!
 
-###  Next: [RockPaperScissors](RockPaperScissors.jsp)
+###  Next: [RockPaperScissors](http://StaticVoidGames.com/tutorials/swing/rockPaperScissors)
