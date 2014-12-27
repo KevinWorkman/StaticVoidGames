@@ -254,6 +254,14 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 
 	@Override
 	public String forgotPassword(ModelMap model, HttpSession session) {
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/forgotPassword.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
+		}
+				);
+		
 		return "/forgotPassword";
 	}
 

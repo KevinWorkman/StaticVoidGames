@@ -165,7 +165,7 @@ public class MemberController implements MemberControllerInterface{
 			meta.setContentLength(profilePicture.getSize());
 
 			try{
-								
+
 				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, profilePicture.getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
@@ -267,8 +267,15 @@ public class MemberController implements MemberControllerInterface{
 		memberDao.updateMember(member);
 
 		model.addAttribute("password", password);
-
 		model.addAttribute("resetSuccess", true);
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/resetPassword.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/MemberController.java")
+		}
+				);
+		
 		return "members/resetPassword";
 
 	}
@@ -291,6 +298,13 @@ public class MemberController implements MemberControllerInterface{
 		}
 
 		model.addAttribute("memberName", m.getMemberName());
+		
+		model.addAttribute("openSourceLinks", 
+				new OpenSourceLink[]{
+				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/members/changePassword.jsp"),
+				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/MemberController.java")
+		}
+				);
 
 		return "members/changePassword";
 	}
@@ -331,7 +345,4 @@ public class MemberController implements MemberControllerInterface{
 
 		return "members/changePassword";
 	}
-
-
-
 }
