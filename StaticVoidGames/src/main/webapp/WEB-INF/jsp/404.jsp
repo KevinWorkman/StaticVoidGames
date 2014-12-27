@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
 </head>
 <body>
+<%@ include file="include/analytics.jsp"%>
 <%@ include file="include/navigation.jsp" %>
 
 

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>Account Activation - Static Void Games</title>
+<title>Password Reset - Static Void Games</title>
 
 <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 
@@ -21,39 +21,27 @@
 		<div class="darkBackground thinGrayBorder topMargin centeredBlock width75 textPadding">
 
 			<c:choose>
-				<c:when test="${activationSuccess}">
-				<h1>Activation Successful</h1>
-					<p>Your account is activated! You can now <a href="<c:url value="/login"/>">login</a>!</p>
+				<c:when test="${resetSuccess}">
+				<h1>Password Reset</h1>
+					<p>Your password has been reset. Your new temporary password is:</p>
+					<p>${password}</p>
 					
-					<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin">
-					<p>Now that you have an account, you can do all sorts of things on Static Void Games:</p>
-					<ul>
-					<li>Comment on games, blogs, and member profiles.</li>
-					<li>Upload your own game!</li>
-					<li>Write a blog!</li>
-					<li>Get involved in our open-source project!</li>
-					</ul>
+					<p>You can now <a href="<c:url value="/login"/>">login</a> with your new password.</p>
 					
+				
 					<p>If you have any questions, don't hesitate to <a href="<c:url value="/about/contact"/>">contact me</a>.</p>
 					
-		</div>
+
 					
 				</c:when>
 				<c:otherwise>
-					<h1>Activation Failed</h1>
-					<p style="color:red">${activationMessage}</p>
+					<h1>Reset Failed</h1>
+					<p style="color:red">${resetMessage}</p>
 					<p>If you're having an issue, please <a href="<c:url value="/about/contact"/>">contact me</a>.</p>
 				</c:otherwise>
 			</c:choose>
-
-
-
+			
 		</div>
-
-
-		
-
-
 
 		<%@ include file="../include/advertisement.jsp"%>
 		<%@ include file="../include/openSource.jsp"%>

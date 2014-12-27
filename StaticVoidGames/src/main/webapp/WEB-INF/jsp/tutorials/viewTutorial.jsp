@@ -11,6 +11,7 @@
 	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
 </head>
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation.jsp"%>
 	<%@ include file="tutorialsNavigation.jsp" %>
 <div id="contentPane">

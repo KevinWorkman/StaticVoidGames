@@ -39,5 +39,12 @@ public interface StaticVoidGamesControllerInterface {
 	
 	@RequestMapping(value = "/oldLogin", method = RequestMethod.POST)
 	public String oldLoginPost(ModelMap model, HttpSession session,  @RequestParam("username") String username,  @RequestParam("password") String password);
+	
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
+	public String forgotPassword(ModelMap model, HttpSession session);
+	
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+	public String forgotPasswordPost(HttpServletRequest request, ModelMap model, HttpSession session, @RequestParam("username") String username);	
+
 
 }

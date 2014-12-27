@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="../include/analytics.jsp"%>
 <%@ include file="../include/navigation.jsp" %>
 	<h1>Members</h1>
 

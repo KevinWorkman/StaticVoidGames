@@ -9,6 +9,7 @@
 </head>
 
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="include/analytics.jsp"%>
 <%@ include file="include/navigation.jsp" %>
 <div id="contentPane">
 
@@ -21,13 +22,12 @@
 
 <p>Don't have an account yet? Register <a href="<c:url value="/register"/>">here</a>!</p>
 
-<p>If you haven't logged in recently, you have to login <a href="<c:url value="/oldLogin" />">here</a> first.</p>
-
 <h2 style="color:red">${loginError}</h2>
 <c:if test="${not empty param.error}">
 	<c:choose>
 		<c:when test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message eq 'Bad credentials'}">
 			<h3 style="color:red">Incorrect username or password.</h3>
+			<p>For security reasons, if you haven't logged in since July 2014, please reset your password <a href="<c:url value="/forgotPassword" />">here</a>.</p>
 		</c:when>
 		<c:when test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message eq 'User is disabled'}">
 		 	<h3 style="color:red">That account has not been activated. Click the activation link in the email you received when you registered.</h3>
@@ -48,6 +48,8 @@
     <tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
   </table>
 </form>
+
+		<p>Forgot your password? Go <a href="<c:url value="/forgotPassword" />">here</a> to reset it.</p>
   </div>
 
     <%@ include file="include/advertisement.jsp" %>

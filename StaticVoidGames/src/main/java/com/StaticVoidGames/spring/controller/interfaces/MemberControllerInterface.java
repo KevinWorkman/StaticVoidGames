@@ -36,5 +36,17 @@ public interface MemberControllerInterface {
 	@RequestMapping(value = "/{member}/activate/{activationId}", method = RequestMethod.GET)
 	public String activateMember(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, @PathVariable(value="activationId") String activationId, HttpSession session);
 	
+	@Transactional
+	@RequestMapping(value = "/{member}/resetPassword/{activationId}", method = RequestMethod.GET)
+	public String resetPassword(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, @PathVariable(value="activationId") String activationId, HttpSession session);
+	
+	@Transactional
+	@RequestMapping(value = "/{member}/changePassword", method = RequestMethod.GET)
+	public String changePassword(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, HttpSession session);
+	
+	@Transactional
+	@RequestMapping(value = "/{member}/changePassword", method = RequestMethod.POST)
+	public String changePasswordPost(HttpServletRequest request, ModelMap model, @PathVariable(value="member") String member, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword1") String newPassword1, @RequestParam("newPassword2") String newPassword2, HttpSession session);
+	
 	
 }

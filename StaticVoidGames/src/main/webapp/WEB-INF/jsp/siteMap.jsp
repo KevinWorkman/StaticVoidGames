@@ -1,5 +1,6 @@
 <html>
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="include/analytics.jsp"%>
 	<h1>Site Map</h1>
 
     <p>Login: <a href="login">login</a></p>

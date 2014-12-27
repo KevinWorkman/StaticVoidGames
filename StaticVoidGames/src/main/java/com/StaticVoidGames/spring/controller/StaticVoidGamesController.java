@@ -251,4 +251,44 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 			return "/oldLogin";
 		}
 	}
+
+	@Override
+	public String forgotPassword(ModelMap model, HttpSession session) {
+		return "/forgotPassword";
+	}
+
+	@Transactional
+	@Override
+	public String forgotPasswordPost(HttpServletRequest request, ModelMap model, HttpSession session, String username) {
+
+		Member m = memberDao.getMember(username);
+		
+		model.addAttribute("username", username);
+
+		if(m == null){
+			model.addAttribute("forgotPasswordError", "That username does not exist.");
+			return forgotPassword(model, session);
+		}
+		
+		if(!m.isActivated()){
+			model.addAttribute("forgotPasswordError", "Please activate your account before resetting your password.");
+			return forgotPassword(model, session);
+		}
+
+		m.setActivationId(ActivationEmailSender.generateRandomKey(32));
+
+		memberDao.updateMember(m);
+		
+		notificationsDao.updateMemberSubscription(username, username, "Account", "Comments on your profile");
+		
+		ActivationEmailSender aes = new ActivationEmailSender(env);
+		boolean success = aes.sendPasswordResetEmail(m);
+		
+		model.addAttribute("passwordSent", success);
+		
+
+		return "/forgotPasswordPost";
+
+	
+	}
 }

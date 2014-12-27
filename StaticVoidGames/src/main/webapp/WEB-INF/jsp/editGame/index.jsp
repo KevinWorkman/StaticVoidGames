@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/editGame.css"/>">
 </head>
 <body style="background-size:auto; background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation.jsp"%>
 	<div id="contentPane">
 	

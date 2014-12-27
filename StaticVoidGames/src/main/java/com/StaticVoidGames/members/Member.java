@@ -232,6 +232,11 @@ public class Member implements TimestampedEvent{
 	public boolean isActivated(){
 		return activated;
 	}
+
+
+	public String getBcryptHash() {
+		return bcryptHash;
+	}
 }
 
 

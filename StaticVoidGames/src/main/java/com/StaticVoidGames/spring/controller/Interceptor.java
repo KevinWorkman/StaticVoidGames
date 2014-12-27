@@ -108,6 +108,14 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		if(request.getRequestURL().toString().contains("/activate/")){
 			return;
 		}
+		
+		if(request.getRequestURL().toString().contains("/forgotPassword")){
+			return;
+		}
+		
+		if(request.getRequestURL().toString().contains("/resetPassword")){
+			return;
+		}
 
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 

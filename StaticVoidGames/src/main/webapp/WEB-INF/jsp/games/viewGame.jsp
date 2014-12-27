@@ -20,7 +20,7 @@
 </head>
 
 <body style="background-size:auto; background-image:url(<c:url value="${backgroundImage}"/>);">
-	
+	<%@ include file="../include/analytics.jsp"%>
 <%@ include file="../include/navigation.jsp" %>
 <div id="contentPane">
 

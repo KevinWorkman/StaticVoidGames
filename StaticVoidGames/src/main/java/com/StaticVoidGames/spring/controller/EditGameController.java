@@ -273,10 +273,8 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setAndroid(gameForm.getAndroid());
 		}
 
-
-
-
-
+		//TODO use MultipartFile.isEmpty()
+		//I'm not even sure what "".equals() is going to do in this case?
 		if(gameForm.getJarFile() != null && !"".equals(gameForm.getJarFile())){
 
 			String awsAccessKey = env.getProperty("aws.accessKey");

@@ -20,6 +20,7 @@
 </head>
 
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
+<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation.jsp"%>
 	
 	<div id="contentPane">
@@ -29,6 +30,8 @@
 			<h1>
 				This is your profile. <a href="<c:url value="/members/${member.getMemberName()}/edit" />">Edit it here.</a>
 			</h1>
+			
+			<p>Change your password <a href="<c:url value="/members/${member.getMemberName()}/changePassword" />">here</a>.</p>
 			
 			<h2><a href="<c:url value="/logout" />">Logout</a></h2>
 		</c:if>

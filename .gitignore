@@ -4,3 +4,5 @@ StaticVoidGames/.classpath
 StaticVoidGames/.settings
 StaticVoidGames/target
 
+StaticVoidGames/src/main/java/local.properties
+*.db
