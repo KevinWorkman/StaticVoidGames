@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.HandlerMapping;
 
 import com.StaticVoidGames.comments.Comment;
 import com.StaticVoidGames.comments.CommentView;
@@ -72,7 +74,7 @@ public class GameController implements GameControllerInterface{
 	@Override
 	@Transactional
 	@RequestMapping(value = {"/{game}", "play/?game={game}"}, method = RequestMethod.GET)
-	public String viewGame(HttpServletRequest request, ModelMap model, @PathVariable("game") String game, HttpSession session) {
+	public String viewGame(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("game") String game, HttpSession session) {
 
 		Game gameObj = gameDao.getGame(game);
 
@@ -99,25 +101,8 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("gameExecutables", gameExecutables);
 		}
 		
-		if(gameObj.getAppletClass() != null){
-			isPlayable = true;
-			model.addAttribute("isApplet", true);
-			model.addAttribute("appletJnlpUrl", s3Endpoint + "/games/" + game + "/" + gameObj.getGameName() + "Applet.jnlp");
-		}
-		else{
-			model.addAttribute("isApplet", false);
-		}
 		
-		if(gameObj.getMainClass() != null){
-			isPlayable = true;
-			model.addAttribute("isWebstart", true);
-			model.addAttribute("webstartJnlpUrl", s3Endpoint + "/games/" + game + "/" + gameObj.getGameName() + "WebStart.jnlp");
-		}
-		else{
-			model.addAttribute("isWebstart", false);
-		}
-		
-		if(!gameObj.isLwjgl() && gameObj.getJarFileUrl() != null && gameDao.getGameLibFiles(game).isEmpty() ){
+		if(gameObj.getJarFileUrl() != null){
 			isPlayable = true;
 			model.addAttribute("isJar", true);
 			//TODO jar url should only contain filename, make this relative to s3 endpoint
@@ -135,7 +120,6 @@ public class GameController implements GameControllerInterface{
 		
 		
 		if(gameObj.getSourceZipUrl() != null){
-			
 			
 			
 			model.addAttribute("isOpenSource", true);
@@ -156,6 +140,9 @@ public class GameController implements GameControllerInterface{
 		}
 		
 		if(gameObj.isAndroid()){
+			
+			isPlayable = true;
+			
 			model.addAttribute("isAndroid", true);
 			model.addAttribute("androidText", gameObj.getEscapedAndroidText());
 			
@@ -177,6 +164,10 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("isAndroid", false);
 		}
 		
+		if(gameObj.isShowLibGdxHtml()){
+			isPlayable = true;
+			model.addAttribute("libGdxHtmlLink", s3Endpoint + "/games/" + game + "/gdx/index.html");
+		}
 		
 		model.addAttribute("isPlayable", isPlayable);
 		
@@ -231,6 +222,32 @@ public class GameController implements GameControllerInterface{
 		);
 
 		return "games/viewGame";
+	}
+	
+	@Override
+	@RequestMapping(value = {"/{game}/{subdirectory}/**"}, method = RequestMethod.GET)
+	public String viewGameHtmlFile(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("game") String game, @PathVariable("subdirectory") String subdirectory, HttpSession session) {
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		
+		System.out.println("View game html file.");
+		
+		// /games/gameName/html/blah/blah
+		String url = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		url = url.replace("/games/"+game, "");
+		
+		System.out.println("Rest of url: " + url);
+		
+		String s3File = "http://s3.staticvoidgames.com/games/" + game + "/libGdxHtml5/dist" + url;
+		
+		//String s3File = "http://localhost:8080/StaticVoidGames/tutorialsContent/dist" + url;
+		
+		System.out.println("s3 file: " + s3File);
+		
+	//	response.setHeader("Location", s3File);
+		
+		return "redirect:" + s3File;
+		
 	}
 
 	@Override

@@ -15,6 +15,8 @@
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js" />"></script>
 	
+	<link rel="shortcut icon" href="<c:url value="${faviconImage}"/>" />
+	
 </head>
 <body style="background-size:auto; background-image:url(<c:url value="${backgroundImage}"/>);">
 <%@ include file="../include/analytics.jsp"%>
@@ -34,14 +36,33 @@
                 		</div>
                     </c:when>
                     <c:when test="${formField.getType() == 'file'}">
+	                    <div class="darkBackground textPadding centered topMargin thinGrayBorder">
+	                			<h2>${formField.getLabel()}</h2>
+	                    	<p>${formField.getDescription()}</p> 
+	                    	<input type="file" name="${formField.getCommand()}"  />
+	                    </div>
+                    </c:when>
+                    <c:when test="${formField.getType() == 'libGdxHtmlModeRadio'}">
                     <div class="darkBackground textPadding centered topMargin thinGrayBorder">
                 			<h2>${formField.getLabel()}</h2>
-                    	${formField.getDescription()}: <input type="file" name="${formField.getCommand()}"  />
+                    	<p>
+                    	<form:radiobutton path="${formField.getCommand()}" value="StaticVoidGames" />Link to a nice-looking page that contains my playable game.
+						</p>
+						<p>
+                    	<form:radiobutton path="${formField.getCommand()}" value="minimal" />Link to a minimal page that only contains my playable game.
+						</p>
+						<p>
+                    	<form:radiobutton path="${formField.getCommand()}" value="mine" />Link to the page I'm providing in dist/html/index.html
+						</p>
+
+                    	
+                    	
                     	</div>
                     </c:when>
                     <c:when test="${formField.getType() == 'textarea'}">
                     <div class="darkBackground textPadding centered topMargin thinGrayBorder">
                 			<h2>${formField.getLabel()}</h2>
+                			<p>${formField.getDescription()}</p> 
                     	<div class="wmd-panel">
 							<div id="wmd-button-bar"></div>
 							<form:textarea path="${formField.getCommand()}" class="wmd-input" id="wmd-input" />

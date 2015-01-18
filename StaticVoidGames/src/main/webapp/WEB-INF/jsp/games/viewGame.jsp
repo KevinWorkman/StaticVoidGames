@@ -34,6 +34,7 @@
 		<h1>${game.getTitle()}</h1>
 		<img style="width:100px" src="${thumbnailImage}"/>
 		<p>${game.getShortDescription()}</p>
+		<p>This is a game by <a href="<c:url value="/members/${game.getMember()}" />">${game.getMember()}</a>.</p>
 	</div>
 	
 	<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
@@ -45,27 +46,16 @@
 				<h3>This game isn't playable yet.</h3>
 				</c:otherwise>
 			</c:choose>
-
-		<c:if test="${isJar}">
-			<p><a href="<c:url value="${jarUrl}"/>" >Jar</a></p>
-		</c:if>
-
-		<c:if test="${hasExecutables}">
-			<c:forEach items="${gameExecutables}" var="gameExecutable">
-				<p><a href="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getLabel()}</a></p>
-			</c:forEach>
+			
+			
+		<c:if test="${game.isShowLibGdxHtml()}">
+		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
+			<h3>Play this game in your browser <a href="${libGdxHtmlLink}">here</a>.</h3>
+			
+		</div>
 		</c:if>
 		
-		<c:if test="${isApplet}">
-			<p><a href="<c:url value="${appletJnlpUrl}"/>" >Applet JNLP</a></p>
-		</c:if>
-		
-		<c:if test="${isWebstart}">
-			<p><a href="<c:url value="${webstartJnlpUrl}"/>" >WebStart JNLP</a></p>
-		</c:if>
-	</div>
-	
-	<c:if test="${isAndroid}">
+			<c:if test="${isAndroid}">
 		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
 			<h3>Android</h3>
 			<c:if test="${hasApk}">
@@ -74,9 +64,26 @@
 			${androidText}
 		</div>
 	
-		<p><a href="<c:url value="${jarUrl}"/>" >Jar</a></p>
 	</c:if>
+			
 
+		<c:if test="${isJar}">
+		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
+			<h3>Desktop</h3>
+			<p>Play this game offline by downloading the <a href="<c:url value="${jarUrl}"/>" >jar</a>.</p>
+			</div>
+		</c:if>
+
+		<c:if test="${hasExecutables}">
+			<c:forEach items="${gameExecutables}" var="gameExecutable">
+			<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
+				<p><a href="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getLabel()}</a></p>
+				</div>
+			</c:forEach>
+		</c:if>
+		
+	</div>
+	
 
 	<c:if test="${isOpenSource}">
 		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
@@ -84,6 +91,8 @@
 				${sourceText}
 		</div>
 	</c:if>
+	
+
 
 
 	<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin">

@@ -1,6 +1,7 @@
 package com.StaticVoidGames.spring.controller.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public interface GameControllerInterface {
 	
 	@Transactional
 	@RequestMapping(value = {"/{game}"}, method = RequestMethod.GET)
-	public String viewGame(HttpServletRequest request, ModelMap model, @PathVariable(value="game") String game, HttpSession session);
+	public String viewGame(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable(value="game") String game, HttpSession session);
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String newGame(ModelMap model, HttpSession session);
@@ -30,6 +31,9 @@ public interface GameControllerInterface {
 	@Transactional
 	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public String newGamePost(ModelMap model, HttpSession session, @RequestParam("gameUrlName") String gameUrlName);
+
+	@RequestMapping(value = {"/{game}/{subdirectory}/**"}, method = RequestMethod.GET)
+	public String viewGameHtmlFile(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable("game") String game, @PathVariable("subdirectory") String subdirectory, HttpSession session);
 	
 	
 }

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/general.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/everyPage.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/editGame.css"/>">
+	<link rel="shortcut icon" href="<c:url value="${faviconImage}"/>" />
 </head>
 <body style="background-size:auto; background-image:url(<c:url value="${backgroundImage}"/>);">
 <%@ include file="../include/analytics.jsp"%>
@@ -28,6 +29,7 @@
 			<h3>Step 2: Specify how people can play your game:</h3>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/jar" />">Jar</a></div>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/android" />">Android</a></div>
+			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/libGdxHtml" />">LibGDX HTML</a></div>
 		</div>
 	               
 		<div class="editSectionDiv">

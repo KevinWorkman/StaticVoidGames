@@ -1,4 +1,4 @@
-#  [Deployment](index.jsp)
+#  [Deployment](http://staticvoidgames.com/tutorials/deployment/index)
 
 ## Example: Exporting a Basic Processing Sketch
 
@@ -55,11 +55,11 @@ I'm going to save this to a sketch named 'Test'.
 To generate some of the files we're going to need, we simply use the "Export
 Application" option, like so:
 
-![](ExportProcessing1.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/ExportProcessing1.png)
 
 This brings up a dialog with several options, pictured here:
 
-![](ExportProcessing2.png)
+![](http://StaticVoidGames.com/tutorialsContent/deployment/ExportProcessing2.png)
 
 On this screen, you can choose whether you want to run in full screen mode,
 but you should NOT check the "embed Java" option.

@@ -1,4 +1,4 @@
-#  [Deployment](index.jsp)
+#  [Deployment](http://staticvoidgames.com/tutorials/deployment/index)
 
 ## A Brief History of Java Security
 
@@ -132,4 +132,4 @@ programs as applets.
 The rest of the deployment tutorial contains other options for deploying Java
 (and Processing).
 
-###  Next: [Java Security Settings](JavaSecuritySettings.jsp)
+###  Next: [Java Security Settings](http://staticvoidgames.com/tutorials/deployment/javaSecuritySettings)

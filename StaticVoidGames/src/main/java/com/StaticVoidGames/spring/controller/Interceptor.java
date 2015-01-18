@@ -36,12 +36,12 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 	public Interceptor(){
 		//random
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-2WjDL3s/0/O/lights3.jpg");
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-3NPvKtv/0/O/lights2.jpg");
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-xc7q5Xx/0/O/lights1.jpg");
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-gGBQK2k/1/O/lights4.jpg");
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-fHZpVNs/0/O/lights9.jpg");
-		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-gnNp3t9/1/O/Night1.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-2WjDL3s/0/O/lights3.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-3NPvKtv/0/O/lights2.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-xc7q5Xx/0/O/lights1.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-gGBQK2k/1/O/lights4.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2013/i-fHZpVNs/0/O/lights9.jpg");
+				backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2011/i-gnNp3t9/1/O/Night1.jpg");
 
 
 		//Halloween
@@ -66,11 +66,11 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-N5Nd76k/1/X3/path7-X3.jpg");
 
 		//xmas
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-PR2nNVD/1/X3/Ball5-X3.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-M3TXbKJ/1/X3/Lights2-X3.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2009/i-sVVrNNt/0/X3/Wrapping-X3.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2009/i-Lfcp5Q3/0/X3/Snowman-X3.jpg");
-		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-Rd9KNzN/1/X3/LappTree1-X3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-PR2nNVD/1/X3/Ball5-X3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2008/i-M3TXbKJ/1/X3/Lights2-X3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2009/i-sVVrNNt/0/X3/Wrapping-X3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2009/i-Lfcp5Q3/0/X3/Snowman-X3.jpg");
+//		backgroundImageUrls.add("http://photos.kevinworkman.com/Pictures/2012/i-Rd9KNzN/1/X3/LappTree1-X3.jpg");
 
 
 	}

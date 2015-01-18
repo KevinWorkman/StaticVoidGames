@@ -108,6 +108,7 @@
 				<li><a class="sectionTitle ${'advancedProcessingExample' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/advancedProcessingExample" />">Example: Advanced Processing Sketch</a></li>
 				<li><a class="sectionTitle ${'lwjglExample' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/lwjglExample" />">Example: LWJGL Game</a></li>
 				<li><a class="sectionTitle ${'joglExample' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/joglExample" />">Example: JOGL Game</a></li>
+				<li><a class="sectionTitle ${'libGdxHtml' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/libGdxHtml" />">LibGDX HTML</a></li>
 				
 			</ul>
 		</li>

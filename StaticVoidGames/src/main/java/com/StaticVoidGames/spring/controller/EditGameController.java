@@ -1,21 +1,35 @@
 package com.StaticVoidGames.spring.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.ConfigurableMimeFileTypeMap;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.StaticVoidGames.games.Game;
 import com.StaticVoidGames.games.GameForm;
@@ -24,11 +38,15 @@ import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
 import com.StaticVoidGames.spring.util.FormField;
 import com.StaticVoidGames.spring.util.OpenSourceLink;
+import com.StaticVoidGames.spring.util.PageDownUtils;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
+import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 /**
  * Controller that handles the game edit pages.
@@ -96,6 +114,11 @@ public class EditGameController implements EditGameControllerInterface{
 		FormField androidText = new FormField("Android Text", "What text should show under the Android tab? Include links to Google Play, etc.", "androidText", "textarea");
 		FormField android = new FormField("android", "Include an Android tab?", "android", "checkbox");
 
+		FormField showLibGdxHtmlLink = new FormField("Include libGDX HTML link", "Check this box if your game page should include a link to a playable html version of your game", "showLibGdxHtml", "checkbox");
+		FormField libGdxHtmlFile = new FormField("dist.zip", "Follow <a target=\"_blank\" href=\"http://staticvoidgames.com/tutorials/deployment/libGdxHtml\">this</a> guide, then upload your dist.zip file here.", "libGdxHtmlFile", "file");
+		FormField libGdxHtmlMode = new FormField("LibGDX html mode", "What type of html should display?", "libGdxHtmlMode", "libGdxHtmlModeRadio");
+		FormField libGdxHtmlText = new FormField("LibGDX html text", "If you chose to show a prettified page, what text should show under the game? Use this for things like showing controls.", "libGdxHtmlText", "textarea");
+
 		formFields.put("title", Arrays.asList(title));
 		formFields.put("description", Arrays.asList(shortDescription, description, website));
 		formFields.put("jar", Arrays.asList(language, javaVersion, jarFile));
@@ -108,6 +131,8 @@ public class EditGameController implements EditGameControllerInterface{
 		formFields.put("deprecated", Arrays.asList(lwjgl, signed));
 		formFields.put("android", Arrays.asList(android, apkFile, androidText));
 		formFields.put("publish", Arrays.asList(published));
+
+		formFields.put("libGdxHtml", Arrays.asList(showLibGdxHtmlLink, libGdxHtmlFile, libGdxHtmlMode, libGdxHtmlText));
 	}
 
 	/**
@@ -134,6 +159,11 @@ public class EditGameController implements EditGameControllerInterface{
 			model.addAttribute("backgroundImage", s3Endpoint + "/games/" + game + "/" + gameObj.getBackgroundUrl());
 		}
 
+		if(gameObj.getFaviconUrl() != null){
+			String s3Endpoint = env.getProperty("s3.endpoint");
+			model.addAttribute("faviconImage", s3Endpoint + "/games/" + game + "/" + gameObj.getFaviconUrl());
+		}
+
 		session.setAttribute("gameObj", gameObj);
 
 		model.addAttribute("openSourceLinks", 
@@ -156,6 +186,8 @@ public class EditGameController implements EditGameControllerInterface{
 	@RequestMapping(method = RequestMethod.POST)
 	public String post(@PathVariable("game") String game,  @ModelAttribute("gameForm") GameForm gameForm, HttpSession session, HttpServletRequest request) {
 
+		System.out.println("here");
+
 		Game gameObj = gameDao.getGame(game);
 
 		if(gameObj == null){
@@ -168,31 +200,26 @@ public class EditGameController implements EditGameControllerInterface{
 			return "redirect:/games/"+game;
 		}
 
-
-		System.out.println();
-		System.out.println("GameForm.title: " + gameForm.getTitle());
-		System.out.println("GameForm.description: " + gameForm.getDescription());
-		System.out.println("GameForm.shortDescription: " + gameForm.getShortDescription());
-		System.out.println("GameForm.published: " + gameForm.getPublished());
-		System.out.println("GameForm.android: " + gameForm.getAndroid());
-
-
-
+		boolean redoLibGdxHtml = false;
 
 		//TODO: probably a smarter way to do this?
 
-		if(gameForm.getTitle() != null){
+		if(gameForm.getTitle() != null && !gameForm.getTitle().equals(gameObj.getTitle())){
 			gameObj.setTitle(gameForm.getTitle());
+			redoLibGdxHtml = true;
 		}
 
-		if(gameForm.getDescription() != null){
+		if(gameForm.getDescription() != null && !gameForm.getDescription().equals(gameObj.getGameDescription())){
 			gameObj.setGameDescription(gameForm.getDescription());
+			redoLibGdxHtml = true;
 		}
 
-		if(gameForm.getShortDescription() != null){
+		if(gameForm.getShortDescription() != null && !gameForm.getShortDescription().equals(gameObj.getShortDescription())){
 			gameObj.setShortDescription(gameForm.getShortDescription());
+			redoLibGdxHtml = true;
 		}
 
+		//TODO: remove game websites, people can put it in the description
 		if(gameForm.getWebsite() != null){
 			gameObj.setWebsite(gameForm.getWebsite());
 		}
@@ -237,8 +264,9 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setLanguage(gameForm.getLanguage());
 		}
 
-		if(gameForm.getAdText() != null){
+		if(gameForm.getAdText() != null && !gameForm.getAdText().equals(gameObj.getAdText())){
 			gameObj.setAdText(gameForm.getAdText());
+			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getShowAdBorder() != null){
@@ -257,20 +285,41 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setSigned(gameForm.getSigned());
 		}
 
-		if(gameForm.getSourcePermissionsText() != null){
+
+		if(gameForm.getSourcePermissionsText() != null && !gameForm.getSourcePermissionsText().equals(gameObj.getSourcePermissionsText())){
 			gameObj.setSourcePermissionsText(gameForm.getSourcePermissionsText());
+			redoLibGdxHtml = true;
 		}
 
-		if(gameForm.getApkUrl() != null){
+		if(gameForm.getApkUrl() != null && !gameForm.getApkUrl().equals(gameObj.getApkUrl())){
 			gameObj.setApkUrl(gameForm.getApkUrl());
+			redoLibGdxHtml = true;
 		}
 
-		if(gameForm.getAndroidText() != null){
+		if(gameForm.getAndroidText() != null && !gameForm.getAndroidText().equals(gameObj.getAndroidText())){
 			gameObj.setAndroidText(gameForm.getAndroidText());
+			redoLibGdxHtml = true;
 		}
 
-		if(gameForm.getAndroid() != null){
+		if(gameForm.getAndroid() != null && !gameForm.getAndroid().equals(gameObj.isAndroid())){
 			gameObj.setAndroid(gameForm.getAndroid());
+			redoLibGdxHtml = true;
+		}
+
+		if(gameForm.getLibGdxHtmlMode() != null && !gameForm.getLibGdxHtmlMode().equals(gameObj.getLibGdxHtmlMode())){
+			System.out.println("Setting game.libGdxHtmlMode: " + gameForm.getLibGdxHtmlMode());
+			gameObj.setLibGdxHtmlMode(gameForm.getLibGdxHtmlMode());
+			redoLibGdxHtml = true;
+		}
+
+		if(gameForm.getShowLibGdxHtml() != null){
+			System.out.println("Setting game.showLibGdxHtml: " + gameForm.getShowLibGdxHtml());
+			gameObj.setShowLibGdxHtml(gameForm.getShowLibGdxHtml());
+		}
+
+		if(gameForm.getLibGdxHtmlText() != null && !gameForm.getLibGdxHtmlText().equals(gameObj.getLibGdxHtmlText())){
+			gameObj.setLibGdxHtmlText(gameForm.getLibGdxHtmlText());
+			redoLibGdxHtml = true;
 		}
 
 		//TODO use MultipartFile.isEmpty()
@@ -296,14 +345,14 @@ public class EditGameController implements EditGameControllerInterface{
 				//TODO: let the user know something went wrong
 				e.printStackTrace();
 			}
+
+			redoLibGdxHtml = true;
 		}
 
-		System.out.println("Here 1");
-		
 		if(gameForm.getSource() != null && !"".equals(gameForm.getSource())){
 
 			System.out.println("Here 2");
-			
+
 			String awsAccessKey = env.getProperty("aws.accessKey");
 			String awsSecretKey = env.getProperty("aws.secretKey");
 
@@ -314,21 +363,23 @@ public class EditGameController implements EditGameControllerInterface{
 			meta.setContentLength(gameForm.getSource().getSize());
 
 			try{
-				
+
 				System.out.println("Here 3");
-				
+
 				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getSource().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 				gameObj.setSourceZipUrl(gameForm.getSource().getOriginalFilename());
-				
+
 				System.out.println("Here 4");
-				
+
 			}
 			catch(Exception e){
 				//TODO: let the user know something went wrong
 				e.printStackTrace();
 			}
+
+			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getFaviconFile() != null && !"".equals(gameForm.getFaviconFile())){
@@ -352,6 +403,8 @@ public class EditGameController implements EditGameControllerInterface{
 				//TODO: let the user know something went wrong
 				e.printStackTrace();
 			}
+
+			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getBackgroundFile() != null && !"".equals(gameForm.getBackgroundFile())){
@@ -374,6 +427,8 @@ public class EditGameController implements EditGameControllerInterface{
 				//TODO: let the user know something went wrong
 				e.printStackTrace();
 			}
+
+			redoLibGdxHtml = true;
 		}
 
 
@@ -391,18 +446,303 @@ public class EditGameController implements EditGameControllerInterface{
 				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getThumbnailFile().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+
+
 				gameObj.setThumbnailUrl(gameForm.getThumbnailFile().getOriginalFilename());
 			}
 			catch(Exception e){
 				//TODO: let the user know something went wrong
 				e.printStackTrace();
 			}
+
+			redoLibGdxHtml = true;
+		}
+
+
+		if(gameForm.getLibgdxHtmlFile() != null){
+
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			String bucket = env.getProperty("s3.bucket");
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+
+			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+			ObjectListing ol =s3.listObjects(bucket, "games/" + game + "/gdx/"); 
+
+			List<String> keys = new ArrayList<String>();
+			for(S3ObjectSummary os : ol.getObjectSummaries()){
+				keys.add(os.getKey());
+			}
+			deleteRequest.withKeys(keys.toArray(new String[]{}));
+			s3.deleteObjects(deleteRequest);
+
+			MultipartFile cmf = gameForm.getLibgdxHtmlFile();
+
+			try{
+				byte[] buffer = new byte[1024];
+				ZipInputStream zip = new ZipInputStream(cmf.getInputStream());
+				ZipEntry ze = zip.getNextEntry();
+
+				while(ze!=null){
+
+					File tempFile = File.createTempFile(gameObj.getGameName(), "tmp");
+
+					FileOutputStream fos = new FileOutputStream(tempFile);             
+
+					int len;
+					while ((len = zip.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+					}
+
+					fos.close();   
+
+					String key = "games/" + game + "/gdx/" + ze.getName();
+					if(ze.getName().startsWith("dist/")){
+						key = "games/" + game + "/gdx/" + ze.getName().substring(5);
+					}
+					else{
+						//TODO error, zip file is not formatted correctly
+					}
+
+
+					ObjectMetadata meta = new ObjectMetadata();
+					meta.setContentLength(tempFile.length());
+
+					ConfigurableMimeFileTypeMap mimeMap = new ConfigurableMimeFileTypeMap();
+					String type = mimeMap.getContentType(ze.getName());
+
+					meta.setContentType(type);
+
+					FileInputStream fis = new FileInputStream(tempFile);
+
+					s3.putObject(bucket, key, fis, meta);
+					s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+
+					ze = zip.getNextEntry();
+				}
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+
+			//we just overwrote whatever file was there before, let's redo it
+			redoLibGdxHtml = true;
+		}
+		else{
+			System.out.println("libGDX Html5 is empty!");
+		}
+
+		if(gameObj.isShowLibGdxHtml() && redoLibGdxHtml){
+			redoLibGdxHtml(gameObj);
 		}
 
 		gameDao.updateGame(gameObj);
 		return "redirect:/games/"+game +"/edit";
 	}
 
+	private void redoLibGdxHtml(Game game){
+
+		StringBuilder minimalStringBuilder = new StringBuilder();
+		minimalStringBuilder.append("<!doctype html>\n");
+		minimalStringBuilder.append("<html>\n");
+
+		minimalStringBuilder.append("<head>");
+
+		minimalStringBuilder.append("<title>");
+		minimalStringBuilder.append(game.getTitle());
+		minimalStringBuilder.append("</title>\n");
+
+		minimalStringBuilder.append("<link href=\"styles.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+		minimalStringBuilder.append("<script src=\"soundmanager2-setup.js\"></script>\n");
+		minimalStringBuilder.append("<script src=\"soundmanager2-jsmin.js\"></script>"); 
+
+		if(game.getFaviconUrl() == null){
+			minimalStringBuilder.append("<link rel=\"shortcut icon\" href=\"http://s3.staticvoidgames.com/images/favicon.png\" />\n");
+		}
+		else{
+			minimalStringBuilder.append("<link rel=\"shortcut icon\" href=\"../" + game.getFaviconUrl() + "\" />\n");
+		}
+
+		minimalStringBuilder.append("</head>\n");
+
+		minimalStringBuilder.append("<body>\n");
+
+		minimalStringBuilder.append("<div align=\"center\" id=\"embed-html\"></div>\n");
+
+		minimalStringBuilder.append("<script type=\"text/javascript\" src=\"html/html.nocache.js\"></script>\n");
+
+		minimalStringBuilder.append("</body>\n");
+
+		minimalStringBuilder.append("</html>");
+
+		String key1 = "games/" + game.getGameName() + "/gdx/min.html";
+		boolean success1 = uploadTextAsFile(key1, minimalStringBuilder.toString());
+
+		if(success1 && "minimal".equals(game.getLibGdxHtmlMode())){
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			String bucket = env.getProperty("s3.bucket");
+
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+			s3.copyObject(bucket, key1, bucket, "games/" + game.getGameName() + "/gdx/index.html");
+			s3.setObjectAcl(bucket, "games/" + game.getGameName() + "/gdx/index.html", CannedAccessControlList.PublicRead);
+		}
+
+
+
+		//else if("StaticVoidGames".equals(game.getLibGdxHtmlMode())){
+
+		StringBuilder svgStringBuilder = new StringBuilder();
+
+		svgStringBuilder.append("<!doctype html>\n");
+		svgStringBuilder.append("<html>\n");
+
+		svgStringBuilder.append("<head>");
+
+		svgStringBuilder.append("<title>");
+		svgStringBuilder.append(game.getTitle());
+		svgStringBuilder.append("</title>\n");
+
+
+		svgStringBuilder.append("<link href=\"http://StaticVoidGames.com/css/general.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+		svgStringBuilder.append("<link href=\"http://StaticVoidGames.com/css/everyPage.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+
+
+		svgStringBuilder.append("<link href=\"styles.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+		svgStringBuilder.append("<script src=\"soundmanager2-setup.js\"></script>\n");
+		svgStringBuilder.append("<script src=\"soundmanager2-jsmin.js\"></script>\n"); 
+
+		if(game.getFaviconUrl() == null){
+			svgStringBuilder.append("<link rel=\"shortcut icon\" href=\"http://s3.staticvoidgames.com/images/favicon.png\" />\n");
+		}
+		else{
+			svgStringBuilder.append("<link rel=\"shortcut icon\" href=\"../" + game.getFaviconUrl() + "\" />\n");
+		}
+
+		svgStringBuilder.append("</head>\n");
+
+		if(game.getBackgroundUrl() == null){
+			svgStringBuilder.append("<body style=\"background:black\">\n");
+		}
+		else{
+			svgStringBuilder.append("<body style=\"background-size:auto; background-image:url(../" + game.getBackgroundUrl() + ");\">\n");
+		}
+
+
+		svgStringBuilder.append("<div id=\"topBar\">\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com\"><img id=\"siteLogo\" src=\"http://s3.staticvoidgames.com/images/StaticVoidGamesLogo3.png\" /></a>\n");
+		svgStringBuilder.append("<div id=\"topBarText\"><br/>\n");
+		svgStringBuilder.append("<div id=\"navButtons\">\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/games\">Play</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/tutorials\">Tutorials</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/games/new\">Upload</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/about\">About</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/blog\">Blog</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/irc\">IRC</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/JarMatey\">JarMatey</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/events\">Events</a>\n");
+		svgStringBuilder.append("</div>\n");//end navButtons
+		svgStringBuilder.append("</div>\n"); //end topBarText
+		svgStringBuilder.append("<a href=\"http://www.facebook.com/StaticVoidGames\" target=\"_blank\"><img style=\"height:50px; float:right\" src=\"http://s3.StaticVoidGames.com/images/FacebookLogo.png\" /></a>\n");
+		svgStringBuilder.append("<a href=\"https://twitter.com/StaticVoidGames\" target=\"_blank\"><img style=\"height:50px; float:right\" src=\"http://s3.StaticVoidGames.com/images/TwitterBird.png\" /></a>\n");
+
+		svgStringBuilder.append("</div>\n"); //end topBar
+
+		svgStringBuilder.append("<hr />\n");
+
+
+		svgStringBuilder.append("<div align=\"center\"><h1><a href=\"http://StaticVoidGames.com/games/"+ game.getGameName() + "\">" + game.getTitle() + "</a></h1></div>\n");
+
+		svgStringBuilder.append("<div align=\"center\" id=\"embed-html\"></div>\n");
+
+		svgStringBuilder.append("<script type=\"text/javascript\" src=\"html/html.nocache.js\"></script>\n");
+
+
+
+		svgStringBuilder.append("<div class=\"darkBackground centered\">\n");
+		svgStringBuilder.append(game.getLibGdxHtmlText());
+		svgStringBuilder.append("</div>\n");
+
+		svgStringBuilder.append("<hr />\n");
+
+		svgStringBuilder.append("<div class=\"darkBackground centered\">\n");
+
+		svgStringBuilder.append("<div>\n");
+		svgStringBuilder.append("<p>This is a game by <a href=\"http://StaticVoidGames.com/members/" + game.getMember() + "\">" + game.getMember() + "</a>.</p>\n");
+		svgStringBuilder.append("</div>\n");
+
+
+		if(game.getJarFileUrl() != null){
+			svgStringBuilder.append("<div>\n");
+			svgStringBuilder.append("<p>You can play this game offline by downloading the jar from <a href=\"../" + game.getJarFileUrl() + "\">here</a>.</p>");
+			svgStringBuilder.append("</div>\n");
+		}
+
+		if(game.getApkUrl() != null){
+			svgStringBuilder.append("<div>\n");
+			svgStringBuilder.append("<p>You can play this game on Android by downloading the APK from <a href=\"../" + game.getApkUrl() + "\">here</a>.</p>");
+			svgStringBuilder.append("</div>\n");
+		}
+
+		if(game.getAndroidText() != null){
+			svgStringBuilder.append("<div>\n");
+			svgStringBuilder.append(PageDownUtils.getSanitizedHtml(game.getAndroidText()));
+			svgStringBuilder.append("</div>\n");
+		}
+
+		svgStringBuilder.append("</div>\n");
+
+
+		svgStringBuilder.append("</body>\n");
+
+		svgStringBuilder.append("</html>");
+
+		String key2 = "games/" + game.getGameName() + "/gdx/play.html";
+		boolean success2 = uploadTextAsFile(key2, svgStringBuilder.toString());
+
+		if(success2 && "StaticVoidGames".equals(game.getLibGdxHtmlMode())){
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			String bucket = env.getProperty("s3.bucket");
+
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+			s3.copyObject(bucket, key2, bucket, "games/" + game.getGameName() + "/gdx/index.html");
+			s3.setObjectAcl(bucket, "games/" + game.getGameName() + "/gdx/index.html", CannedAccessControlList.PublicRead);
+		}
+
+
+	}
+
+
+	private boolean uploadTextAsFile(String key, String contents){
+		try{
+			byte[] bytes = contents.getBytes("UTF-8");
+			InputStream is = new ByteArrayInputStream(bytes);
+
+			String bucket = "s3.staticvoidgames.com";
+
+
+			ObjectMetadata meta = new ObjectMetadata();
+			meta.setContentLength(bytes.length);
+			meta.setContentType("text/html");
+
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+			s3.putObject(bucket, key, is, meta);
+			s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+		}
+		catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Returns the view for a particular game edit page.
@@ -430,6 +770,11 @@ public class EditGameController implements EditGameControllerInterface{
 		if(gameObj.getBackgroundUrl() != null){
 			String s3Endpoint = env.getProperty("s3.endpoint");
 			model.addAttribute("backgroundImage", s3Endpoint + "/games/" + game + "/" + gameObj.getBackgroundUrl());
+		}
+
+		if(gameObj.getFaviconUrl() != null){
+			String s3Endpoint = env.getProperty("s3.endpoint");
+			model.addAttribute("faviconImage", s3Endpoint + "/games/" + game + "/" + gameObj.getFaviconUrl());
 		}
 
 		model.addAttribute("gameForm", gameObj.getGameForm());

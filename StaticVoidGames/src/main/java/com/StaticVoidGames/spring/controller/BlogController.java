@@ -146,7 +146,7 @@ public class BlogController implements BlogControllerInterface{
 	}
 
 	@Override
-	public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, HttpSession session) {
+	public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, HttpSession session, @RequestParam("text") String text) {
 		
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 
@@ -160,6 +160,7 @@ public class BlogController implements BlogControllerInterface{
 		
 		String title = request.getParameter("title");
 		blog.setTitle(title);
+		blog.setText(text);
 		blogEntryDao.updateBlogEntry(blog);
 
 		return "redirect:" + BlogController.getFullUrl(blog);

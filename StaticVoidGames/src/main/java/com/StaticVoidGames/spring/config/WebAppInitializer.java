@@ -26,6 +26,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		ServletRegistration.Dynamic springDispatcher = servletContext.addServlet("dispatcher", dispatcher);
 		springDispatcher.setLoadOnStartup(1);
-		springDispatcher.addMapping("/");
+		springDispatcher.addMapping("/");       
 	}
 }

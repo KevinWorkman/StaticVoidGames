@@ -123,6 +123,24 @@ public class Game implements TimestampedEvent{
 	 */
 	private boolean published;
 	
+	/**
+	 * Whether the game should show a link to a libGdx HTML page.
+	 */
+	private boolean showLibGdxHtml;
+	
+	/**
+	 * Holds the kind of index files to show for the libGdx HTML page.
+	 * Possibly values: minimal, StaticVoidGames, mine
+	 * <br />
+	 * TODO: This should be an enum, but I'm too scared to look up how that works with JPA
+	 */
+	private String libGdxHtmlMode;
+	
+	/**
+	 * Holds the text to display on the libGDX html page. Used for controls, etc. This is markdown.
+	 */
+	private String libGdxHtmlText;
+	
 	//the below settings are deprecated or in a state of flux right now
 	
 	/**
@@ -485,6 +503,10 @@ public class Game implements TimestampedEvent{
 		gf.setWebstartHeight(webstartHeight);
 		gf.setWebstartWidth(webstartWidth);
 		
+		gf.setShowLibGdxHtml(showLibGdxHtml);
+		gf.setLibGdxHtmlMode(libGdxHtmlMode != null ? libGdxHtmlMode : "StaticVoidGames");
+		gf.setLibGdxHtmlText(libGdxHtmlText);
+		
 		return gf;
 	}
 
@@ -500,5 +522,32 @@ public class Game implements TimestampedEvent{
 
 	public void setMember(String member) {
 		this.member = member;
+	}
+
+	public boolean isShowLibGdxHtml() {
+		return showLibGdxHtml;
+	}
+
+	public void setShowLibGdxHtml(boolean showLibGdxHtml) {
+		this.showLibGdxHtml = showLibGdxHtml;
+	}
+
+	/**
+	 * Possible values: minimal, StaticVoidGames, mine 
+	 */
+	public String getLibGdxHtmlMode() {
+		return libGdxHtmlMode;
+	}
+
+	public void setLibGdxHtmlMode(String libGdxHtmlMode) {
+		this.libGdxHtmlMode = libGdxHtmlMode;
+	}
+
+	public String getLibGdxHtmlText() {
+		return libGdxHtmlText;
+	}
+
+	public void setLibGdxHtmlText(String libGdxHtmlText) {
+		this.libGdxHtmlText = libGdxHtmlText;
 	}
 }

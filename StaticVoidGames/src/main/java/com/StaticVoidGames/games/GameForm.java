@@ -55,6 +55,12 @@ public class GameForm {
 	private String apkUrl;
 	private String androidText;
 	private Boolean android;
+	
+
+	private Boolean showLibGdxHtml;
+	private String libGdxHtmlMode;
+	private MultipartFile libGdxHtmlFile;
+	private String libGdxHtmlText;
 
 
 	public String getTitle() {
@@ -127,6 +133,14 @@ public class GameForm {
 
 	public void setThumbnailFile(MultipartFile thumbnailFile) {
 		this.thumbnailFile = thumbnailFile;
+	}
+	
+	public MultipartFile getLibgdxHtmlFile() {
+		return libGdxHtmlFile;
+	}
+
+	public void setLibGdxHtmlFile(MultipartFile libGdxHtmlFile) {
+		this.libGdxHtmlFile = libGdxHtmlFile;
 	}
 
 	public String getMainClass() {
@@ -287,5 +301,29 @@ public class GameForm {
 
 	public void setAndroid(Boolean android) {
 		this.android = android;
+	}
+
+	public Boolean getShowLibGdxHtml() {
+		return showLibGdxHtml;
+	}
+
+	public void setShowLibGdxHtml(boolean showLibGdxHtml) {
+		this.showLibGdxHtml = showLibGdxHtml;
+	}
+
+	public String getLibGdxHtmlMode() {
+		return libGdxHtmlMode;
+	}
+
+	public void setLibGdxHtmlMode(String libGdxHtmlMode) {
+		this.libGdxHtmlMode = libGdxHtmlMode;
+	}
+
+	public String getLibGdxHtmlText() {
+		return libGdxHtmlText;
+	}
+
+	public void setLibGdxHtmlText(String libGdxHtmlText) {
+		this.libGdxHtmlText = libGdxHtmlText;
 	}
 }

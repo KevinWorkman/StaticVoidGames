@@ -49,7 +49,6 @@
 		<from>^/SvgExe(.*)$</from>
 		<to type="redirect">%{context-path}/JarMatey</to>
 	</rule>
-	
 
 	<outbound-rule>
 		<note>
