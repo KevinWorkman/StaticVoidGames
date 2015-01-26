@@ -15,6 +15,11 @@
 	<%@ include file="../include/navigation.jsp"%>
 	<%@ include file="tutorialsNavigation.jsp" %>
 <div id="contentPane">
+
+	<div class="thinGrayBorder darkBackground textPadding">
+		<p>Have a question about this tutorial? Come talk about it on <a target="_blank" href="http://forum.staticvoidgames.com/">the forum</a>!</p>
+	</div>
+
 	<div class="tutorialDiv lightBackground darkText textPadding topMargin">
 		${tutorialText}
 	</div>
