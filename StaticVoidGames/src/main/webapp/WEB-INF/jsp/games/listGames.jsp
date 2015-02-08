@@ -27,7 +27,8 @@
 				
 				<div style="float:left;">
 					<%-- Image of game --%>
-					<img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" />
+					<div><img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" /></div>
+					by ${game.getMember()}
 				</div>
 				
 				<div style="padding:15px;">
