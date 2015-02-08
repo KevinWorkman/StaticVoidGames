@@ -1,12 +1,13 @@
 div.smallGameLink{
 	border:thin solid gray;
-	display:inline-block;
-	margin:10px;
-	max-width:300px;
+	margin:5px;
+	max-width:80%;
+	margin-left:auto;
+    margin-right:auto;
 	overflow:hidden;
 	background:black;
 	text-align:center;
-	padding:10px;
+	padding:2px;
 }
 
 div.smallGameLink img{
@@ -16,10 +17,12 @@ div.smallGameLink img{
 }
 
 div.smallGameLink div.smallGameLinkText{
-	
 	vertical-align:top;
 	overflow:hidden;
 }
 
-
-
+#gameListPane{
+	width:92%;
+	margin-left:auto;
+    margin-right:auto;
+}
