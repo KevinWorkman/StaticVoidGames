@@ -335,14 +335,10 @@ public class Game implements TimestampedEvent{
 		this.backgroundUrl = backgroundUrl;
 	}
 
-	public String getThumbnailUrl() {
+	public String getThumbnailUrl() {	
 		return thumbnailUrl;
 	}
 	
-	
-	public String getThumbnailView(){
-		return thumbnailUrl;
-	}
 
 	public void setThumbnailUrl(String thumbnailUrl) {
 		this.thumbnailUrl = thumbnailUrl;
@@ -406,6 +402,10 @@ public class Game implements TimestampedEvent{
 	
 	public String getEscapedDescription(){
 		return PageDownUtils.getSanitizedHtml(gameDescription);
+	}
+	
+	public String getEscapedShortDescription(){
+		return PageDownUtils.getSanitizedHtml(shortDescription);
 	}
 
 	public String getAppletDescription() {

@@ -32,6 +32,7 @@
 	
 	<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
 		<h1>${game.getTitle()}</h1>
+		
 		<img style="width:100px" src="${thumbnailImage}"/>
 		<p>${game.getShortDescription()}</p>
 		<p>This is a game by <a href="<c:url value="/members/${game.getMember()}" />">${game.getMember()}</a>.</p>

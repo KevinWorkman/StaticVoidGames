@@ -27,7 +27,11 @@
 				
 				<div style="float:left;">
 					<%-- Image of game --%>
-					<div><img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" /></div>
+					<c:choose>
+					<c:when test="${game.getThumbnailUrl() == null}"><div><img src="<c:url value="${s3Endpoint}/images/staticVoidProfile3.png"/>" /></div></c:when>
+					<c:otherwise><div><img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" /></div></c:otherwise>
+					</c:choose>
+					
 					by ${game.getMember()}
 				</div>
 				

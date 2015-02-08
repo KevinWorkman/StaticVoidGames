@@ -191,7 +191,7 @@ public class GameController implements GameControllerInterface{
 			}
 		}
 		else{
-			//TODO generic thumbnail
+			model.addAttribute("thumbnailImage", s3Endpoint + "/images/staticVoidProfile3.png");
 		}
 		
 		if(gameObj.getFaviconUrl() != null){

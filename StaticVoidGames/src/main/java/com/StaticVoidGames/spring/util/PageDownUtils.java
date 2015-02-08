@@ -16,6 +16,10 @@ public class PageDownUtils {
 	 * This calls the PageDown javascript library to do the work for us.
 	 */
 	public static String getSanitizedHtml(String markdown){
+		
+		if(markdown == null){
+			return null;
+		}
 
 		//TODO: going through the javascript library seems a bit hackish. If there's a PageDown Java library, we should switch to that.
 		//The other way to go would be to eliminate this altogether and do all of the PageDown parsing on the client side.
