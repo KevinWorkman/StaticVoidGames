@@ -30,6 +30,8 @@
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/jar" />">Jar</a></div>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/android" />">Android</a></div>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/libGdxHtml" />">LibGDX HTML</a></div>
+			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/processingJavaScript" />">Processing.js</a></div>
+			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/javaScript" />">Pure JavaScript</a></div>
 		</div>
 	               
 		<div class="editSectionDiv">
@@ -46,26 +48,7 @@
 			<h3>Step 5: Publish your game!</h3>
 			<div class="editLinkDiv"><a href="<c:url value="/games/${gameObj.getGameName()}/edit/publish" />">Publish</a></div>
 		</div>
-	
-		<div class="editSectionDiv">
-			<h3>These settings are deprecated but are available for legacy games:</h3>
-			<div class="editLinkDiv">
-	 			<a href="<c:url value="/games/${gameObj.getGameName()}/edit/webstart" />">DEPRECATED: Webstart</a>
-			</div>
-	
-			<div class="editLinkDiv">
-				<a href="<c:url value="/games/${gameObj.getGameName()}/edit/applet" />">DEPRECATED: Applet</a>
-			</div>
-	
-			<div class="editLinkDiv">
-				<a href="<c:url value="/games/${gameObj.getGameName()}/edit/deprecated" />">Other Deprecated Settings</a>
-			</div>
-		</div>
-	
-	 	<div class="editLinkDiv">
-	 		<a href="<c:url value="/games/${gameObj.getGameName()}/edit/rating" />">Content Rating</a>
-		</div>
-		
+
 			<%@ include file="../include/advertisement.jsp" %>
    			<%@ include file="../include/openSource.jsp" %>
 		

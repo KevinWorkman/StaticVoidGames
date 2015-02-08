@@ -10,7 +10,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  * This class gives access to the properties defined in the properties file
  */
 @Configuration
-@PropertySource("classpath:/live.properties")
+@PropertySource("classpath:/local.properties")
 public class PropertiesConfig {
 
 	@Value( "${database.location}" )
@@ -39,6 +39,9 @@ public class PropertiesConfig {
 	
 	@Value("${recaptcha.privateKey}")
 	private String recaptchaPrivateKey;
+	
+	@Value("${discourse.sso.secret}")
+	private String discourseSsoSecret;
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

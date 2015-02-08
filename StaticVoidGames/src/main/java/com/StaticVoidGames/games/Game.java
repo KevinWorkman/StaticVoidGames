@@ -141,6 +141,31 @@ public class Game implements TimestampedEvent{
 	 */
 	private String libGdxHtmlText;
 	
+	
+	/**
+	 * Whether the game should show a link to a Processing HTML page.
+	 */
+	private boolean showProcessingJavaScript;
+	
+	/**
+	 * Holds the kind of index files to show for the Processing HTML page.
+	 * Possibly values: minimal, StaticVoidGames, mine
+	 * <br />
+	 * TODO: This should be an enum, but I'm too scared to look up how that works with JPA
+	 */
+	private String processingJavaScriptMode;
+	
+	/**
+	 * Holds the text to display on the Processing html page. Used for controls, etc. This is markdown.
+	 */
+	private String processingJavaScriptText;
+	
+	private String processingSketchName;
+	
+	private boolean showJavaScript;
+	private String javaScriptIndex;
+	
+	
 	//the below settings are deprecated or in a state of flux right now
 	
 	/**
@@ -507,6 +532,14 @@ public class Game implements TimestampedEvent{
 		gf.setLibGdxHtmlMode(libGdxHtmlMode != null ? libGdxHtmlMode : "StaticVoidGames");
 		gf.setLibGdxHtmlText(libGdxHtmlText);
 		
+		gf.setShowProcessingJavaScript(showProcessingJavaScript);
+		gf.setProcessingJavaScriptMode(processingJavaScriptMode != null ? processingJavaScriptMode : "StaticVoidGames");
+		gf.setProcessingJavaScriptText(processingJavaScriptText);
+		gf.setProcessingSketchName(processingSketchName);
+		
+		gf.setShowJavaScript(showJavaScript);
+		gf.setJavaScriptIndex(javaScriptIndex);
+		
 		return gf;
 	}
 
@@ -549,5 +582,53 @@ public class Game implements TimestampedEvent{
 
 	public void setLibGdxHtmlText(String libGdxHtmlText) {
 		this.libGdxHtmlText = libGdxHtmlText;
+	}
+
+	public boolean isShowProcessingJavaScript() {
+		return showProcessingJavaScript;
+	}
+
+	public void setShowProcessingJavaScript(boolean showProcessingJavaScript) {
+		this.showProcessingJavaScript = showProcessingJavaScript;
+	}
+
+	public String getProcessingJavaScriptMode() {
+		return processingJavaScriptMode;
+	}
+
+	public void setProcessingJavaScriptMode(String processingJavaScriptMode) {
+		this.processingJavaScriptMode = processingJavaScriptMode;
+	}
+
+	public String getProcessingJavaScriptText() {
+		return processingJavaScriptText;
+	}
+
+	public void setProcessingJavaScriptText(String processingJavaScriptText) {
+		this.processingJavaScriptText = processingJavaScriptText;
+	}
+
+	public String getProcessingSketchName() {
+		return processingSketchName;
+	}
+
+	public void setProcessingSketchName(String processingSketchName) {
+		this.processingSketchName = processingSketchName;
+	}
+
+	public boolean isShowJavaScript() {
+		return showJavaScript;
+	}
+
+	public void setShowJavaScript(boolean showJavaScript) {
+		this.showJavaScript = showJavaScript;
+	}
+
+	public String getJavaScriptIndex() {
+		return javaScriptIndex;
+	}
+
+	public void setJavaScriptIndex(String javaScriptIndex) {
+		this.javaScriptIndex = javaScriptIndex;
 	}
 }

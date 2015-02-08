@@ -50,7 +50,21 @@
 			
 		<c:if test="${game.isShowLibGdxHtml()}">
 		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
-			<h3>Play this game in your browser <a href="${libGdxHtmlLink}">here</a>.</h3>
+			<h3>Play this libGDX game in your browser <a href="${libGdxHtmlLink}">here</a>.</h3>
+			
+		</div>
+		</c:if>
+		
+		<c:if test="${game.isShowProcessingJavaScript()}">
+		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
+			<h3>Play this Processing.js game in your browser <a href="${processingJavaScriptLink}">here</a>.</h3>
+			
+		</div>
+		</c:if>
+		
+				<c:if test="${game.isShowJavaScript()}">
+		<div class="darkBackground centeredBlock thinGrayBorder topMargin width75 centered">
+			<h3>Play this JavaScript game in your browser <a href="${pureJavaScriptLink}">here</a>.</h3>
 			
 		</div>
 		</c:if>

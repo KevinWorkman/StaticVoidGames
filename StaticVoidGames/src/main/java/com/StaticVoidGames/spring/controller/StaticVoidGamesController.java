@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.StaticVoidGames.members.Member;
 import com.StaticVoidGames.members.MemberPointsView;
@@ -71,6 +72,8 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Override
 	@RequestMapping(value = "/login")
 	public String login(ModelMap model, HttpSession session) {
+		
+		System.out.println("in login.");
 
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
@@ -80,6 +83,18 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 				);
 
 		return "login";
+	}
+	
+	@RequestMapping(value = "/forumLogin")
+	public String forumLogin(ModelMap model, HttpSession session, @RequestParam("sso") String sso, @RequestParam("sig") String sig){
+		
+		session.setAttribute("sso", sso);
+		session.setAttribute("sig", sig);
+		
+		System.out.println("sso: " + sso);
+		System.out.println("sig: " + sig);
+		return login(model, session);
+		
 	}
 
 	@Override

@@ -61,7 +61,16 @@ public class GameForm {
 	private String libGdxHtmlMode;
 	private MultipartFile libGdxHtmlFile;
 	private String libGdxHtmlText;
-
+	
+	private Boolean showProcessingJavaScript;
+	private String processingJavaScriptMode;
+	private MultipartFile processingJavaScriptFile;
+	private String processingJavaScriptText;
+	private String processingSketchName;
+	
+	private Boolean showJavaScript;
+	private String javaScriptIndex;
+	private MultipartFile javaScriptFile;
 
 	public String getTitle() {
 		return title;
@@ -325,5 +334,69 @@ public class GameForm {
 
 	public void setLibGdxHtmlText(String libGdxHtmlText) {
 		this.libGdxHtmlText = libGdxHtmlText;
+	}
+
+	public Boolean getShowProcessingJavaScript() {
+		return showProcessingJavaScript;
+	}
+
+	public void setShowProcessingJavaScript(Boolean showProcessingJavaScript) {
+		this.showProcessingJavaScript = showProcessingJavaScript;
+	}
+
+	public String getProcessingJavaScriptMode() {
+		return processingJavaScriptMode;
+	}
+
+	public void setProcessingJavaScriptMode(String processingJavaScriptMode) {
+		this.processingJavaScriptMode = processingJavaScriptMode;
+	}
+
+	public MultipartFile getProcessingJavaScriptFile() {
+		return processingJavaScriptFile;
+	}
+
+	public void setProcessingJavaScriptFile(MultipartFile processingJavaScriptFile) {
+		this.processingJavaScriptFile = processingJavaScriptFile;
+	}
+
+	public String getProcessingJavaScriptText() {
+		return processingJavaScriptText;
+	}
+
+	public void setProcessingJavaScriptText(String processingJavaScriptText) {
+		this.processingJavaScriptText = processingJavaScriptText;
+	}
+
+	public String getProcessingSketchName() {
+		return processingSketchName;
+	}
+
+	public void setProcessingSketchName(String processingSketchName) {
+		this.processingSketchName = processingSketchName;
+	}
+
+	public Boolean getShowJavaScript() {
+		return showJavaScript;
+	}
+
+	public void setShowJavaScript(boolean showJavaScript) {
+		this.showJavaScript = showJavaScript;
+	}
+
+	public String getJavaScriptIndex() {
+		return javaScriptIndex;
+	}
+
+	public void setJavaScriptIndex(String javaScriptIndex) {
+		this.javaScriptIndex = javaScriptIndex;
+	}
+
+	public MultipartFile getJavaScriptFile() {
+		return javaScriptFile;
+	}
+
+	public void setJavaScriptFile(MultipartFile javaScriptFile) {
+		this.javaScriptFile = javaScriptFile;
 	}
 }

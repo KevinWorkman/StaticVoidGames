@@ -109,6 +109,8 @@
 				<li><a class="sectionTitle ${'lwjglExample' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/lwjglExample" />">Example: LWJGL Game</a></li>
 				<li><a class="sectionTitle ${'joglExample' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/joglExample" />">Example: JOGL Game</a></li>
 				<li><a class="sectionTitle ${'libGdxHtml' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/libGdxHtml" />">LibGDX HTML</a></li>
+				<li><a class="sectionTitle ${'processingJavaScript' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/processingJavaScript" />">Processing.js</a></li>
+				<li><a class="sectionTitle ${'pureJavaScript' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/pureJavaScript" />">Pure JavaScript</a></li>
 				
 			</ul>
 		</li>

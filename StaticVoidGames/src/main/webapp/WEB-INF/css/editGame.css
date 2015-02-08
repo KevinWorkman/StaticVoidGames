@@ -18,3 +18,8 @@ div.editLinkDiv{
 input.editGameSubmitButton{
 	font-size:xx-large;
 }
+
+checkbox{
+	min-width:25px;
+	min-height:25px;
+}

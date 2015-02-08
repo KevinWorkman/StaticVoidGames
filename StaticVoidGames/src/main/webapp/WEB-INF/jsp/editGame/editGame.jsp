@@ -32,7 +32,8 @@
                 	<c:when test="${formField.getType() == 'input'}">
                 		<div class="darkBackground textPadding centered topMargin thinGrayBorder">
                 			<h2>${formField.getLabel()}</h2>
-                		${formField.getDescription()}: <form:input path="${formField.getCommand()}" />
+                		<p>${formField.getDescription()}</p>
+                		<form:input path="${formField.getCommand()}" />
                 		</div>
                     </c:when>
                     <c:when test="${formField.getType() == 'file'}">
@@ -42,7 +43,7 @@
 	                    	<input type="file" name="${formField.getCommand()}"  />
 	                    </div>
                     </c:when>
-                    <c:when test="${formField.getType() == 'libGdxHtmlModeRadio'}">
+                    <c:when test="${formField.getType() == 'htmlModeRadio'}">
                     <div class="darkBackground textPadding centered topMargin thinGrayBorder">
                 			<h2>${formField.getLabel()}</h2>
                     	<p>

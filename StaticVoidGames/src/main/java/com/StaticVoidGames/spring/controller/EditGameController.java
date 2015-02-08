@@ -77,7 +77,7 @@ public class EditGameController implements EditGameControllerInterface{
 		FormField title = new FormField("Title", "Enter your game's title:", "title", "input");
 		FormField shortDescription = new FormField("Short Description", "Enter a short description shown on thumbnails for your game", "shortDescription", "input");
 		FormField description = new FormField("Description", "Enter a description for your game", "description", "textarea");
-		FormField website = new FormField("Website", "If your game is hosted elsewhere, specify that here", "website", "input");
+		//	FormField website = new FormField("Website", "If your game is hosted elsewhere, specify that here", "website", "input");
 
 		FormField jarFile = new FormField("Jar File", "Upload a RUNNABLE jar. Applets and Webstarts are HIGHLY discouraged.", "jarFile", "file");
 
@@ -88,14 +88,14 @@ public class EditGameController implements EditGameControllerInterface{
 		FormField backgroundFile = new FormField("Background", "Upload a background image. This is optional.", "backgroundFile", "file");
 		FormField thumbnailFile = new FormField("Thumbnail", "Upload an image to be shown as the game's thumbnail.", "thumbnailFile", "file");
 
-		FormField mainClass = new FormField("Main Class", "DEPRECATED: specify the main class to create a webstart version of your game.", "mainClass", "input");
-		FormField webstartWidth = new FormField("Webstart Width", "How wide should the webstart version be?", "webstartWidth", "input");
-		FormField webstartHeight = new FormField("Webstart Height", "How tall should the webstart version be?", "webstartHeight", "input");
+		//FormField mainClass = new FormField("Main Class", "DEPRECATED: specify the main class to create a webstart version of your game.", "mainClass", "input");
+		//FormField webstartWidth = new FormField("Webstart Width", "How wide should the webstart version be?", "webstartWidth", "input");
+		//FormField webstartHeight = new FormField("Webstart Height", "How tall should the webstart version be?", "webstartHeight", "input");
 
-		FormField appletClass = new FormField("Applet Class", "DEPRECATED: specify the applet class to create an applet version of your game.", "appletClass", "input");
-		FormField appletWidth = new FormField("Applet Width", "How wide should the applet version be?", "appletWidth", "input");
-		FormField appletHeight = new FormField("Applet Height", "How tall should the applet version be?", "applettHeight", "input");
-		FormField appletDescription = new FormField("Applet Description", "Enter a short description (such as controls) shown below the applet:", "appletDescription", "textarea");
+		//	FormField appletClass = new FormField("Applet Class", "DEPRECATED: specify the applet class to create an applet version of your game.", "appletClass", "input");
+		//FormField appletWidth = new FormField("Applet Width", "How wide should the applet version be?", "appletWidth", "input");
+		//	FormField appletHeight = new FormField("Applet Height", "How tall should the applet version be?", "applettHeight", "input");
+		//FormField appletDescription = new FormField("Applet Description", "Enter a short description (such as controls) shown below the applet:", "appletDescription", "textarea");
 
 		FormField javaVersion = new FormField("Java Version", "What version of Java did you use to compile your game?", "javaVersion", "input");
 		FormField rating = new FormField("Rating", "Is your game for all ages, teens, or adults only?", "rating", "input");
@@ -107,32 +107,44 @@ public class EditGameController implements EditGameControllerInterface{
 
 		FormField published = new FormField("Publish", "Do you want to publish your game?<br/>Unpublished games are not shown on the main game page, but can still be played by anybody you give the link to.<br/>Publish:", "published", "checkbox");
 
-		FormField lwjgl = new FormField("LWJGL", "DEPRECATED: Was your game made with LWJGL?", "lwjgl", "checkbox");
-		FormField signed = new FormField("signed", "DEPRECATED: Is your jar signed?", "signed", "checkbox");
+		//FormField lwjgl = new FormField("LWJGL", "DEPRECATED: Was your game made with LWJGL?", "lwjgl", "checkbox");
+		//FormField signed = new FormField("signed", "DEPRECATED: Is your jar signed?", "signed", "checkbox");
 
 		FormField apkFile = new FormField("Android APK", "Upload an Android APK", "apkFile", "file");
 		FormField androidText = new FormField("Android Text", "What text should show under the Android tab? Include links to Google Play, etc.", "androidText", "textarea");
 		FormField android = new FormField("android", "Include an Android tab?", "android", "checkbox");
 
 		FormField showLibGdxHtmlLink = new FormField("Include libGDX HTML link", "Check this box if your game page should include a link to a playable html version of your game", "showLibGdxHtml", "checkbox");
-		FormField libGdxHtmlFile = new FormField("dist.zip", "Follow <a target=\"_blank\" href=\"http://staticvoidgames.com/tutorials/deployment/libGdxHtml\">this</a> guide, then upload your dist.zip file here.", "libGdxHtmlFile", "file");
-		FormField libGdxHtmlMode = new FormField("LibGDX html mode", "What type of html should display?", "libGdxHtmlMode", "libGdxHtmlModeRadio");
+		FormField libGdxHtmlFile = new FormField("dist.zip", "Follow <a target=\"_blank\" href=\"http://staticvoidgames.com/tutorials/deployment/libGdxHtml\">this</a> guide, then upload your dist.zip file here.<br/>Note: this upload may take a few minutes!", "libGdxHtmlFile", "file");
+		FormField libGdxHtmlMode = new FormField("LibGDX html mode", "What type of html should display?", "libGdxHtmlMode", "htmlModeRadio");
 		FormField libGdxHtmlText = new FormField("LibGDX html text", "If you chose to show a prettified page, what text should show under the game? Use this for things like showing controls.", "libGdxHtmlText", "textarea");
 
+		FormField showProcessingJavaScript = new FormField("Include link to Processing.js page", "Check this box if your game page should include a link to a playable html version of your game", "showProcessingJavaScript", "checkbox");
+		FormField processingJavaScriptFile = new FormField("web-export.zip", "Follow <a target=\"_blank\" href=\"http://staticvoidgames.com/tutorials/deployment/processingJavaScript\">this</a> guide, then upload your web-export.zip file here.", "processingJavaScriptFile", "file");
+		FormField processingJavaScriptMode = new FormField("Processing.js html mode", "What type of html should display?", "processingJavaScriptMode", "htmlModeRadio");
+		FormField processingJavaScriptText = new FormField("Processing.js html text", "If you chose to show a prettified page, what text should show under the game? Use this for things like showing controls.", "processingJavaScriptText", "textarea");
+
+		FormField showJavaScript = new FormField("Include link to JavaScript page", "Check this box if your game page should include a link to the index page you provide in the zip file.", "showJavaScript", "checkbox");
+		FormField javaScriptFile = new FormField("Zip File", "Follow <a target=\"_blank\" href=\"http://staticvoidgames.com/tutorials/deployment/pureJavaScript\">this</a> guide, then upload your zip file here.", "javaScriptFile", "file");
+		FormField javaScriptIndex = new FormField("JavaScriptIndex", "In your zip file, what is the relative path to the html page that contains your game?", "javaScriptIndex", "input");
+
+
 		formFields.put("title", Arrays.asList(title));
-		formFields.put("description", Arrays.asList(shortDescription, description, website));
+		formFields.put("description", Arrays.asList(shortDescription, description));
 		formFields.put("jar", Arrays.asList(language, javaVersion, jarFile));
 		formFields.put("source", Arrays.asList(sourceFile, sourcePermissions));
 		formFields.put("images", Arrays.asList(thumbnailFile, faviconFile, backgroundFile));
-		formFields.put("webstart", Arrays.asList(mainClass, webstartWidth, webstartHeight));
-		formFields.put("applet", Arrays.asList(appletClass, appletWidth, appletHeight, appletDescription));
+		//formFields.put("webstart", Arrays.asList(mainClass, webstartWidth, webstartHeight));
+		//formFields.put("applet", Arrays.asList(appletClass, appletWidth, appletHeight, appletDescription));
 		formFields.put("rating", Arrays.asList(rating));
 		formFields.put("advertising", Arrays.asList(adText, showAdBorder));
-		formFields.put("deprecated", Arrays.asList(lwjgl, signed));
+		//formFields.put("deprecated", Arrays.asList(lwjgl, signed));
 		formFields.put("android", Arrays.asList(android, apkFile, androidText));
 		formFields.put("publish", Arrays.asList(published));
 
 		formFields.put("libGdxHtml", Arrays.asList(showLibGdxHtmlLink, libGdxHtmlFile, libGdxHtmlMode, libGdxHtmlText));
+		formFields.put("processingJavaScript", Arrays.asList(showProcessingJavaScript, processingJavaScriptFile, processingJavaScriptMode, processingJavaScriptText));
+		formFields.put("javaScript", Arrays.asList(showJavaScript, javaScriptFile, javaScriptIndex));
 	}
 
 	/**
@@ -162,6 +174,9 @@ public class EditGameController implements EditGameControllerInterface{
 		if(gameObj.getFaviconUrl() != null){
 			String s3Endpoint = env.getProperty("s3.endpoint");
 			model.addAttribute("faviconImage", s3Endpoint + "/games/" + game + "/" + gameObj.getFaviconUrl());
+		}
+		else{
+			model.addAttribute("faviconImage", "http://StaticVoidGames.com/images/favicon.png");
 		}
 
 		session.setAttribute("gameObj", gameObj);
@@ -201,22 +216,23 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		boolean redoLibGdxHtml = false;
+		boolean redoProcessingJavaScript = false;
+
 
 		//TODO: probably a smarter way to do this?
 
 		if(gameForm.getTitle() != null && !gameForm.getTitle().equals(gameObj.getTitle())){
 			gameObj.setTitle(gameForm.getTitle());
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 		if(gameForm.getDescription() != null && !gameForm.getDescription().equals(gameObj.getGameDescription())){
 			gameObj.setGameDescription(gameForm.getDescription());
-			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getShortDescription() != null && !gameForm.getShortDescription().equals(gameObj.getShortDescription())){
 			gameObj.setShortDescription(gameForm.getShortDescription());
-			redoLibGdxHtml = true;
 		}
 
 		//TODO: remove game websites, people can put it in the description
@@ -266,7 +282,6 @@ public class EditGameController implements EditGameControllerInterface{
 
 		if(gameForm.getAdText() != null && !gameForm.getAdText().equals(gameObj.getAdText())){
 			gameObj.setAdText(gameForm.getAdText());
-			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getShowAdBorder() != null){
@@ -288,26 +303,27 @@ public class EditGameController implements EditGameControllerInterface{
 
 		if(gameForm.getSourcePermissionsText() != null && !gameForm.getSourcePermissionsText().equals(gameObj.getSourcePermissionsText())){
 			gameObj.setSourcePermissionsText(gameForm.getSourcePermissionsText());
-			redoLibGdxHtml = true;
 		}
 
 		if(gameForm.getApkUrl() != null && !gameForm.getApkUrl().equals(gameObj.getApkUrl())){
 			gameObj.setApkUrl(gameForm.getApkUrl());
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 		if(gameForm.getAndroidText() != null && !gameForm.getAndroidText().equals(gameObj.getAndroidText())){
 			gameObj.setAndroidText(gameForm.getAndroidText());
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 		if(gameForm.getAndroid() != null && !gameForm.getAndroid().equals(gameObj.isAndroid())){
 			gameObj.setAndroid(gameForm.getAndroid());
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 		if(gameForm.getLibGdxHtmlMode() != null && !gameForm.getLibGdxHtmlMode().equals(gameObj.getLibGdxHtmlMode())){
-			System.out.println("Setting game.libGdxHtmlMode: " + gameForm.getLibGdxHtmlMode());
 			gameObj.setLibGdxHtmlMode(gameForm.getLibGdxHtmlMode());
 			redoLibGdxHtml = true;
 		}
@@ -322,13 +338,35 @@ public class EditGameController implements EditGameControllerInterface{
 			redoLibGdxHtml = true;
 		}
 
-		//TODO use MultipartFile.isEmpty()
-		//I'm not even sure what "".equals() is going to do in this case?
-		if(gameForm.getJarFile() != null && !"".equals(gameForm.getJarFile())){
 
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-			String bucket = env.getProperty("s3.bucket");
+		if(gameForm.getProcessingJavaScriptMode() != null && !gameForm.getProcessingJavaScriptMode().equals(gameObj.getProcessingJavaScriptMode())){
+			gameObj.setProcessingJavaScriptMode(gameForm.getProcessingJavaScriptMode());
+			redoProcessingJavaScript = true;
+		}
+
+		if(gameForm.getShowProcessingJavaScript() != null){
+			gameObj.setShowProcessingJavaScript(gameForm.getShowProcessingJavaScript());
+		}
+
+		if(gameForm.getProcessingJavaScriptText() != null && !gameForm.getProcessingJavaScriptText().equals(gameObj.getProcessingJavaScriptText())){
+			gameObj.setProcessingJavaScriptText(gameForm.getProcessingJavaScriptText());
+			redoProcessingJavaScript = true;
+		}
+
+		if(gameForm.getShowJavaScript() != null){
+			gameObj.setShowJavaScript(gameForm.getShowJavaScript());
+		}
+
+		if(gameForm.getJavaScriptIndex() != null && !gameForm.getJavaScriptIndex().equals(gameObj.getJavaScriptIndex())){
+			gameObj.setJavaScriptIndex(gameForm.getJavaScriptIndex());
+		}
+
+		String awsAccessKey = env.getProperty("aws.accessKey");
+		String awsSecretKey = env.getProperty("aws.secretKey");
+		String bucket = env.getProperty("s3.bucket");
+		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+		if(gameForm.getJarFile() != null && !gameForm.getJarFile().isEmpty()){
 
 			String key = "games/" + game + "/" + gameForm.getJarFile().getOriginalFilename();
 
@@ -336,7 +374,6 @@ public class EditGameController implements EditGameControllerInterface{
 			meta.setContentLength(gameForm.getJarFile().getSize());
 
 			try{
-				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getJarFile().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 				gameObj.setJarFileUrl(gameForm.getJarFile().getOriginalFilename());
@@ -347,32 +384,20 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
-		if(gameForm.getSource() != null && !"".equals(gameForm.getSource())){
+		if(gameForm.getSource() != null && !gameForm.getSource().isEmpty()){
 
-			System.out.println("Here 2");
-
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-
-			String bucket = env.getProperty("s3.bucket");
 			String key = "games/" + game + "/" + gameForm.getSource().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(gameForm.getSource().getSize());
 
 			try{
-
-				System.out.println("Here 3");
-
-				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getSource().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 				gameObj.setSourceZipUrl(gameForm.getSource().getOriginalFilename());
-
-				System.out.println("Here 4");
-
 			}
 			catch(Exception e){
 				//TODO: let the user know something went wrong
@@ -380,21 +405,17 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
-		if(gameForm.getFaviconFile() != null && !"".equals(gameForm.getFaviconFile())){
+		if(gameForm.getFaviconFile() != null && !gameForm.getFaviconFile().isEmpty()){
 
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-
-			String bucket = env.getProperty("s3.bucket");
 			String key = "games/" + game + "/" + gameForm.getFaviconFile().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(gameForm.getFaviconFile().getSize());
 
 			try{
-				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getFaviconFile().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 				gameObj.setFaviconUrl(gameForm.getFaviconFile().getOriginalFilename());
@@ -405,20 +426,17 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
-		if(gameForm.getBackgroundFile() != null && !"".equals(gameForm.getBackgroundFile())){
+		if(gameForm.getBackgroundFile() != null && !gameForm.getBackgroundFile().isEmpty()){
 
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-			String bucket = env.getProperty("s3.bucket");
 			String key = "games/" + game + "/" + gameForm.getBackgroundFile().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(gameForm.getBackgroundFile().getSize());
 
 			try{
-				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getBackgroundFile().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 				gameObj.setBackgroundUrl(gameForm.getBackgroundFile().getOriginalFilename());
@@ -429,21 +447,18 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 
-		if(gameForm.getThumbnailFile() != null && !"".equals(gameForm.getThumbnailFile())){
+		if(gameForm.getThumbnailFile() != null && !gameForm.getThumbnailFile().isEmpty()){
 
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-			String bucket = env.getProperty("s3.bucket");
 			String key = "games/" + game + "/" + gameForm.getThumbnailFile().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(gameForm.getThumbnailFile().getSize());
 
 			try{
-				AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 				s3.putObject(bucket, key, gameForm.getThumbnailFile().getInputStream(), meta);
 				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
 
@@ -456,16 +471,11 @@ public class EditGameController implements EditGameControllerInterface{
 			}
 
 			redoLibGdxHtml = true;
+			redoProcessingJavaScript = true;
 		}
 
 
-		if(gameForm.getLibgdxHtmlFile() != null){
-
-			String awsAccessKey = env.getProperty("aws.accessKey");
-			String awsSecretKey = env.getProperty("aws.secretKey");
-			String bucket = env.getProperty("s3.bucket");
-			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
-
+		if(gameForm.getLibgdxHtmlFile() != null && !gameForm.getLibgdxHtmlFile().isEmpty()){
 
 			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
 			ObjectListing ol =s3.listObjects(bucket, "games/" + game + "/gdx/"); 
@@ -529,12 +539,144 @@ public class EditGameController implements EditGameControllerInterface{
 			//we just overwrote whatever file was there before, let's redo it
 			redoLibGdxHtml = true;
 		}
-		else{
-			System.out.println("libGDX Html5 is empty!");
+
+
+		if(gameForm.getProcessingJavaScriptFile() != null && !gameForm.getProcessingJavaScriptFile().isEmpty()){
+
+			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+			ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/p5/"); 
+
+			List<String> keys = new ArrayList<String>();
+			for(S3ObjectSummary os : ol.getObjectSummaries()){
+				System.out.println("key: " + os.getKey());
+				keys.add(os.getKey());
+			}
+			if(!keys.isEmpty()){
+				deleteRequest.withKeys(keys.toArray(new String[]{}));
+				s3.deleteObjects(deleteRequest);
+			}
+			MultipartFile cmf = gameForm.getProcessingJavaScriptFile();
+
+			try{
+				byte[] buffer = new byte[1024];
+				ZipInputStream zip = new ZipInputStream(cmf.getInputStream());
+				ZipEntry ze = zip.getNextEntry();
+
+				while(ze!=null){
+
+					File tempFile = File.createTempFile(gameObj.getGameName(), "tmp");
+
+					FileOutputStream fos = new FileOutputStream(tempFile);             
+
+					int len;
+					while ((len = zip.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+					}
+
+					fos.close();   
+
+					String key = "games/" + game + "/p5/" + ze.getName();
+					if(ze.getName().startsWith("web-export/")){
+						key = "games/" + game + "/p5/" + ze.getName().substring(11);
+					}
+					else{
+						//TODO error, zip file is not formatted correctly
+					}
+
+					if(key.endsWith(".pde")){
+						String processingSketchName = key.substring(key.lastIndexOf("/")+1, key.length()-4);
+						System.out.println("Sketch name: " + processingSketchName);
+						gameObj.setProcessingSketchName(processingSketchName);
+					}
+
+					ObjectMetadata meta = new ObjectMetadata();
+					meta.setContentLength(tempFile.length());
+
+					ConfigurableMimeFileTypeMap mimeMap = new ConfigurableMimeFileTypeMap();
+					String type = mimeMap.getContentType(ze.getName());
+
+					meta.setContentType(type);
+
+					FileInputStream fis = new FileInputStream(tempFile);
+
+					s3.putObject(bucket, key, fis, meta);
+					s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+
+					ze = zip.getNextEntry();
+				}
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+
+			//we just overwrote whatever file was there before, let's redo it
+			redoProcessingJavaScript = true;
 		}
+
+
+		if(gameForm.getJavaScriptFile() != null && !gameForm.getJavaScriptFile().isEmpty()){
+
+			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+			ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/js/"); 
+
+			List<String> keys = new ArrayList<String>();
+			for(S3ObjectSummary os : ol.getObjectSummaries()){
+				keys.add(os.getKey());
+			}
+			if(!keys.isEmpty()){
+				deleteRequest.withKeys(keys.toArray(new String[]{}));
+				s3.deleteObjects(deleteRequest);
+			}
+			MultipartFile cmf = gameForm.getJavaScriptFile();
+
+			try{
+				byte[] buffer = new byte[1024];
+				ZipInputStream zip = new ZipInputStream(cmf.getInputStream());
+				ZipEntry ze = zip.getNextEntry();
+
+				while(ze!=null){
+
+					File tempFile = File.createTempFile(gameObj.getGameName(), "tmp");
+
+					FileOutputStream fos = new FileOutputStream(tempFile);             
+
+					int len;
+					while ((len = zip.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+					}
+
+					fos.close();   
+
+					String key = "games/" + game + "/js/" + ze.getName();
+
+					ObjectMetadata meta = new ObjectMetadata();
+					meta.setContentLength(tempFile.length());
+
+					ConfigurableMimeFileTypeMap mimeMap = new ConfigurableMimeFileTypeMap();
+					String type = mimeMap.getContentType(ze.getName());
+
+					meta.setContentType(type);
+
+					FileInputStream fis = new FileInputStream(tempFile);
+
+					s3.putObject(bucket, key, fis, meta);
+					s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+
+					ze = zip.getNextEntry();
+				}
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+
 
 		if(gameObj.isShowLibGdxHtml() && redoLibGdxHtml){
 			redoLibGdxHtml(gameObj);
+		}
+
+		if(gameObj.isShowProcessingJavaScript() && redoProcessingJavaScript){
+			redoProcessingJavaScript(gameObj);
 		}
 
 		gameDao.updateGame(gameObj);
@@ -680,16 +822,19 @@ public class EditGameController implements EditGameControllerInterface{
 			svgStringBuilder.append("</div>\n");
 		}
 
-		if(game.getApkUrl() != null){
-			svgStringBuilder.append("<div>\n");
-			svgStringBuilder.append("<p>You can play this game on Android by downloading the APK from <a href=\"../" + game.getApkUrl() + "\">here</a>.</p>");
-			svgStringBuilder.append("</div>\n");
-		}
+		if(game.isAndroid()){
 
-		if(game.getAndroidText() != null){
-			svgStringBuilder.append("<div>\n");
-			svgStringBuilder.append(PageDownUtils.getSanitizedHtml(game.getAndroidText()));
-			svgStringBuilder.append("</div>\n");
+			if(game.getApkUrl() != null){
+				svgStringBuilder.append("<div>\n");
+				svgStringBuilder.append("<p>You can play this game on Android by downloading the APK from <a href=\"../" + game.getApkUrl() + "\">here</a>.</p>");
+				svgStringBuilder.append("</div>\n");
+			}
+
+			if(game.getAndroidText() != null){
+				svgStringBuilder.append("<div>\n");
+				svgStringBuilder.append(PageDownUtils.getSanitizedHtml(game.getAndroidText()));
+				svgStringBuilder.append("</div>\n");
+			}
 		}
 
 		svgStringBuilder.append("</div>\n");
@@ -712,9 +857,183 @@ public class EditGameController implements EditGameControllerInterface{
 			s3.copyObject(bucket, key2, bucket, "games/" + game.getGameName() + "/gdx/index.html");
 			s3.setObjectAcl(bucket, "games/" + game.getGameName() + "/gdx/index.html", CannedAccessControlList.PublicRead);
 		}
-
-
 	}
+
+	private void redoProcessingJavaScript(Game game){
+
+		StringBuilder minimalStringBuilder = new StringBuilder();
+		minimalStringBuilder.append("<!doctype html>\n");
+		minimalStringBuilder.append("<html>\n");
+
+		minimalStringBuilder.append("<head>");
+
+		minimalStringBuilder.append("<title>");
+		minimalStringBuilder.append(game.getTitle());
+		minimalStringBuilder.append("</title>\n");
+
+		minimalStringBuilder.append("<link href=\"styles.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+
+		minimalStringBuilder.append("<script src=\"processing.js\" type=\"text/javascript\"></script>\n");
+		minimalStringBuilder.append("<script type=\"text/javascript\">function getProcessingSketchId () { return '" + game.getProcessingSketchName() + "'; }</script>\n"); 
+
+		if(game.getFaviconUrl() == null){
+			minimalStringBuilder.append("<link rel=\"shortcut icon\" href=\"http://s3.staticvoidgames.com/images/favicon.png\" />\n");
+		}
+		else{
+			minimalStringBuilder.append("<link rel=\"shortcut icon\" href=\"../" + game.getFaviconUrl() + "\" />\n");
+		}
+
+		minimalStringBuilder.append("</head>\n");
+
+		minimalStringBuilder.append("<body>\n");
+
+		minimalStringBuilder.append("<canvas id=\"" + game.getProcessingSketchName() + "\" data-processing-sources=\"" + game.getProcessingSketchName() + ".pde\"></canvas>\n");
+
+
+
+		minimalStringBuilder.append("</body>\n");
+
+		minimalStringBuilder.append("</html>");
+
+		String key1 = "games/" + game.getGameName() + "/p5/min.html";
+		boolean success1 = uploadTextAsFile(key1, minimalStringBuilder.toString());
+
+		if(success1 && "minimal".equals(game.getProcessingJavaScriptMode())){
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			String bucket = env.getProperty("s3.bucket");
+
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+			s3.copyObject(bucket, key1, bucket, "games/" + game.getGameName() + "/p5/index.html");
+			s3.setObjectAcl(bucket, "games/" + game.getGameName() + "/p5/index.html", CannedAccessControlList.PublicRead);
+		}
+
+
+
+		//else if("StaticVoidGames".equals(game.getLibGdxHtmlMode())){
+
+		StringBuilder svgStringBuilder = new StringBuilder();
+
+		svgStringBuilder.append("<!doctype html>\n");
+		svgStringBuilder.append("<html>\n");
+
+		svgStringBuilder.append("<head>");
+
+		svgStringBuilder.append("<title>");
+		svgStringBuilder.append(game.getTitle());
+		svgStringBuilder.append("</title>\n");
+
+
+		svgStringBuilder.append("<link href=\"http://StaticVoidGames.com/css/general.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+		svgStringBuilder.append("<link href=\"http://StaticVoidGames.com/css/everyPage.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+
+
+		svgStringBuilder.append("<link href=\"styles.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+
+		svgStringBuilder.append("<script src=\"processing.js\" type=\"text/javascript\"></script>\n");
+		svgStringBuilder.append("<script type=\"text/javascript\">function getProcessingSketchId () { return '" + game.getProcessingSketchName() + "'; }</script>\n"); 
+
+		if(game.getFaviconUrl() == null){
+			svgStringBuilder.append("<link rel=\"shortcut icon\" href=\"http://s3.staticvoidgames.com/images/favicon.png\" />\n");
+		}
+		else{
+			svgStringBuilder.append("<link rel=\"shortcut icon\" href=\"../" + game.getFaviconUrl() + "\" />\n");
+		}
+
+		svgStringBuilder.append("</head>\n");
+
+		if(game.getBackgroundUrl() == null){
+			svgStringBuilder.append("<body style=\"background:black\">\n");
+		}
+		else{
+			svgStringBuilder.append("<body style=\"background-size:auto; background-image:url(../" + game.getBackgroundUrl() + ");\">\n");
+		}
+
+
+		svgStringBuilder.append("<div id=\"topBar\">\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com\"><img id=\"siteLogo\" src=\"http://s3.staticvoidgames.com/images/StaticVoidGamesLogo3.png\" /></a>\n");
+		svgStringBuilder.append("<div id=\"topBarText\"><br/>\n");
+		svgStringBuilder.append("<div id=\"navButtons\">\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/games\">Play</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/tutorials\">Tutorials</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/games/new\">Upload</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/about\">About</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/blog\">Blog</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/irc\">IRC</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/JarMatey\">JarMatey</a>\n");
+		svgStringBuilder.append("<a href=\"http://StaticVoidGames.com/events\">Events</a>\n");
+		svgStringBuilder.append("</div>\n");//end navButtons
+		svgStringBuilder.append("</div>\n"); //end topBarText
+		svgStringBuilder.append("<a href=\"http://www.facebook.com/StaticVoidGames\" target=\"_blank\"><img style=\"height:50px; float:right\" src=\"http://s3.StaticVoidGames.com/images/FacebookLogo.png\" /></a>\n");
+		svgStringBuilder.append("<a href=\"https://twitter.com/StaticVoidGames\" target=\"_blank\"><img style=\"height:50px; float:right\" src=\"http://s3.StaticVoidGames.com/images/TwitterBird.png\" /></a>\n");
+
+		svgStringBuilder.append("</div>\n"); //end topBar
+
+		svgStringBuilder.append("<hr />\n");
+
+
+		svgStringBuilder.append("<div align=\"center\"><h1><a href=\"http://StaticVoidGames.com/games/"+ game.getGameName() + "\">" + game.getTitle() + "</a></h1></div>\n");
+
+
+		svgStringBuilder.append("<div align=\"center\"><canvas style=\"border:thin solid white;\" id=\"" + game.getProcessingSketchName() + "\" data-processing-sources=\"" + game.getProcessingSketchName() + ".pde\"></canvas></div>\n");
+
+
+		svgStringBuilder.append("<div class=\"darkBackground centered\">\n");
+		svgStringBuilder.append(game.getProcessingJavaScriptText());
+		svgStringBuilder.append("</div>\n");
+
+		svgStringBuilder.append("<hr />\n");
+
+		svgStringBuilder.append("<div class=\"darkBackground centered\">\n");
+
+		svgStringBuilder.append("<div>\n");
+		svgStringBuilder.append("<p>This is a game by <a href=\"http://StaticVoidGames.com/members/" + game.getMember() + "\">" + game.getMember() + "</a>.</p>\n");
+		svgStringBuilder.append("</div>\n");
+
+
+		if(game.getJarFileUrl() != null){
+			svgStringBuilder.append("<div>\n");
+			svgStringBuilder.append("<p>You can play this game offline by downloading the jar from <a href=\"../" + game.getJarFileUrl() + "\">here</a>.</p>");
+			svgStringBuilder.append("</div>\n");
+		}
+
+		if(game.isAndroid()){
+			if(game.getApkUrl() != null){
+				svgStringBuilder.append("<div>\n");
+				svgStringBuilder.append("<p>You can play this game on Android by downloading the APK from <a href=\"../" + game.getApkUrl() + "\">here</a>.</p>");
+				svgStringBuilder.append("</div>\n");
+			}
+
+			if(game.getAndroidText() != null){
+				svgStringBuilder.append("<div>\n");
+				svgStringBuilder.append(PageDownUtils.getSanitizedHtml(game.getAndroidText()));
+				svgStringBuilder.append("</div>\n");
+			}
+		}
+
+		svgStringBuilder.append("</div>\n");
+
+
+		svgStringBuilder.append("</body>\n");
+
+		svgStringBuilder.append("</html>");
+
+		String key2 = "games/" + game.getGameName() + "/p5/play.html";
+		boolean success2 = uploadTextAsFile(key2, svgStringBuilder.toString());
+
+		if(success2 && "StaticVoidGames".equals(game.getProcessingJavaScriptMode())){
+			String awsAccessKey = env.getProperty("aws.accessKey");
+			String awsSecretKey = env.getProperty("aws.secretKey");
+			String bucket = env.getProperty("s3.bucket");
+
+			AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+
+			s3.copyObject(bucket, key2, bucket, "games/" + game.getGameName() + "/p5/index.html");
+			s3.setObjectAcl(bucket, "games/" + game.getGameName() + "/p5/index.html", CannedAccessControlList.PublicRead);
+		}
+	}
+
 
 
 	private boolean uploadTextAsFile(String key, String contents){

@@ -25,6 +25,10 @@
 <h2 style="color:red">${loginError}</h2>
 <c:if test="${not empty param.error}">
 	<c:choose>
+		<c:when test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message eq 'Cannot pass null or empty values to constructor'}">
+			<h3 style="color:red">Please reset your password.</h3>
+			<p>We increased the security of the site since you last logged in, so please reset your password <a href="<c:url value="/forgotPassword" />">here</a>.</p>
+		</c:when>
 		<c:when test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message eq 'Bad credentials'}">
 			<h3 style="color:red">Incorrect username or password.</h3>
 			<p>For security reasons, if you haven't logged in since July 2014, please reset your password <a href="<c:url value="/forgotPassword" />">here</a>.</p>
@@ -34,6 +38,7 @@
 		</c:when>
 		<c:otherwise>
 			<h3 style="color:red">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</h3>
+			<p>For security reasons, if you haven't logged in since July 2014, please reset your password <a href="<c:url value="/forgotPassword" />">here</a>.</p>
 		</c:otherwise>
 	</c:choose>
 	

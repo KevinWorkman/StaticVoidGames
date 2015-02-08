@@ -16,7 +16,7 @@
 	<%@ include file="tutorialsNavigation.jsp" %>
 <div id="contentPane">
 
-	<div class="thinGrayBorder darkBackground textPadding">
+	<div class="thinGrayBorder darkBackground textPadding centered topMargin">
 		<p>Have a question about this tutorial? Come talk about it on <a target="_blank" href="http://forum.staticvoidgames.com/">the forum</a>!</p>
 	</div>
 

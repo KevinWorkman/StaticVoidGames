@@ -169,6 +169,16 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("libGdxHtmlLink", s3Endpoint + "/games/" + game + "/gdx/index.html");
 		}
 		
+		if(gameObj.isShowProcessingJavaScript()){
+			isPlayable = true;
+			model.addAttribute("processingJavaScriptLink", s3Endpoint + "/games/" + game + "/p5/index.html");
+		}
+		
+		if(gameObj.isShowJavaScript()){
+			isPlayable = true;
+			model.addAttribute("pureJavaScriptLink", s3Endpoint + "/games/" + game + "/js/" + gameObj.getJavaScriptIndex());
+		}
+		
 		model.addAttribute("isPlayable", isPlayable);
 		
 		if(gameObj.getThumbnailUrl() != null){
@@ -192,6 +202,9 @@ public class GameController implements GameControllerInterface{
 			else{
 				model.addAttribute("faviconImage", s3Endpoint + "/games/" + gameObj.getGameName() + "/" +  gameObj.getFaviconUrl());
 			}
+		}
+		else{
+			model.addAttribute("faviconImage", "http://StaticVoidGames.com/images/favicon.png");
 		}
 		
 		if(gameObj.getBackgroundUrl() != null){

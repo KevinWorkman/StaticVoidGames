@@ -13,70 +13,47 @@
 
 	<div id="contentPane">
 	
-		<div class="darkBackground lightText thinGrayBorder textPadding" style="float:left; width:300px; height:600px; overflow:hidden;">
+		<div class="darkBackground lightText thinGrayBorder textPadding topMargin">
+		
+			<h1>Thanks for visiting Static Void Games.</h1>
+		
+		
+			<p>Static Void Games offers a couple things:</p>
+			
+		    <ul>
+			
+			<li><h2>Tutorials</h2>
+				<ul>
+					<li>Don't know anything about code? Good! Try our <a href="<c:url value="/tutorials/hourOfCode/index" />">Hour of Code</a> and learn the basics of programming (and code your own Pong game) in an hour!</li>
+					<li><a href="<c:url value="/tutorials/basicConcepts/index" />">Processing tutorials</a>: go from knowing nothing about programming to being able to program your own games!</li>
+					<li><a href="<c:url value="/tutorials/basicJava/index" />">Java tutorials</a>: we have basic Java tutorials that show you how to make simple games and <a href="<c:url value="/tutorials/swing/index" />">Swing tutorials</a> that show you how to make GUI games.
+				</ul>
+			</li>
+			<li><h2>Free Hosting</h2>
+				<ul>
+					<li>Free hosting for Processing, Processing.js, Java, and JavaScript games.</li>
+					<li>Use our easy <a href="<c:url value="/games/new" />">uploader</a> to create a website for your game, without worrying about html.</li>
+				</ul>				
+			</li>
+			<li><h2>Open-Source Games</h2>
+				<ul>
+					<li>Want to play some indie games and help support up-and-coming developers?</li>
+					<li><a href="<c:url value="/games" />">Play</a> some games and drop the developers a comment!</li>
+					<li>Static Void Games is entirely open source: visit us on <a href="https://github.com/KevinWorkman/StaticVoidGames">GitHub!</a></li>
+				</ul>
+			</li>
+			
+			</ul>
+		</div>
+
+	
+	
+	<div class="darkBackground thinGrayBorder textPadding topMargin centeredBlock centered">
 			<p>Here's what's been going on lately:</p>
 			<hr/>
 			<c:forEach items="${events}" var="event">
 				<p><a href="<c:url value="${event.getRelativeUrl() }"/>">${event.getEventText()}</a></p>
 			</c:forEach>
-		</div>
-
-		<div style="margin-left:400px;">
-	
-	
-	<div class="darkBackground thinGrayBorder textPadding topMargin" style="height:600px;">
-		
-			<h1>Welcome to Static Void Games!</h1>
-		
-			<p>Who is this site for?</p>
-			<p>I'm building this site with the following people in mind:</p>
-			
-		    <ul>
-			
-			<li>Game Jammers:
-				<ul>
-					<li>
-						You don't have time to worry about hosting and deployment.
-					</li>
-					<li>
-						Use our easy <a href="<c:url value="/games/new" />">uploader</a> to get applet, webstart, and runnable jar versions of your game on a customizable webpage!
-					</li>
-					<li>
-						Specify your own ad code and keep 100% of the revenue your game generates!
-					</li>
-				</ul>
-			 
-			</li>
-			<li>
-				Students:
-				<ul>
-					<li>
-						Have you started learning Processing or Java and want to learn more about game development?
-					</li>
-					<li>
-						Check out our growing list of <a href="<c:url value="/tutorials" />">tutorials</a> and the source code to real games here!
-					</li>
-					
-				</ul>				
-			</li>
-			<li>
-				Players:
-				<ul>
-				
-					<li>
-						Want to play some indie games and help support up-and-coming developers?
-					</li>
-					
-					<li >
-						<a href="<c:url value="/games" />">Play</a> some games and drop the developers a comment!
-					</li>
-				
-				</ul>
-				
-			</li>
-			
-			</ul>
-			
 		</div>
 		
 
@@ -84,11 +61,11 @@
 		<div class="lightBackground darkText centeredBlock thinGrayBorder textPadding topMargin">
 			<h2>Kevin's latest blog: ${latestBlog.getTitle()}</h2>
 			<hr/>
-			${latestBlog.getParsedText().substring(0, latestBlog.getParsedText().indexOf(".") +1)}
+			${latestBlog.getParsedText()}
 			
 			<hr/>
 			
-			<p>Read more <a href="<c:url value="/blog/${latestBlog.getUrlName()}" />">here</a>.</p>
+			<p>Comment <a href="<c:url value="/blog/${latestBlog.getUrlName()}" />">here</a>.</p>
 			
 		</div>
 	

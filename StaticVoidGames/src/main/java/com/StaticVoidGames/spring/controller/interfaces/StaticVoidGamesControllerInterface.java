@@ -21,6 +21,9 @@ public interface StaticVoidGamesControllerInterface {
 	
 	@RequestMapping(value = "/login")
 	public String login(ModelMap model, HttpSession session);
+	
+	@RequestMapping(value = "/forumLogin")
+	public String forumLogin(ModelMap model, HttpSession session, @RequestParam("sso") String sso, @RequestParam("sig") String sig);
 
 	@RequestMapping(value = "/logout-success", method = RequestMethod.GET)
 	public String logout(ModelMap model, HttpSession session);
