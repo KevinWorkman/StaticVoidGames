@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Games - Static Void Games</title>
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans' >
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans&effect=3d' >
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/general.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/everyPage.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/game.css"/>">
@@ -13,32 +13,36 @@
 
 <%@ include file="../include/analytics.jsp"%>
 <%@ include file="../include/navigation.jsp" %>
-<div id="contentPane">
+<div id="gameListPane">
 
-	<div class="darkBackground centeredBlock centered textPadding topMargin" style="border:thin solid gray;">
+	<div class="darkBackground centeredBlock centered textPadding topMargin font-effect-3d" style="border:thin solid gray; font-size: 32px;" >
 	<h1>All Games</h1>
-	<p>This page needs some work, maybe with more information about each game or some kind of search system?</p>
-	<p>For now, here is every (published) game on the site:</p>
 	</div>
 	
-	<div style="text-align:center;">
 	<c:forEach items="${games}" var="game">
-		<a href="<c:url value="/games/${game.getGameName()}" />">
-			<div class="smallGameLink">
-			
-				<img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" />
-			
-				<div class="smallGameLinkText">
-					${game.getTitle()}
-					<hr/>
-					${game.getShortDescription()}
-					
+		
+		<div class="smallGameLink">
+			<%-- Links both the title and description with a link to the game. --%>
+			<a href="<c:url value="/games/${game.getGameName()}" />">
+				
+				<div style="float:left;">
+					<%-- Image of game --%>
+					<div><img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" /></div>
+					by ${game.getMember()}
 				</div>
-			</div>
-		</a>
+				
+				<div style="padding:15px;">
+					<div style="font-size:28px;">${game.getTitle()}</div>
+					
+					<c:choose>
+					<c:when test="${game.shortDescription == null || game.shortDescription.isEmpty() || game.shortDescription == \"null\"}"></c:when>
+					<c:otherwise>${game.getShortDescription()}</c:otherwise>
+					</c:choose>
+				</div>
+			</a>
+		</div>
 		
 	</c:forEach>
-	</div>
 	
 			<%@ include file="../include/advertisement.jsp" %>
    			<%@ include file="../include/openSource.jsp" %>
