@@ -143,7 +143,7 @@ public class Comment implements TimestampedEvent{
 	public String getRelativeUrl() {
 		
 		if("GameComment".equals(type)){
-			return "/games/ " + thingCommentedOn;
+			return "/games/" + thingCommentedOn;
 		}
 		else if("BlogComment".equals(type)){
 			return "/blog/" + thingCommentedOn;

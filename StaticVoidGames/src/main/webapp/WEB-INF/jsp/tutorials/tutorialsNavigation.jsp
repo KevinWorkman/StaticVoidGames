@@ -114,6 +114,16 @@
 				
 			</ul>
 		</li>
+		
+		
+		<li><a class="chapterTitle ${'contributed' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/contributed/index" />">Contributed</a>
+			<ul class="${'objects' eq chapter ? 'show' : 'noShow'}">
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-3-0-tutorial-setting-the-library-up-and-reminding-you-to-upgrade-your-drivers-part-0/34">Lwjgl 3.0: Setting the library up (Part 0)</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-3-0-tutorial-modern-opengl-part-1/32">Lwjgl 3.0: modern Opengl, part 1</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-2/35">LWJGL: modern Opengl, part 2</a></li>
+			</ul>
+		</li>
+		
 
 	</ul>
 

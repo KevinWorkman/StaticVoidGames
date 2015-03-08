@@ -504,7 +504,6 @@ public class Game implements TimestampedEvent{
 		gf.setAdText(adText);
 		gf.setAndroid(android);
 		gf.setAndroidText(androidText);
-		gf.setApkUrl(apkUrl);
 		gf.setAppletClass(appletClass);
 		gf.setAppletDescription(appletDescription);
 		gf.setAppletHeight(appletHeight);

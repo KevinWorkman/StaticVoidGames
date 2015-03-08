@@ -52,7 +52,7 @@ public class GameForm {
 
 	private String sourcePermissionsText;
 
-	private String apkUrl;
+	private MultipartFile apkFile;
 	private String androidText;
 	private Boolean android;
 	
@@ -288,12 +288,12 @@ public class GameForm {
 		this.sourcePermissionsText = sourcePermissionsText;
 	}
 
-	public String getApkUrl() {
-		return apkUrl;
+	public MultipartFile getApkFile() {
+		return apkFile;
 	}
 
-	public void setApkUrl(String apkUrl) {
-		this.apkUrl = apkUrl;
+	public void setApkFile(MultipartFile apkFile) {
+		this.apkFile = apkFile;
 	}
 
 	public String getAndroidText() {

@@ -146,6 +146,8 @@ public class GameController implements GameControllerInterface{
 			model.addAttribute("isAndroid", true);
 			model.addAttribute("androidText", gameObj.getEscapedAndroidText());
 			
+			System.out.println("APK url: " + gameObj.getApkUrl());
+			
 			if(gameObj.getApkUrl() != null){
 				model.addAttribute("hasApk", true);
 			

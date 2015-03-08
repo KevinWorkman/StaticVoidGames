@@ -217,6 +217,12 @@ public class EditGameController implements EditGameControllerInterface{
 
 		boolean redoLibGdxHtml = false;
 		boolean redoProcessingJavaScript = false;
+		
+		
+		String awsAccessKey = env.getProperty("aws.accessKey");
+		String awsSecretKey = env.getProperty("aws.secretKey");
+		String bucket = env.getProperty("s3.bucket");
+		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
 
 
 		//TODO: probably a smarter way to do this?
@@ -305,10 +311,27 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setSourcePermissionsText(gameForm.getSourcePermissionsText());
 		}
 
-		if(gameForm.getApkUrl() != null && !gameForm.getApkUrl().equals(gameObj.getApkUrl())){
-			gameObj.setApkUrl(gameForm.getApkUrl());
+		if(gameForm.getApkFile() != null && !gameForm.getApkFile().isEmpty()){
+			
+			String key = "games/" + game + "/" + gameForm.getApkFile().getOriginalFilename();
+
+			ObjectMetadata meta = new ObjectMetadata();
+			meta.setContentLength(gameForm.getApkFile().getSize());
+
+			try{
+				s3.putObject(bucket, key, gameForm.getApkFile().getInputStream(), meta);
+				s3.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+				gameObj.setApkUrl(gameForm.getApkFile().getOriginalFilename());
+			}
+			catch(Exception e){
+				//TODO: let the user know something went wrong
+				e.printStackTrace();
+			}
+
 			redoLibGdxHtml = true;
 			redoProcessingJavaScript = true;
+		
+			
 		}
 
 		if(gameForm.getAndroidText() != null && !gameForm.getAndroidText().equals(gameObj.getAndroidText())){
@@ -361,10 +384,7 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setJavaScriptIndex(gameForm.getJavaScriptIndex());
 		}
 
-		String awsAccessKey = env.getProperty("aws.accessKey");
-		String awsSecretKey = env.getProperty("aws.secretKey");
-		String bucket = env.getProperty("s3.bucket");
-		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(awsAccessKey, awsSecretKey));
+		
 
 		if(gameForm.getJarFile() != null && !gameForm.getJarFile().isEmpty()){
 
