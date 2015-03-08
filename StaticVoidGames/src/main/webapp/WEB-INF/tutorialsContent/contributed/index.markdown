@@ -2,7 +2,7 @@
 
 This section contains tutorials written by members of Static Void Games.
 
-This is still in the experimental, so I'm still figuring out the best way to organize all this. I want to make it easy, fun, and rewarding for other people to write tutorials, but I don't know the best way to do that. Any suggestions are definitely appreciated!
+This is still experimental, so I'm still figuring out the best way to organize all this. I want to make it easy, fun, and rewarding for other people to write tutorials, but I don't know the best way to do that. Any suggestions are definitely appreciated!
 
 If you want to write your own tutorial, or if you have a question or a suggestion, post to [the forum](http://forum.staticvoidgames.com/c/tutorials)!
 
