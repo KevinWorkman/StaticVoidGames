@@ -100,7 +100,7 @@
 		</li>
 		
 		<li><a class="chapterTitle ${'deployment' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/index" />">Deployment</a>
-			<ul class="${'objects' eq chapter ? 'show' : 'noShow'}">
+			<ul class="${'deployment' eq chapter ? 'show' : 'noShow'}">
 				<li><a class="sectionTitle ${'history' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/history" />">A Brief History</a></li>
 				<li><a class="sectionTitle ${'javaSecuritySettings' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/deployment/javaSecuritySettings" />">Java Security Settings</a></li>
 			
@@ -115,12 +115,23 @@
 			</ul>
 		</li>
 		
+		<li><a class="chapterTitle ${'howTo' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/howTo/twitterBot" />">How to...</a>
+			<ul class="${'howTo' eq chapter ? 'show' : 'noShow'}">
+				<li><a class="sectionTitle ${'twitterBot' eq section ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/howTo/twitterBot" />">Make a Twitter Bot</a></li>
+			</ul>
+		</li>
+		
 		
 		<li><a class="chapterTitle ${'contributed' eq chapter ? 'current' : 'notCurrent'}" href="<c:url value="/tutorials/contributed/index" />">Contributed</a>
 			<ul class="${'objects' eq chapter ? 'show' : 'noShow'}">
 				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-3-0-tutorial-setting-the-library-up-and-reminding-you-to-upgrade-your-drivers-part-0/34">Lwjgl 3.0: Setting the library up (Part 0)</a></li>
 				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-3-0-tutorial-modern-opengl-part-1/32">Lwjgl 3.0: modern Opengl, part 1</a></li>
 				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-2/35">LWJGL: modern Opengl, part 2</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-3/41">LWJGL: modern Opengl, part 3</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-4/42">LWJGL: modern Opengl, part 4</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-5/43">LWJGL: modern Opengl, part 5</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-modern-opengl-part-6/44">LWJGL: modern Opengl, part 6</a></li>
+				<li><a class="sectionTitle notCurrent" href="http://forum.staticvoidgames.com/t/lwjgl-tutorial-part-7-vector-and-matrix-math/47">LWJGL part 7: Vector and Matrix Math</a></li>
 			</ul>
 		</li>
 		

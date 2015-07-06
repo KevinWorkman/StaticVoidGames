@@ -13,4 +13,5 @@ public interface GameDao {
 	public List<Game> getAllPublishedGames();
 	public List<GameExecutable> getGameExecutables(String game);
 	public List<String> getGameLibFiles(String game);
+	public List<Game> getRecentGames(int count);
 }

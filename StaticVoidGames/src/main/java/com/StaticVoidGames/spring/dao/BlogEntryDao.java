@@ -16,4 +16,5 @@ public interface BlogEntryDao {
 	public List<BlogEntry> getBlogsOfMember(String member);
 	public void updateBlogEntry(BlogEntry blog);
 	public boolean doesBlogEntryExist(String url);
+	public BlogEntry getNewestBlogByMember(String member);
 }

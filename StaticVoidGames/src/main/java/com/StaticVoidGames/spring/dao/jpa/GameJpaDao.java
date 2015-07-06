@@ -116,4 +116,17 @@ public class GameJpaDao implements GameDao{
 		return libFiles;
 
 	}
+
+	@Override
+	public List<Game> getRecentGames(int count) {
+
+		List<Game> games = (List<Game>) sessionFactory.getCurrentSession().createCriteria(Game.class)
+				.add( Restrictions.eq("published", true))
+				.addOrder(Order.desc("timestamp"))
+				.setMaxResults(count)
+				.list();
+
+		return games;
+	
+	}
 }

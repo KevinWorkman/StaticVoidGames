@@ -695,7 +695,7 @@ public class EditGameController implements EditGameControllerInterface{
 			redoLibGdxHtml(gameObj);
 		}
 
-		if(gameObj.isShowProcessingJavaScript() && redoProcessingJavaScript){
+		if(redoProcessingJavaScript){
 			redoProcessingJavaScript(gameObj);
 		}
 
@@ -1000,7 +1000,7 @@ public class EditGameController implements EditGameControllerInterface{
 
 
 		svgStringBuilder.append("<div class=\"darkBackground centered\">\n");
-		svgStringBuilder.append(game.getProcessingJavaScriptText());
+		svgStringBuilder.append(PageDownUtils.getSanitizedHtml(game.getProcessingJavaScriptText()));
 		svgStringBuilder.append("</div>\n");
 
 		svgStringBuilder.append("<hr />\n");

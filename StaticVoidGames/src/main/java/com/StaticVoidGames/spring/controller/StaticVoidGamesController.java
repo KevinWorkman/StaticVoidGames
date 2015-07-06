@@ -27,6 +27,7 @@ import com.StaticVoidGames.members.Member;
 import com.StaticVoidGames.members.MemberPointsView;
 import com.StaticVoidGames.spring.controller.interfaces.StaticVoidGamesControllerInterface;
 import com.StaticVoidGames.spring.dao.BlogEntryDao;
+import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.ActivationEmailSender;
@@ -51,22 +52,33 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private GameDao gameDao;
+	
 
 	@Override
 	@Transactional
 	public String viewHomePage(HttpServletRequest request, ModelMap model, HttpSession session){
-
+		
 		model.addAttribute("events", notificationsDao.getEvents(15));
-		model.addAttribute("latestBlog", blogDao.getBlogsOfMember("Kevin").get(0));
+		
+		model.addAttribute("latestBlog", blogDao.getNewestBlogByMember("Kevin"));
+		
+		model.addAttribute("recentGames", gameDao.getRecentGames(6));
 
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
 				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/index.jsp"),
 				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
-		}
-				);
-
-		return "index";
+		});
+		
+		return "bs";
+		
+//		if("bootstrap".equals(request.getParameter("view"))){
+//			return "bs";
+//		}
+//
+//		return "index";
 	}
 
 	@Override

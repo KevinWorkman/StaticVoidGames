@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,8 +97,18 @@ public class BlogEntryJpaDao implements BlogEntryDao{
 	public boolean doesBlogEntryExist(String url) {
 		BlogEntry blog = (BlogEntry) sessionFactory.getCurrentSession().createCriteria(BlogEntry.class)
 				.add( Restrictions.idEq(url) ).uniqueResult();
-
+		
 		return blog != null;
+	}
+
+	@Override
+	public BlogEntry getNewestBlogByMember(String member) {
+		return (BlogEntry) sessionFactory.getCurrentSession().createCriteria(BlogEntry.class)
+				.add(Restrictions.eq("member", member))
+				.addOrder(Order.desc("timestamp"))
+				.setMaxResults(1)
+				.uniqueResult();
+	
 	}
 
 }
