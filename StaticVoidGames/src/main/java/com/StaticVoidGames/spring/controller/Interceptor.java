@@ -77,7 +77,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
-
+		
 		request.setAttribute("backgroundImage", backgroundImageUrls.get((int) (Math.random()* backgroundImageUrls.size())));
 
 		return true;
@@ -86,6 +86,9 @@ public class Interceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView){
 
+		if(request.getRequestURL().toString().endsWith("/points")){
+			return;
+		}
 		if(request.getRequestURL().toString().endsWith("/notifications")){
 			return;
 		}
@@ -114,6 +117,15 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		}
 		
 		if(request.getRequestURL().toString().contains("/resetPassword")){
+			return;
+		}
+		if(request.getRequestURL().toString().endsWith("/todo")){
+			return;
+		}
+		if(request.getRequestURL().toString().endsWith("/stats")){
+			return;
+		}
+		if(request.getRequestURL().toString().endsWith("/thumbnail")){
 			return;
 		}
 

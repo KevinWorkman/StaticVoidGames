@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -27,6 +29,19 @@ public interface MemberControllerInterface {
 	@Transactional
 	@RequestMapping(value = "/{member}/edit", method = RequestMethod.POST)
 	public String editMemberSubmit(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member, @RequestParam("profilePicture") MultipartFile profilePicture, @RequestParam("email") String email, @RequestParam("tag") String tag,  @RequestParam("description") String description,  @RequestParam(required=false, value="includeInLocalDatabase") Boolean includeInLocalDatabase);
+	
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value = "/{member}/points", method = RequestMethod.GET)
+	public  String memberPoints(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member);
+		
+	@Transactional
+	@RequestMapping(value = "/{member}/stats", method = RequestMethod.GET)
+	public @ResponseBody String memberStats(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member);
+	
+	@Transactional
+	@RequestMapping(value = "/{member}/todo", method = RequestMethod.GET)
+	public @ResponseBody String memberToDo(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member);
 	
 	@Transactional
 	@RequestMapping(value = "/{member}/edit", method = RequestMethod.GET)

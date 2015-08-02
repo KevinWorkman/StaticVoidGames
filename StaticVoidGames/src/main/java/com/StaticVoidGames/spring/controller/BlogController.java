@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.StaticVoidGames.blog.BlogEntry;
 import com.StaticVoidGames.blog.BlogView;
@@ -101,6 +102,11 @@ public class BlogController implements BlogControllerInterface{
 		String s3Endpoint =  env.getProperty("s3.endpoint");
 		
 		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
+		
+		if(blog == null){
+			return "redirect:"+"/blog/";
+		}
+		
 		model.addAttribute("blog", blog);
 		
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
@@ -169,7 +175,12 @@ public class BlogController implements BlogControllerInterface{
 	
 	@Transactional
 	@RequestMapping(value="/new", method = RequestMethod.GET)
-    public String newBlogEntry(ModelMap model){	
+    public String newBlogEntry(ModelMap model,  HttpSession session){	
+		
+		String loggedInMember = (String) session.getAttribute(AttributeNames.loggedInUser);
+		if(loggedInMember == null){
+			return "login";
+		}
 		
 		
 		model.addAttribute("openSourceLinks", 
@@ -215,4 +226,26 @@ public class BlogController implements BlogControllerInterface{
 	public static String getFullUrl(BlogEntry blog){
 		return "/blog/"+ blog.getUrlName();
 	}	
+	
+	//TODO: should probably just store this in the databse
+	@Transactional
+	@RequestMapping(value="/{blogUrlId}/thumbnail", method = RequestMethod.GET)
+    public @ResponseBody String getBlogThumbnail(HttpServletRequest request, ModelMap model, @PathVariable(value="blogUrlId") String blogUrlId, HttpSession session){
+		
+		
+		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
+		String text = blog.getParsedText();
+		if(text.contains("src=")){
+			
+			//cut off everything before src="
+			text = text.substring(text.indexOf("src=") + 5);
+			
+			//cut off everything after "
+			text = text.substring(0, text.indexOf("\""));
+			
+			return text;
+		}
+		
+		return null;
+	}
 }

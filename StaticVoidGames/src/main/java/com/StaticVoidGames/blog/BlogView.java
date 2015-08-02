@@ -26,6 +26,10 @@ public class BlogView {
 		return blog;
 	}
 	
+	public Member getMember(){
+		return member;
+	}
+	
 	public String getFormattedDate(){
 		DateFormat df = new SimpleDateFormat("MMMM dd, YYYY");
 		return df.format(new Date(blog.getTimestamp()));

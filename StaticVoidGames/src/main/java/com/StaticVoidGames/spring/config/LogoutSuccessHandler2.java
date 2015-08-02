@@ -25,6 +25,7 @@ public class LogoutSuccessHandler2 extends SimpleUrlLogoutSuccessHandler{
 		
 		request.getSession().setAttribute(AttributeNames.isLoggedIn, false);
 		request.getSession().removeAttribute(AttributeNames.loggedInUser);	
+		request.getSession().removeAttribute("points");
 		
 		
 		String url = "/";

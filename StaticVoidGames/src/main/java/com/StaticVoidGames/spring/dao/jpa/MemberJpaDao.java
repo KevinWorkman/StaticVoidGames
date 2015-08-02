@@ -47,30 +47,80 @@ public class MemberJpaDao implements MemberDao{
 		sessionFactory.getCurrentSession().saveOrUpdate(member);
 	}
 
+	@Override
+	public int getCommentCount(String member){
+		Number memberComments = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
+				.add( Restrictions.eq("commentingMember", member))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberComments.intValue();
+	}
+	
+	@Override
+	public int getBlogCommentCount(String member) {
+		Number memberComments = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
+				.add( Restrictions.eq("commentingMember", member))
+				.add(Restrictions.eq("type", "BlogComment"))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberComments.intValue();
+	}
+
+	@Override
+	public int getAccountCommentCount(String member) {
+		Number memberComments = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
+				.add( Restrictions.eq("commentingMember", member))
+				.add(Restrictions.eq("type", "AccountComment"))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberComments.intValue();
+	}
+	
+	@Override
+	public int getGameCommentCount(String member) {
+		Number memberComments = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
+				.add( Restrictions.eq("commentingMember", member))
+				.add(Restrictions.eq("type", "GameComment"))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberComments.intValue();
+	}
+	
+	@Override
+	public int getGameCount(String member){
+		Number memberGames = (Number) sessionFactory.getCurrentSession().createCriteria(Game.class)
+				.add( Restrictions.eq("member", member))
+				.add(Restrictions.eq("published", true))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberGames.intValue();
+	}
+	
+	@Override
+	public int getBlogCount(String member){
+		Number memberBlogs = (Number) sessionFactory.getCurrentSession().createCriteria(BlogEntry.class)
+				.add( Restrictions.eq("member", member))
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
+		
+		return memberBlogs.intValue();
+	}
+	
 	/**
 	 * Experimental.
 	 */
 	@Override
 	public int getPoints(String member) {
 		
-		Number memberComments = (Number) sessionFactory.getCurrentSession().createCriteria(Comment.class)
-		.add( Restrictions.eq("commentingMember", member))
-		.setProjection(Projections.rowCount())
-				.uniqueResult();
+		int memberComments = getCommentCount(member);
+		int memberGames = getGameCount(member);
+		int memberBlogs = getBlogCount(member);
 		
-		Number memberGames = (Number) sessionFactory.getCurrentSession().createCriteria(Game.class)
-				.add( Restrictions.eq("member", member))
-				.setProjection(Projections.rowCount())
-				.uniqueResult();
-		
-		Number memberBlogs = (Number) sessionFactory.getCurrentSession().createCriteria(BlogEntry.class)
-				.add( Restrictions.eq("member", member))
-				.setProjection(Projections.rowCount())
-				.uniqueResult();
-	
-		return memberComments.intValue() + memberGames.intValue() + memberBlogs.intValue();
+		return memberComments*10 + memberGames*100 + memberBlogs*20;
 	}
-
-	
-
 }

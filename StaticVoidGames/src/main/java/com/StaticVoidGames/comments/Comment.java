@@ -35,7 +35,7 @@ public class Comment implements TimestampedEvent{
 	
 	/**
 	 * The type of thing that was commented on.
-	 * Either Game, BlogEntry, or Member.
+	 * Either GameComment, BlogComment, or AccountComment.
 	 * TODO: This is only necessary in the off chance that somebody does something like create a blog with the same name as a game. We could eliminate this if we just ensured that couldn't happen.
 	 */
 	private String type;

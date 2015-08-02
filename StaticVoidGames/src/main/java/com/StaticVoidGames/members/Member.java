@@ -53,7 +53,7 @@ public class Member implements TimestampedEvent{
 	
 	/**
 	 * This was meant to be the person who referred this member to StaticVoidGames, but it was never really implemented.
-	 * TODO: do something with this? Could be interesting is points or achievements are implemented.
+	 * TODO: do something with this? Could be interesting if points or achievements are implemented.
 	 */
 	private String referrer;
 	
@@ -68,6 +68,9 @@ public class Member implements TimestampedEvent{
 	private boolean activated = false;
 	private String activationId;
 	
+	private int points = 0;
+	private int notificationCount = 0;
+	
 	/**
 	 * @deprecated the old-style password hash.
 	 */
@@ -77,6 +80,7 @@ public class Member implements TimestampedEvent{
 	 * @deprecated The user's alternate website. This will be deleted, as people can just put it in their description.
 	 */
 	private String website;
+	
 	
 	
 	/**
@@ -236,6 +240,26 @@ public class Member implements TimestampedEvent{
 
 	public String getBcryptHash() {
 		return bcryptHash;
+	}
+
+
+	public int getPoints() {
+		return points;
+	}
+
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+
+	public int getNotificationCount() {
+		return notificationCount;
+	}
+
+
+	public void setNotificationCount(int notificationCount) {
+		this.notificationCount = notificationCount;
 	}
 }
 

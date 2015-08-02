@@ -143,7 +143,8 @@ public class NotificationsJpaDao implements NotificationsDao{
 
 	
 	@Override
-	public Collection<TimestampedEvent> getEvents(int count) {
+	//synchronizing this is a horrible hack. This needs to be refactored to not be the worst.
+	public synchronized Collection<TimestampedEvent> getEvents(int count) {
 		
 		//TODO only PUBLISHED events??
 		

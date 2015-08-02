@@ -2,7 +2,7 @@
  
 <nav class="navbar navbar-inverse navbar-fixed-top" style="height:50px; min-width:720px; overflow:hidden;">
 	<div>
-		<a class="logo" href="#"><img style="height:50px; vertical-align:top;" src="http://staticvoidgames.com/images/StaticVoidGamesLogo3.png"/></a>
+		<a class="logo" href="<c:url value="/" />"><img alt="Static Void Games" style="height:50px; vertical-align:top;" src="<c:url value="/images/StaticVoidGamesLogo3.png" />"/></a>
        
         
         <div style="display:inline-block; vertical-align:top;">
@@ -11,22 +11,37 @@
 	        
 				<c:choose>
 				<c:when test="${isLoggedIn}">
-					Hello, <a href="<c:url value="/members/${loggedInUser}" />">${loggedInUser}</a>!
+					<a href="<c:url value="/members/${loggedInUser}" />">${loggedInUser}</a>
+					
+					<span id="pointsSpan" style="">[${points}]</span>
+					<script>
+					function updateMyPoints() {
+						$.ajax({url: "<c:url value="/members/${loggedInUser}/points" />", success: function(result){
+								$("#pointsSpan").html("[" + result + "]");
+								setTimeout(updateMyPoints, 5000);
+					    }});
+					}
+					updateMyPoints();
+					
+					</script>
+					
+					
 					<a id="notificationsLink" style="float:right;" href="<c:url value="/notifications" />">Notifications</a>
 					<script>
 					function updateNotifications() {
 						$.ajax({url: "<c:url value="/ajaxNotificationCount" />", success: function(result){
-								console.log("result: " + result);
 								if(result > 0){
 									$("#notificationsLink").html("Notifications <span style=\"display:inline-block; color:red;\">(" + result + ")</span>");
 								}
 								else{
 									$("#notificationsLink").html("Notifications");
 								}
+								setTimeout(updateNotifications, 5000);
 					    }});
+						
 					}
 					updateNotifications();
-					setInterval(updateNotifications, 5000);
+					
 					</script>
 				</c:when>
 				<c:otherwise>
