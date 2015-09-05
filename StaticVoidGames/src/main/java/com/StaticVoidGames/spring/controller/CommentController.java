@@ -117,10 +117,11 @@ public class CommentController implements CommentControllerInterface{
 			valid = false;
 		}
 
+		//TODO: delete subscription if no more comments?
 		if(valid){
 			commentDao.deleteComment(comment);
 		}
-
+		
 		return "redirect:" + redirect;
 	}
 
@@ -134,13 +135,16 @@ public class CommentController implements CommentControllerInterface{
 			Comment comment = new Comment(commentDao.getNextId(), loggedInMember, thingCommentedOn, commentInput, type);
 			commentDao.addComment(comment);
 		}
+		
+		String redirect = "redirect:/";
 
 
 		//TODO check if thingCommentedOn is valid?
 
 		if("AccountComment".equals(type)){
 			notificationDao.updateMemberSubscription(loggedInMember, thingCommentedOn, "Account", "Comments on " + thingCommentedOn);
-			return "redirect:/members/" + thingCommentedOn;
+			
+			redirect = "redirect:/members/" + thingCommentedOn;
 		}
 		else if("BlogComment".equals(type)){
 			
@@ -150,15 +154,15 @@ public class CommentController implements CommentControllerInterface{
 			
 			notificationDao.updateMemberSubscription(loggedInMember, thingCommentedOn, "Blog", "Comments on " + blog.getTitle());
 		
-			return "redirect:/blog/" + thingCommentedOn;
+			redirect = "redirect:/blog/" + thingCommentedOn;
 		}
 		else if("GameComment".equals(type)){
 			
 			notificationDao.updateMemberSubscription(loggedInMember, thingCommentedOn, "Game", "Comments on " + thingCommentedOn);
 			
-			return "redirect:/games/" + thingCommentedOn;
+			redirect = "redirect:/games/" + thingCommentedOn;
 		}
-
-		return "redirect:/";
+		
+		return redirect;
 	}
 }

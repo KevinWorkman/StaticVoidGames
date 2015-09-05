@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -128,6 +129,9 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		if(request.getRequestURL().toString().endsWith("/thumbnail")){
 			return;
 		}
+		if(request.getRequestURL().toString().endsWith("/myNotificationCount")){
+			return;
+		}
 
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 
@@ -139,7 +143,14 @@ public class Interceptor extends HandlerInterceptorAdapter{
 			request.getSession().setAttribute(AttributeNames.lastPageVisited, request.getRequestURL().toString());
 		}
 
-		System.out.println(loggedInMember + " visited " +  request.getRequestURL().toString());
 		request.setAttribute(AttributeNames.s3Endpoint, env.getProperty("s3.endpoint"));
+		
+		
+		Logger.getRootLogger().info(loggedInMember + " visited " +  request.getRequestURL().toString());
+		
+		double totalMemory = Runtime.getRuntime().totalMemory();
+		double usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
+		int memoryPercentage = (int)(100*usedMemory/totalMemory);
+		Logger.getRootLogger().info(memoryPercentage+ "% " + (int)usedMemory + " / " + (int)totalMemory);
 	}
 }

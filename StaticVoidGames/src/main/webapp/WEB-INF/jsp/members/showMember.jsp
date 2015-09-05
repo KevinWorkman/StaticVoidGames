@@ -21,33 +21,14 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
+	<script>var baseUrl = '<c:url value="/"/>';</script>
+	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
+	<script>$(updateAllPoints);</script>
 	
 	<script>
-	
-	var baseUrl = '<c:url value="/"/>';
 	var viewedMember = '${member.getMemberName()}';
 	
-	function updateAllPoints(){
-		
-		function updatePoints(index){
-			if(index >= $( ".points" ).length){
-				return;
-			}
-			else{
-				var element = $( ".points" ).eq(index);
-				var member = element.attr("class").split(' ')[1];
-				
-				$.ajax({url: baseUrl+"members/" + member + "/points", success: function(result){
-					if(result){
-						element.html("[" + result + "]");
-					}
-					updatePoints(index+1);
-	    		}});
-			}
-		}
-		
-		updatePoints(0);
-		
+	function updateStatsAndToDo(){
 		
 		$.ajax({url: baseUrl+"members/" + viewedMember + "/stats", success: function(result){
 			var obj = $.parseJSON(result);
@@ -63,7 +44,6 @@
 			$("#memberStats").append("</ul>");
 			
 		}});
-		
 		
 		<c:if test="${isOwner}">
 			$.ajax({url: baseUrl+"members/" + viewedMember + "/todo", success: function(result){
@@ -85,7 +65,7 @@
 		
 		}
 	
-	$(updateAllPoints);
+	$(updateStatsAndToDo);
 	</script>
 	
 	<style>
@@ -135,10 +115,8 @@
 	
 	
 	<div class="panel panel-default" style="margin-top:25px;">
-			<div class="panel-heading"><img src="${profilePicture}" style="width:200px" /><h1 style="display:inline-block">${member.getMemberName()}</h1></div>
-		
+		<div class="panel-heading"><img src="${profilePicture}" style="width:200px" /><h1 style="display:inline-block">${member.getMemberName()}</h1></div>
 		<div class="panel-body">${member.getParsedDescription()}</div>
-		
 	</div>
 	
 	<div class="panel panel-default">

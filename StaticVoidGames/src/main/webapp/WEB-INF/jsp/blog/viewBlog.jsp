@@ -28,35 +28,9 @@
 	</style>
 	
 
-	<script>
-	
-	var baseUrl = '<c:url value="/"/>';
-	
-	function updateAllPoints(){
-		
-		function updatePoints(index){
-			if(index >= $( ".points" ).length){
-				return;
-			}
-			else{
-				
-				var element = $( ".points" ).eq(index);
-				var member = element.attr("class").split(' ')[1];
-				
-				$.ajax({url: baseUrl+"members/" + member + "/points", success: function(result){
-					if(result){
-						element.html("[" + result + "]");
-					}
-					updatePoints(index+1);
-	    		}});
-			}
-		}
-		
-		updatePoints(0);
-		}
-	
-	$(updateAllPoints);
-	</script>
+	<script>var baseUrl = '<c:url value="/"/>';</script>
+	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
+	<script>$(updateAllPoints);</script>
 	
 </head>
 

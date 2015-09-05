@@ -72,13 +72,7 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/StaticVoidGamesController.java")
 		});
 		
-		return "bs";
-		
-//		if("bootstrap".equals(request.getParameter("view"))){
-//			return "bs";
-//		}
-//
-//		return "index";
+		return "index";
 	}
 
 	@Override

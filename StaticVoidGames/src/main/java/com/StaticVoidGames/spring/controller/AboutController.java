@@ -32,6 +32,8 @@ public class AboutController implements AboutControllerInterface{
 
 	@Override
 	public String viewAboutPage(ModelMap map,  @PathVariable(value="page") String page) {
+		
+		long start = System.currentTimeMillis();
 		map.addAttribute("page", page);
 		
 		map.addAttribute("openSourceLinks", 
@@ -55,6 +57,8 @@ public class AboutController implements AboutControllerInterface{
 			map.addAttribute("aboutText", "Could not find that about page.");
 		}
 		
+		long elapsed = System.currentTimeMillis() - start;
+		System.out.println("Elapsed: " + elapsed);
 		
 		
 

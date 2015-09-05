@@ -388,7 +388,7 @@ public class MemberController implements MemberControllerInterface{
 			}
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			//probably just means the user has never logged into the forum, no big deal
 		}
 
 		int totalPoints = likesGiven*1 + likesReceived*2 + replies*5 + topics*10;
