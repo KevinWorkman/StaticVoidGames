@@ -28,7 +28,7 @@
 					
 					<p><a href="<c:url value="/members/${eventView.getMember().getMemberName()}" />">${eventView.getMember().getMemberName()}</a></p>
 					<hr/>
-					<p>${eventView.getMember().getParsedTag()}</p>
+					<p>${eventView.getMember().getTag()}</p>
 			
 				</div>
 				

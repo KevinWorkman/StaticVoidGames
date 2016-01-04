@@ -3,21 +3,59 @@
 <head>
 	<title>JarMatey - Static Void Games</title>
 	
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans' >
-		<link rel="stylesheet" type="text/css" href="<c:url value="/css/about.css"/>">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/css/general.css"/>">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/css/everyPage.css"/>">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/bs.css"/>">
+
 	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
+	
+	<style>
+		.list-group-item{
+			padding: 0px;
+		}
+		
+		ul {
+			list-style-position: inside;
+			padding-left:0;
+		}
+		
+		h3{
+			font-size: 20px;
+		}
+	</style>
+	
 
 </head>
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
 <%@ include file="../include/analytics.jsp"%>
-	<%@ include file="../include/navigation.jsp"%>
-	<%@ include file="JarMateyNavigation.jsp" %>
-<div id="contentPane">
-	<div class="aboutDiv lightBackground darkText textPadding topMargin">
-		${text}
-	</div>
+	<%@ include file="../include/navigation3.jsp" %>
+	
+<div class="container" style="margin-top:10px;">
+
+
+		<div class="col-xs-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">JarMatey</div>
+				<div class="panel-body">
+					<%@ include file="JarMateyNavigation.jsp" %>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xs-10" >
+			<div class="panel panel-default">
+				<div class="panel-heading">JarMatey</div>
+		
+				<div class="panel-body markdown" >${markdown}</div>
+			</div>
+		</div>
+	
     <%@ include file="../include/advertisement.jsp" %>
     <%@ include file="../include/openSource.jsp" %>
 </div>

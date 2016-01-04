@@ -46,7 +46,6 @@
 		$(setTutorialNavigationTitle);
 	</script>
 	
-	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
 </head>
 
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">

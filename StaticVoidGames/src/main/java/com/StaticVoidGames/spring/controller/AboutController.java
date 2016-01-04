@@ -48,9 +48,24 @@ public class AboutController implements AboutControllerInterface{
 			File file = new File( servletContext.getRealPath("/WEB-INF/aboutContent/" + page + ".markdown") );
 
 			String markdown = FileUtils.readFileToString(file);
-			String html = PageDownUtils.getSanitizedHtml(markdown);
 
-			map.addAttribute("aboutText", html);
+			map.addAttribute("aboutMarkdown", markdown);
+			
+			if("index".equals(page)){
+				map.addAttribute("aboutTitle", "What is Static Void Games?");
+			}
+			else if("contact".equals(page)){
+				map.addAttribute("aboutTitle", "Don't be a stranger!");
+			}
+			else if("faq".equals(page)){
+				map.addAttribute("aboutTitle", "Frequently Asked Questions");
+			}
+			else if("legal".equals(page)){
+				map.addAttribute("aboutTitle", "Your games are your games.");
+			}
+			else if("openSource".equals(page)){
+				map.addAttribute("aboutTitle", "Open Source");
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();

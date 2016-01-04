@@ -13,12 +13,13 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/bs.css"/>">
     
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/pageDown.css"/>">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js" />"></script>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
 	
 	<style>
 		.profilePic{
@@ -59,7 +60,7 @@
 			<p>Author: <a href="<c:url value="/members/${blog.getMember()}" />">${blog.getMember()}</a> <span class="points ${blog.getMember()}">[]</span></p>
 		</div>
 	
-		<div class="panel-body">${blog.getParsedText()}</div>
+		<div class="panel-body markdown">${blog.getText()}</div>
 	</div>
 	</div>
 	
@@ -85,9 +86,7 @@
 						
 	    			
   				</div>
-  				<div class="panel-body">
-  					${commentView.getComment().getParsedComment()}
-  				</div>
+  				<div class="panel-body markdown">${commentView.getComment().getComment()}</div>
 			</div>
 		</div>
 	</c:forEach>

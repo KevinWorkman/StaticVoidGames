@@ -121,6 +121,9 @@ public class Member implements TimestampedEvent{
 	}
 
 	public String getTag() {
+		if(tag == null){
+			return "";
+		}
 		return tag;
 	}
 
@@ -131,25 +134,7 @@ public class Member implements TimestampedEvent{
 	public String getDescription() {
 		return description;
 	}
-	
-	public String getParsedDescription(){
 		
-		if(description == null){
-			return "This user has not entered a description yet.";
-		}
-		
-		return PageDownUtils.getSanitizedHtml(description);
-	}
-	
-	public String getParsedTag(){
-		
-		if(tag == null){
-			return "Static Void Gamer";
-		}
-		
-		return PageDownUtils.getSanitizedHtml(tag);
-	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}

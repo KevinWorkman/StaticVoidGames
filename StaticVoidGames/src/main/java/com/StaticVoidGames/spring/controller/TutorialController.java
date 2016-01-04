@@ -52,8 +52,7 @@ public class TutorialController implements TutorialControllerInterface {
 		try{
 			File file = new File( servletContext.getRealPath("/WEB-INF/tutorialsContent/" + category + "/" + tutorial + ".markdown") );
 			String markdown = FileUtils.readFileToString(file);
-			String html = PageDownUtils.getSanitizedHtml(markdown);
-			model.addAttribute("tutorialText", html);
+			model.addAttribute("tutorialMarkdown", markdown);
 		}
 		catch(Exception e){
 			e.printStackTrace();

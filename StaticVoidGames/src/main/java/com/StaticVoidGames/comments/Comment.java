@@ -121,13 +121,6 @@ public class Comment implements TimestampedEvent{
 	}
 	
 	/**
-	 * Returns the HTML for this comment by parsing its markdown.
-	 */
-	public String getParsedComment(){
-		return PageDownUtils.getSanitizedHtml(comment);
-	}
-
-	/**
 	 * Returns: MEMBER commented on THING
 	 * TODO: Return the title of the thing commented on?
 	 */

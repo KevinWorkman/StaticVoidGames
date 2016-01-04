@@ -17,6 +17,9 @@
 	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
 	
 <style>
 
@@ -111,9 +114,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3>Kevin's latest blog: ${latestBlog.getTitle()}</h3></div>
-			<div class="panel-body">
-           		${latestBlog.getParsedText()}
-          </div>
+			<div class="panel-body markdown">${latestBlog.getText()}</div>
           <div class="panel-footer">Comment on this blog <a href="<c:url value="/blog/${latestBlog.getUrlName()}" />">here</a>.</div>
       	</div>
       	

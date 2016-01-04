@@ -11,14 +11,21 @@
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/pageDown.css"/>">
 	
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js"/>"></script>
+
 	
 	<link rel="shortcut icon" href="<c:url value="${faviconImage}"/>" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>var baseUrl = '<c:url value="/"/>';</script>
+	
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
+	
+	
+	<script>var baseUrl = '<c:url value="/"/>';
+	console.log("baseUrl: " + baseUrl);
+	</script>
 	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
 	<script>$(updateAllPoints);</script>
 	
@@ -54,7 +61,7 @@
 		<div class="panel-heading"><h1>${game.getTitle()}</h1></div>
 		<div class="panel-body">
 			<img style="width:100px" src="${thumbnailImage}"/>
-			<p>${game.getShortDescription()}</p>
+			<p class="markdown">${game.getShortDescription()}</p>
 			<p>This is a game by <a href="<c:url value="/members/${game.getMember()}" />">${game.getMember()}</a>.</p>
 		</div>
 	</div>
@@ -93,7 +100,7 @@
 				<c:if test="${hasApk}">
 					<h3>Download the APK <a href="${apkUrl}">here</a>.</h3>
 				</c:if>
-				${androidText}
+				<div class="markdown">${androidText}</div>
 			</div>
 		</div>
 		</c:if>
@@ -113,7 +120,7 @@
 				<div class="panel-heading"><h4>Executables</h4></div>
 				<div class="panel-body">
 					<c:forEach items="${gameExecutables}" var="gameExecutable">
-						<p><a href="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getLabel()}</a></p>
+						<p><a class="markdown" href="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getLabel()}</a></p>
 					</c:forEach>
 				</div>
 			</div>
@@ -127,20 +134,16 @@
 			<div class="panel-heading"><h4>Open Source</h4></div>
 			<div class="panel-body">
 				<h5>Download the source <a href="<c:url value="${sourceUrl}"/>">here</a>.</h5>
-					${sourceText}
+				<div class="markdown">${sourceMarkdown}</div>
 			</div>
 		</div>
 	</c:if>
 	
 
-
-
 	<div class="panel panel-default">
 	<div class="panel-heading"><h4>About</h4></div>
-	<div class="panel-body">${game.getEscapedDescription()}</div>
+	<div class="panel-body markdown">${gameDescriptionMarkdown}</div>
 	</div>
-
-
 
 	<c:forEach items="${commentViews}" var="commentView">
 		<div class="col-xs-12">
@@ -158,18 +161,12 @@
 								<span style="border:thin solid red; float:right;margin-right:100px;"><a href="<c:url value="/delete/comment/${commentView.getComment().getId()}"/>">Delete</a></span>
 							</c:when>
 						</c:choose>
-						
-	    			
   				</div>
-  				<div class="panel-body">
-  					${commentView.getComment().getParsedComment()}
-  				</div>
+  				<div class="panel-body markdown">${commentView.getComment().getComment()}</div>
 			</div>
 		</div>
 	</c:forEach>
-
-
-
+	
 	<div class="col-xs-12">
 		<c:choose>
 		<c:when test="${isLoggedIn}">
@@ -209,14 +206,8 @@
 		</c:choose>
 	</div>
 
-
-
-	
-
 			<%@ include file="../include/advertisement.jsp" %>
    			<%@ include file="../include/openSource.jsp" %>
-
 	</div>
-	
 </body>
 </html>

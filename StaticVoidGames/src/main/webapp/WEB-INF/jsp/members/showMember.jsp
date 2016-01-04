@@ -13,13 +13,15 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/bs.css"/>">
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/pageDown.css"/>">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
 	
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
 	<script>var baseUrl = '<c:url value="/"/>';</script>
 	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
@@ -116,7 +118,7 @@
 	
 	<div class="panel panel-default" style="margin-top:25px;">
 		<div class="panel-heading"><img src="${profilePicture}" style="width:200px" /><h1 style="display:inline-block">${member.getMemberName()}</h1></div>
-		<div class="panel-body">${member.getParsedDescription()}</div>
+		<div class="panel-body markdown">${member.getDescription()}</div>
 	</div>
 	
 	<div class="panel panel-default">
@@ -217,8 +219,8 @@
 						
 	    			
   				</div>
-  				<div class="panel-body">
-  					${commentView.getComment().getParsedComment()}
+  				<div class="panel-body markdown">
+  					${commentView.getComment().getComment()}
   				</div>
 			</div>
 		</div>

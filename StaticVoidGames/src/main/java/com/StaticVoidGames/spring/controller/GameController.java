@@ -88,6 +88,7 @@ public class GameController implements GameControllerInterface{
 		
 		model.addAttribute("isOwner", gameObj.getMember().equals(loggedInMember));
 		model.addAttribute("game", gameObj);
+		model.addAttribute("gameDescriptionMarkdown", gameObj.getGameDescription());
 		
 		boolean isPlayable = false;
 		
@@ -133,7 +134,7 @@ public class GameController implements GameControllerInterface{
 				model.addAttribute("sourceUrl", "http://s3.staticvoidgames.com/games/" + gameObj.getGameName() + "/" +  gameObj.getSourceZipUrl());
 			}
 		
-			model.addAttribute("sourceText", gameObj.getEscapedSourcePermissionsText());
+			model.addAttribute("sourceMarkdown", gameObj.getSourcePermissionsText());
 		}
 		else{
 			model.addAttribute("isOpenSource", false);
@@ -144,7 +145,7 @@ public class GameController implements GameControllerInterface{
 			isPlayable = true;
 			
 			model.addAttribute("isAndroid", true);
-			model.addAttribute("androidText", gameObj.getEscapedAndroidText());
+			model.addAttribute("androidText", gameObj.getAndroidText());
 			
 			System.out.println("APK url: " + gameObj.getApkUrl());
 			

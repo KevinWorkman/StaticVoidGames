@@ -113,6 +113,7 @@
 		<h2><a class="list-group-item chapterTitle ${'howTo' eq chapter ? 'list-group-item-success' : 'list-group-item-default'}" href="<c:url value="/tutorials/howTo/twitterBot" />">How to...</a></h2>
 			<ul>
 				<li><a class="list-group-item sectionTitle ${'twitterBot' eq section ? 'list-group-item-success' : 'list-group-item-default'}" href="<c:url value="/tutorials/howTo/twitterBot" />">Make a Twitter Bot</a></li>
+				<li><a class="list-group-item sectionTitle ${'clock' eq section ? 'list-group-item-success' : 'list-group-item-default'}" href="<c:url value="/tutorials/howTo/clock" />">Build a Clock</a></li>
 			</ul>
 		
 		

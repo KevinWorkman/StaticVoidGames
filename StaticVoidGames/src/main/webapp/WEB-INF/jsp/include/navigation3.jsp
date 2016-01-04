@@ -16,6 +16,9 @@
 					<span id="pointsSpan" style="">[${points}]</span>
 					<script>
 					function updateMyPoints() {
+						
+						console.log("u: " + "<c:url value="/members/${loggedInUser}/points" />");
+						
 						$.ajax({url: "<c:url value="/members/${loggedInUser}/points" />", success: function(result){
 								$("#pointsSpan").html("[" + result + "]");
 								setTimeout(updateMyPoints, 5000);
@@ -60,7 +63,7 @@
 			<div class="navigationBar" style="margin-top:5px;">
 				<a href="<c:url value="/games" />">Play</a>
 				<a href="<c:url value="/tutorials" />">Tutorials</a>
-				<a href="<c:url value="/upload" />">Upload</a>
+				<a href="<c:url value="/games/new" />">Upload</a>
 				<a href="<c:url value="/about" />">About</a>
 				<a href="<c:url value="/blog" />">Blog</a>
 				<a href="<c:url value="http://forum.StaticVoidGames.com" />">Forum</a>

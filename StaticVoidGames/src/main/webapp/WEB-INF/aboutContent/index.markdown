@@ -1,17 +1,25 @@
-I believe that programming is fun and can be fun for programmers of every skill level. I believe that independent developers don't have to be alone. I believe that writing code is just as much art as it is science and math. I believe that it should be easy to make your programs available to as many people as possible without worrying about deployment or web development. I believe that indie development has a lucrative future as more and more people are using independently developed applications on their mobile devices- a large portion of which run Java!
+###Static Void Games is a source of tutorials on game development and general programming.
 
-With these beliefs in mind, I started Static Void Games to help indie game developers, or people who want to become indie game developers, come together to learn from each other, show off their games, and hopefully improve indie development in some small way.
+- Check out [our tutorials](http://staticvoidgames.com/tutorials) to learn basic (and not-so basic!) game development, as well as other stuff like [how to make a Twitter bot](http://staticvoidgames.com/tutorials/howTo/twitterBot) or [how to build a clock](http://staticvoidgames.com/tutorialsContent/howTo/clock.markdown).
 
-We don't have the budgets of big game companies, so we spend a lot of time doing things that aren't actually programming- figuring out how to deploy a program, building a half-decent website, getting the word out.. all while trying to write code and create art!
+- You don't have to know anything about programming to get started. Consider starting with the [Hour of Code](http://staticvoidgames.com/tutorials/hourOfCode/index)!
 
-Let's face it- some of the best programmers are terrible web developers. This is part of why Java gets an undeserved bad reputation for things like game programming- too many games are embedded in a boring gray website because the programmer just didn't have time to do it all!
+###Static Void Games is a free host for Java, JavaScript, libGDX, and Processing games.
 
-I gave myself a goal of helping combat this problem, and I ~~made~~ make plenty of mistakes along the way trying to learn the best way to do things. But at the very least, Static Void Games gives you an easy way to upload your game and have a decent-looking website around it without worrying about the gory details.
-
-Static Void Games also has a growing list of tutorials designed to take you from knowing nothing about programming to developing your own games and applications. I'm hoping to continue expanding these tutorials as we go.
-
-I'm not a web developer at all, but hopefully this site will help make the lives of up-and-coming indie developers a little easier. Hopefully we can learn from each other, and this site will grow with us.
-
-Thanks for being here,
-
-Kevin
+ - Use our easy uploader to create a page for your game without worrying about web development.
+ 
+ - Support indie game dev by [playing games by other people](http://staticvoidgames.com/games). Leave a comment telling them what you liked about their game, or ideas on how to improve it!
+ 
+ - Start your own game blog to keep us up to date on what you're working on.
+ 
+ ###Static Void Games is a forum for talking about programming.
+ 
+ - Come say hi on the [Static Void Games forum](http://forum.staticvoidgames.com/)!
+ 
+ ###Static Void Games is open-source.
+ 
+ - The code for this website is [on GitHub](https://github.com/KevinWorkman/StaticVoidGames). Contributors welcome!
+ 
+ - Many of the games on this site are also open source. Check them out for "real life" code examples!
+ 
+ - No, this doesn't mean that your games have to be open source. Check out the [legal department](http://staticvoidgames.com/about/legal) for more info.
