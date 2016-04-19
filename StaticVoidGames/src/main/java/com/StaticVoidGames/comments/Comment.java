@@ -1,10 +1,12 @@
 package com.StaticVoidGames.comments;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
@@ -43,6 +45,7 @@ public class Comment implements TimestampedEvent{
 	/**
 	 * The text of the comment. This is in markdown.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String comment;
 	
 	/**
@@ -126,7 +129,7 @@ public class Comment implements TimestampedEvent{
 	 */
 	@Override
 	public String getEventText() {
-		return commentingMember + " commented on " + thingCommentedOn;
+		return HtmlEscaper.escape(commentingMember) + " commented on " + HtmlEscaper.escape(thingCommentedOn);
 	}
 
 	/**
@@ -136,13 +139,13 @@ public class Comment implements TimestampedEvent{
 	public String getRelativeUrl() {
 		
 		if("GameComment".equals(type)){
-			return "/games/" + thingCommentedOn;
+			return "/games/" + HtmlEscaper.escapeUrlPart(thingCommentedOn);
 		}
 		else if("BlogComment".equals(type)){
-			return "/blog/" + thingCommentedOn;
+			return "/blog/" + HtmlEscaper.escapeUrlPart(thingCommentedOn);
 		}
 		else if("AccountComment".equals(type)){
-			return "/members/" + thingCommentedOn;
+			return "/members/" + HtmlEscaper.escapeUrlPart(thingCommentedOn);
 		}
 		
 		//this shouldn't happen

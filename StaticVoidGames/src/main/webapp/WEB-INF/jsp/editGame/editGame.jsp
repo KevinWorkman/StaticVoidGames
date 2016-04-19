@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<title>Edit ${gameObj.getGameName()}</title>
+<title>Edit ${gameObj.getEscapedGameName()}</title>
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans' >
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/general.css"/>">
@@ -31,7 +31,7 @@
                 <c:choose>
                 	<c:when test="${formField.getType() == 'input'}">
                 		<div class="darkBackground textPadding centered topMargin thinGrayBorder">
-                			<h2>${formField.getLabel()}</h2>
+                		<h2>${formField.getLabel()}</h2>
                 		<p>${formField.getDescription()}</p>
                 		<form:input path="${formField.getCommand()}" />
                 		</div>
@@ -56,8 +56,6 @@
                     	<form:radiobutton path="${formField.getCommand()}" value="mine" />Link to the page I'm providing in dist/html/index.html
 						</p>
 
-                    	
-                    	
                     	</div>
                     </c:when>
                     <c:when test="${formField.getType() == 'textarea'}">
@@ -97,8 +95,6 @@
 		
 		    <%@ include file="../include/advertisement.jsp" %>
    			<%@ include file="../include/openSource.jsp" %>
-    
-    
 	</div>
 </body>
 </html>

@@ -19,9 +19,6 @@
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
-	
-	
 	
 	<script>var baseUrl = '<c:url value="/"/>';</script>
 	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
@@ -118,7 +115,7 @@
 	
 	<div class="panel panel-default" style="margin-top:25px;">
 		<div class="panel-heading"><img src="${profilePicture}" style="width:200px" /><h1 style="display:inline-block">${member.getMemberName()}</h1></div>
-		<div class="panel-body markdown">${member.getDescription()}</div>
+		<div class="panel-body">${member.getParsedDescription()}</div>
 	</div>
 	
 	<div class="panel panel-default">
@@ -219,8 +216,8 @@
 						
 	    			
   				</div>
-  				<div class="panel-body markdown">
-  					${commentView.getComment().getComment()}
+  				<div class="panel-body">
+  					${commentView.getParsedCommentText()}
   				</div>
 			</div>
 		</div>

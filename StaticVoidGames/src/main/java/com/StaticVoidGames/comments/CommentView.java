@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.StaticVoidGames.members.Member;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
+import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
  * This class encapsulates the information needed to show a member's profile thumbnail next to a comment.
@@ -33,10 +35,14 @@ public class CommentView {
 		return df.format(new Date(comment.getTimestamp()));
 	}
 	
+	public String getParsedCommentText(){
+		return PageDownUtils.getSanitizedHtml(comment.getComment());
+	}
+	
 	public String getMemberPictureUrl(){
 		if(member.getProfileImageUrl() == null){
 			return null;
 		}
-		return s3Endpoint + "/users/" + member.getMemberName() + "/" + member.getProfileImageUrl(); 
+		return s3Endpoint + "/users/" + HtmlEscaper.escapeUrlPart(member.getMemberName()) + "/" + HtmlEscaper.escapeUrlPart(member.getProfileImageUrl()); 
 	}
 }

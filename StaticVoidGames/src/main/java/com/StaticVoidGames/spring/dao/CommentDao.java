@@ -10,4 +10,5 @@ public interface CommentDao {
 	public Comment getComment(long id);
 	public void deleteComment(Comment comment);
 	public long getNextId();
+	public List<Comment> getAllComments();
 }

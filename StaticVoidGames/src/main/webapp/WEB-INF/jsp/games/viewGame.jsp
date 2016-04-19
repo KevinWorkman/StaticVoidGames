@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<title>${game.getTitle()} - Static Void Games</title>
+	<title>${game.getEscapedTitle()} - Static Void Games</title>
 		
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/cyborg/bootstrap.min.css">
@@ -11,8 +11,6 @@
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/pageDown.css"/>">
 	
-
-	
 	<link rel="shortcut icon" href="<c:url value="${faviconImage}"/>" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -20,11 +18,8 @@
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
-	
 	
 	<script>var baseUrl = '<c:url value="/"/>';
-	console.log("baseUrl: " + baseUrl);
 	</script>
 	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
 	<script>$(updateAllPoints);</script>
@@ -48,21 +43,18 @@
 		<div style="width:250px; margin-left:auto; margin-right:auto;">
 			<div class="panel panel-default" style="margin-top:25px;">
 				<div class="panel-heading">This is your game.</div>
-				<div class="panel-body"><a href="<c:url value="/games/${game.getGameName()}/edit/" />">Edit it here.</a></div>
+				<div class="panel-body"><a href="<c:url value="/games/${game.getUrlEscapedGameName()}/edit/" />">Edit it here.</a></div>
 			</div>
 		</div>
 		
 	</c:if>
 	
-	
-		
-	
 	<div class="panel panel-default text-center" style="width:500px; margin-left:auto; margin-right:auto; margin-top:25px;">
-		<div class="panel-heading"><h1>${game.getTitle()}</h1></div>
+		<div class="panel-heading"><h1>${game.getEscapedTitle()}</h1></div>
 		<div class="panel-body">
 			<img style="width:100px" src="${thumbnailImage}"/>
-			<p class="markdown">${game.getShortDescription()}</p>
-			<p>This is a game by <a href="<c:url value="/members/${game.getMember()}" />">${game.getMember()}</a>.</p>
+			<p>${game.getParsedShortDescription()}</p>
+			<p>This is a game by <a href="<c:url value="/members/${game.getUrlEscapedMember()}" />">${game.getEscapedMember()}</a>.</p>
 		</div>
 	</div>
 	
@@ -100,7 +92,7 @@
 				<c:if test="${hasApk}">
 					<h3>Download the APK <a href="${apkUrl}">here</a>.</h3>
 				</c:if>
-				<div class="markdown">${androidText}</div>
+				<div>${game.getParsedAndroidText()}</div>
 			</div>
 		</div>
 		</c:if>
@@ -120,21 +112,18 @@
 				<div class="panel-heading"><h4>Executables</h4></div>
 				<div class="panel-body">
 					<c:forEach items="${gameExecutables}" var="gameExecutable">
-						<p><a class="markdown" href="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getLabel()}</a></p>
+						<p><a href="<c:url value="${s3Endpoint}/games/${game.getUrlEscapedGameName()}/${gameExecutable.getUrl()}"/>" >${gameExecutable.getParsedLabel()}</a></p>
 					</c:forEach>
 				</div>
 			</div>
 		</c:if>
 		
-
-	
-
 	<c:if test="${isOpenSource}">
 		<div class="panel panel-default">
 			<div class="panel-heading"><h4>Open Source</h4></div>
 			<div class="panel-body">
 				<h5>Download the source <a href="<c:url value="${sourceUrl}"/>">here</a>.</h5>
-				<div class="markdown">${sourceMarkdown}</div>
+				<div>${game.getParsedSourceText()}</div>
 			</div>
 		</div>
 	</c:if>
@@ -142,16 +131,16 @@
 
 	<div class="panel panel-default">
 	<div class="panel-heading"><h4>About</h4></div>
-	<div class="panel-body markdown">${gameDescriptionMarkdown}</div>
+	<div class="panel-body">${game.getParsedDescription()}</div>
 	</div>
 
 	<c:forEach items="${commentViews}" var="commentView">
 		<div class="col-xs-12">
 			<div class="panel panel-default">
   				<div class="panel-heading">
-	    			<a href="<c:url value="/members/${commentView.getMember().getMemberName()}" />">
+	    			<a href="<c:url value="/members/${commentView.getMember().getUrlEscapedMemberName()}" />">
 	      				<img class="profilePic" src="<c:url value="${commentView.getMemberPictureUrl() != null ? commentView.getMemberPictureUrl() : '/images/defaultProfilePictures/profile1.jpg'}" />"/>
-	    				${commentView.getMember().getMemberName()}</a> <span class="points ${commentView.getMember().getMemberName()}">[]</span> - ${commentView.getFormattedDate()}
+	    				${commentView.getMember().getEscapedMemberName()}</a> <span class="points ${commentView.getMember().getUrlEscapedMemberName()}">[]</span> - ${commentView.getFormattedDate()}
 	    				<%-- TODO: this is stupid, but I can't figure out how to do this in one if statement. Should probably be on the server anyway? --%>
 						<c:choose>
 							<c:when test="${isOwner}">
@@ -162,7 +151,7 @@
 							</c:when>
 						</c:choose>
   				</div>
-  				<div class="panel-body markdown">${commentView.getComment().getComment()}</div>
+  				<div class="panel-body">${commentView.getParsedCommentText()}</div>
 			</div>
 		</div>
 	</c:forEach>
@@ -173,7 +162,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Leave a comment!</div>
 				<div class="panel-body">
-					<form action="<c:url value="/add/GameComment/${game.getGameName()}"/>" method="post">
+					<form action="<c:url value="/add/GameComment/${game.getUrlEscapedGameName()}"/>" method="post">
 			
 						<div class="wmd-panel">
 							<div id="wmd-button-bar"></div>

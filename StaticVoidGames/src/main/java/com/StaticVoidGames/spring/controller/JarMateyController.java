@@ -44,18 +44,14 @@ public class JarMateyController implements JarMateyControllerInterface{
 			File file = new File( servletContext.getRealPath("/WEB-INF/JarMateyContent/" + page + ".markdown") );
 
 			String markdown = FileUtils.readFileToString(file);
-
-			map.addAttribute("markdown", markdown);
+			String content = PageDownUtils.getSanitizedHtml(markdown);
+			map.addAttribute("content", content);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 			map.addAttribute("text", "Could not find that page.");
 		}
 		
-		
-		
-
 		return "JarMatey/viewPage";
 	}
-
 }

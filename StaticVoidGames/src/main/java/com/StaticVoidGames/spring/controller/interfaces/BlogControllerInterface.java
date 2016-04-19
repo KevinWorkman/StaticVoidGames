@@ -33,7 +33,7 @@ public interface BlogControllerInterface {
 
 	@Transactional
 	@RequestMapping(value="/{blogUrlId}/edit", method = RequestMethod.POST)
-    public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, HttpSession session, @RequestParam("text") String text);
+    public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, @PathVariable(value="blogUrlId") String blogUrlId, HttpSession session, @RequestParam("text") String text);
 
 	@Transactional
 	@RequestMapping(value="/new", method = RequestMethod.GET)

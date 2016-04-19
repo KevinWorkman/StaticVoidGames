@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.StaticVoidGames.members.Member;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 
 /**
  * Class used by Spring to keep track of the currently logged-in user.
@@ -58,9 +59,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String loggedInUser = user.getUsername();
+		String escapedLoggedInUser = HtmlEscaper.escape(loggedInUser);
+		String urlEscapedLoggedInUser = HtmlEscaper.escapeUrlPart(loggedInUser);
 
 		request.getSession().setAttribute(AttributeNames.isLoggedIn, true);
 		request.getSession().setAttribute(AttributeNames.loggedInUser, loggedInUser);
+		request.getSession().setAttribute(AttributeNames.escapedLoggedInUser, escapedLoggedInUser);
+		request.getSession().setAttribute(AttributeNames.urlEscapedLoggedInUser, urlEscapedLoggedInUser);
 
 		//redirect to the last page visited
 		//TODO: this acts weird if the user opens multiple tabs or hits the back button before logging in

@@ -181,7 +181,11 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Override
 	public String registerPost(HttpServletRequest request, ModelMap model, HttpSession session, String email, String username, String password) {
 
-
+		if(username.contains("/") || username.contains("\\")){
+			model.addAttribute("registrationError", "Usernames can't contain slashes.");
+			return register(model, session);
+		}
+		
 		Member m = memberDao.getMember(username);
 		
 		model.addAttribute("username", username);
@@ -218,17 +222,24 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 
 		m.setBcryptHash(bcryptHash);
 		
+		m.setActivated(!Boolean.parseBoolean(env.getProperty("activation.mail.required")));
+		
 		m.setActivationId(ActivationEmailSender.generateRandomKey(32));
 
 		memberDao.updateMember(m);
 		
 		notificationsDao.updateMemberSubscription(username, username, "Account", "Comments on your profile");
 		
-		ActivationEmailSender aes = new ActivationEmailSender(env);
-		aes.sendActivationEmail(m);
+		if(Boolean.parseBoolean(env.getProperty("activation.mail.required"))){
+			ActivationEmailSender aes = new ActivationEmailSender(env);
+			aes.sendActivationEmail(m);
 		
-		model.addAttribute("loginError", "Before you can login, you must activate your account by clicking the link in the activation email.");
-
+			model.addAttribute("loginError", "Before you can login, you must activate your account by clicking the link in the activation email.");
+		}
+		else{
+			model.addAttribute("loginError", "You can now login!");
+			
+		}
 		return "login";
 
 	}

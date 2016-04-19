@@ -33,6 +33,7 @@ import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.util.ActivationEmailSender;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 import com.StaticVoidGames.spring.util.OpenSourceLink;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -61,6 +62,9 @@ public class MemberController implements MemberControllerInterface{
 	@Override
 	public String showMember(ModelMap model, @PathVariable(value="member") String member, HttpSession session){
 
+		
+		System.out.println("Member: "  + member);
+		
 		Member m = memberDao.getMember(member);
 
 		if(m == null){
@@ -431,7 +435,8 @@ public class MemberController implements MemberControllerInterface{
 			}
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			//probably because the user has never logged into the forum, let's just ignore it
+			//e.printStackTrace();
 		}
 		
 		stats.append("likesGiven", likesGiven);
@@ -476,7 +481,8 @@ public class MemberController implements MemberControllerInterface{
 			}
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			//probably because the user has never logged into the forum, let's just ignore it
+			//e.printStackTrace();
 		}
 		
 		if(likesGiven == 0){

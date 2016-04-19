@@ -1,10 +1,16 @@
 package com.StaticVoidGames.blog;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+import org.springframework.web.util.HtmlUtils;
+
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 import com.StaticVoidGames.spring.util.PageDownUtils;
 
 @Entity
@@ -35,6 +41,7 @@ public class BlogEntry implements TimestampedEvent{
 	/**
 	 * The text of the blog. This should be in markup.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String text;
 	
 	/**
@@ -61,8 +68,33 @@ public class BlogEntry implements TimestampedEvent{
 	 * Empty constructor needed for Hibernate
 	 */
 	public BlogEntry(){}
+	
+	public String getEscapedTitle(){
+		return HtmlEscaper.escape(title);
+	}
+	
 
-
+	
+	public String getEscapedUrlName(){
+		return HtmlEscaper.escape(urlName);
+	}
+	
+	public String getUrlEscapedUrlName(){
+		return HtmlEscaper.escapeUrlPart(urlName);
+	}
+	
+	public String getEscapedMember(){
+		return HtmlEscaper.escape(member);
+	}
+	
+	public String getUrlEscapedMember(){
+		return HtmlEscaper.escapeUrlPart(member);
+	}
+	
+	public String getEscapedText(){
+		return HtmlEscaper.escape(text);
+	}
+	
 	public String getMember() {
 		return member;
 	}
@@ -108,7 +140,7 @@ public class BlogEntry implements TimestampedEvent{
 	 */
 	@Override
 	public String getEventText() {
-		return member + " wrote a blog: " + title;
+		return getEscapedMember() + " wrote a blog: " + getEscapedTitle();
 	}
 
 	/**
@@ -116,7 +148,7 @@ public class BlogEntry implements TimestampedEvent{
 	 */
 	@Override
 	public String getRelativeUrl() {
-		return "/blog/" + urlName;
+		return "/blog/" + getUrlEscapedUrlName();
 	}
 }
 

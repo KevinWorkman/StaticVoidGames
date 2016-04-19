@@ -25,12 +25,6 @@
 			font-size: 20px;
 		}
 	</style>
-	
-	
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
-	
 </head>
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
 
@@ -50,9 +44,9 @@
 		
 		<div class="col-xs-10" >
 			<div class="panel panel-default">
-				<div class="panel-heading">${aboutTitle}</div>
+				<div class="panel-heading"><c:out value="${aboutTitle}" /></div>
 		
-				<div class="panel-body markdown" >${aboutMarkdown}</div>
+				<div class="panel-body" >${aboutContent}</div>
 			</div>
 		</div>
 

@@ -8,7 +8,7 @@
 	
 		<c:choose>
 			<c:when test="${isLoggedIn}">
-				Hello, <a href="<c:url value="/members/${loggedInUser}" />">${loggedInUser}</a>! 
+				Hello, <a href="<c:url value="/members/${urlEscapedLoggedInUser}" />">${escapedLoggedInUser}</a>! 
 			</c:when>
 			<c:otherwise>
 					<a href="<c:url value="/login" />">Login</a>

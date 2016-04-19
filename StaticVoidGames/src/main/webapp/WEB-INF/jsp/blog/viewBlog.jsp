@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/baseUrl.jspf"%>
 <html>
 <head>
 
-<title>${blog.getTitle()} by ${blog.getMember() } - Static Void Games</title>
+<title>${blog.getEscapedTitle()} by ${blog.getEscapedMember() } - Static Void Games</title>
 <link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
 
   	<!-- Bootstrap core CSS -->
@@ -19,7 +20,6 @@
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/js/Markdown.Editor.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
 	
 	<style>
 		.profilePic{
@@ -28,7 +28,6 @@
 		}
 	</style>
 	
-
 	<script>var baseUrl = '<c:url value="/"/>';</script>
 	<script src="<c:url value="/js/PointsGetter.js"/>"></script>
 	<script>$(updateAllPoints);</script>
@@ -41,14 +40,12 @@
 
     <div class="container">
 
-	
-	
 	<c:if test="${isOwner}">
 		<div style="width:200px; margin-left:auto; margin-right:auto;">
 			<div class="panel panel-default" style="margin-top:25px;">
 				<div class="panel-heading">This is your blog post.</div>
 				<div class="panel-body">
-					<a href="<c:url value="/blog/${blog.getUrlName()}/edit/" />">Click here to edit it.</a>			
+					<a href="<c:url value="/blog/${blog.getUrlEscapedUrlName()}/edit/" />">Click here to edit it.</a>			
 				</div>
 			</div>
 		</div>
@@ -56,24 +53,22 @@
 	
 	<div class="col-xs-12" style="margin-top:25px;">
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2>${blog.getTitle()}</h2>
-			<p>Author: <a href="<c:url value="/members/${blog.getMember()}" />">${blog.getMember()}</a> <span class="points ${blog.getMember()}">[]</span></p>
+		<div class="panel-heading"><h2>${blog.getEscapedTitle()}</h2>
+			<p>Author: <a href="<c:url value="/members/${blog.getUrlEscapedMember()}" />">${blog.getEscapedMember()}</a> <span class="points ${blog.getUrlEscapedMember()}">[]</span></p>
 		</div>
 	
-		<div class="panel-body markdown">${blog.getText()}</div>
+		<div class="panel-body">${blogContent}</div>
 	</div>
 	</div>
 	
 
-	
-	
 	<c:forEach items="${commentViews}" var="commentView">
 		<div class="col-xs-12">
 			<div class="panel panel-default">
   				<div class="panel-heading">
-	    			<a href="<c:url value="/members/${commentView.getMember().getMemberName()}" />">
+	    			<a href="<c:url value="/members/${commentView.getMember().getEscapedMemberName()}" />">
 	      				<img class="profilePic" src="<c:url value="${commentView.getMemberPictureUrl() != null ? commentView.getMemberPictureUrl() : '/images/defaultProfilePictures/profile1.jpg'}" />"/>
-	    				${commentView.getMember().getMemberName()}</a> <span class="points ${commentView.getMember().getMemberName()}">[]</span> - ${commentView.getFormattedDate()}
+	    				${commentView.getMember().getEscapedMemberName()}</a> <span class="points ${commentView.getMember().getUrlEscapedMemberName()}">[]</span> - ${commentView.getFormattedDate()}
 	    				<%-- TODO: this is stupid, but I can't figure out how to do this in one if statement. Should probably be on the server anyway? --%>
 						<c:choose>
 							<c:when test="${isOwner}">
@@ -86,7 +81,7 @@
 						
 	    			
   				</div>
-  				<div class="panel-body markdown">${commentView.getComment().getComment()}</div>
+  				<div class="panel-body">${commentView.getParsedCommentText()}</div>
 			</div>
 		</div>
 	</c:forEach>
@@ -97,7 +92,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Leave a comment!</div>
 				<div class="panel-body">
-					<form action="<c:url value="/add/BlogComment/${blog.getUrlName()}"/>" method="post">
+					<form action="<c:url value="/add/BlogComment/${blog.getUrlEscapedUrlName()}"/>" method="post">
 			
 						<div class="wmd-panel">
 							<div id="wmd-button-bar"></div>

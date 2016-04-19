@@ -10,6 +10,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -42,7 +43,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/css/");
-		
+
 		//this gives us access to images inside the tutorialsContent directory
 		registry.addResourceHandler("/tutorialsContent/**").addResourceLocations("/WEB-INF/tutorialsContent/");
 		registry.addResourceHandler("/JarMateyContent/**").addResourceLocations("/WEB-INF/JarMateyContent/");
@@ -77,6 +78,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public MultipartResolver multipartResolver(){
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		return resolver;
+	}
+
+	/**
+	 * This allows us to use mappings like /members/email@gmail.com without Spring removing the .com part
+	 */
+	@Override
+	public void configurePathMatch(PathMatchConfigurer matcher) {
+		matcher.setUseRegisteredSuffixPatternMatch(true);
 	}
 }
 

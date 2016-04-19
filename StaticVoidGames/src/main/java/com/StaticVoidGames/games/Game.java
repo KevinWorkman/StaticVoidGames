@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 import com.StaticVoidGames.spring.util.PageDownUtils;
-
 
 @Entity
 @Table( name = "Games" )
@@ -78,6 +78,7 @@ public class Game implements TimestampedEvent{
 	 * This is the javascript code to display as the user-defined ad.
 	 * TODO: Have the user enter fill-in-the-blank style Google Adsense codes directly instead of supplying their own ad code?
 	 */
+	@Column(columnDefinition="long varchar")
 	private String adText;
 	
 	/**
@@ -95,6 +96,7 @@ public class Game implements TimestampedEvent{
 	/**
 	 * The text to display in the source link box. This is used to specify an open-source license.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String sourcePermissionsText;
 	
 	/**
@@ -105,6 +107,7 @@ public class Game implements TimestampedEvent{
 	/**
 	 * The text to display in the Android box. This probably contains a link to the Google Play store.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String androidText;
 	
 	/**
@@ -139,6 +142,7 @@ public class Game implements TimestampedEvent{
 	/**
 	 * Holds the text to display on the libGDX html page. Used for controls, etc. This is markdown.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String libGdxHtmlText;
 	
 	
@@ -158,6 +162,7 @@ public class Game implements TimestampedEvent{
 	/**
 	 * Holds the text to display on the Processing html page. Used for controls, etc. This is markdown.
 	 */
+	@Column(columnDefinition="long varchar")
 	private String processingJavaScriptText;
 	
 	private String processingSketchName;
@@ -229,7 +234,46 @@ public class Game implements TimestampedEvent{
 	 */
 	public Game(){}
 	
+	public String getEscapedGameName(){
+		return HtmlEscaper.escape(gameName);
+	}
 	
+	public String getUrlEscapedGameName(){
+		return HtmlEscaper.escapeUrlPart(gameName);
+	}
+	
+	
+	public String getEscapedTitle(){
+		return HtmlEscaper.escape(title);
+	}
+	
+	public String getUrlEscapedThumbnailUrl(){
+		return HtmlEscaper.escape(thumbnailUrl);
+	}
+	
+	public String getEscapedMember(){
+		return HtmlEscaper.escape(member);
+	}
+	
+	public String getUrlEscapedMember(){
+		return HtmlEscaper.escapeUrlPart(member);
+	}
+	
+	public String getParsedShortDescription(){
+		return PageDownUtils.getSanitizedHtml(shortDescription);
+	}
+	
+	public String getParsedAndroidText(){
+		return PageDownUtils.getSanitizedHtml(androidText);
+	}
+	
+	public String getParsedSourceText(){
+		return PageDownUtils.getSanitizedHtml(shortDescription);
+	}
+	
+	public String getParsedDescription(){
+		return PageDownUtils.getSanitizedHtml(gameDescription);
+	}
 
 	public boolean isLwjgl(){
 		return lwjgl;
@@ -528,12 +572,12 @@ public class Game implements TimestampedEvent{
 
 	@Override
 	public String getEventText() {
-		return member + " uploaded " + title;
+		return getEscapedMember() + " uploaded " + getEscapedTitle();
 	}
 
 	@Override
 	public String getRelativeUrl() {
-		return "/games/" + gameName;
+		return "/games/" + getUrlEscapedGameName();
 	}
 
 	public void setMember(String member) {

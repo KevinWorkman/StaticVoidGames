@@ -92,7 +92,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Have a question about this tutorial? Come talk about it on <a target="_blank" href="http://forum.staticvoidgames.com/">the forum</a>!</div>
 		
-			<div class="panel-body" id="tutorialText">${tutorialMarkdown}</div>
+			<div class="panel-body" id="tutorialText2">${tutorialHtml}</div>
 		</div>
 	</div>
 	

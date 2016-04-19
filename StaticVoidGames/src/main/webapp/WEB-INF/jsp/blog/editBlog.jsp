@@ -23,16 +23,16 @@
 
 <div id="contentPane">
 
-	<h1>Edit ${blog.getTitle()}</h1>
+	<h1>Edit <e:forHtml value="${blog.getTitle()}" />${blog.getEscapedTitle()}</h1>
 	
 	<div class="pagedownDiv" style="width:100%;">
-		<form action="<c:url value="/blog/${blog.getUrlName()}/edit/" />" method='POST'>
-			<input type='hidden' name='editedBlog' value='${blog.getUrlName()}' /> 
-			Title: <input style="width:100%;" type='text' name='title' value='${blog.getTitle()}' /> 
+		<form action="<c:url value="/blog/${blog.getUrlEscapedUrlName()}/edit/" />" method='POST'>
+			
+			Title: <input style="width:100%;" type='text' name='title' value='${blog.getEscapedTitle()}' /> 
 		
 			<div class="wmd-panel">
 				<div id="wmd-button-bar"></div>
-				<textarea class="wmd-input" id="wmd-input" name="text"  style="height:500px;">${blog.getText()}</textarea>
+				<textarea class="wmd-input" id="wmd-input" name="text"  style="height:500px;">${blog.getEscapedText()}</textarea>
 			</div>
 			<p>Preview:</p>
 			<div id="wmd-preview" class="wmd-panel wmd-preview"></div>

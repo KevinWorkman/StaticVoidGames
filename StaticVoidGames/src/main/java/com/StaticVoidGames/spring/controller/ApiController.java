@@ -49,9 +49,7 @@ public class ApiController implements ApiControllerInterface{
 	@ResponseBody
 	@RequestMapping(value = "/members/{member}/points", method = RequestMethod.GET)
 	public synchronized String memberPoints(HttpServletRequest request, ModelMap model, HttpSession session, @PathVariable("member") String member){
-		
-		System.out.println("in points getter");
-	
+			
 		try{
 			
 			int sitePoints = memberDao.getPoints(member);

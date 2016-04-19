@@ -11,10 +11,6 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/MarkdownParser.js"/>"></script>
-	
 	<style>
 		.list-group-item{
 			padding: 0px;
@@ -52,7 +48,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">JarMatey</div>
 		
-				<div class="panel-body markdown" >${markdown}</div>
+				<div class="panel-body" >${content}</div>
 			</div>
 		</div>
 	

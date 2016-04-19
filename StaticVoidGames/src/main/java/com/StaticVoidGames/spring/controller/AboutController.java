@@ -48,11 +48,13 @@ public class AboutController implements AboutControllerInterface{
 			File file = new File( servletContext.getRealPath("/WEB-INF/aboutContent/" + page + ".markdown") );
 
 			String markdown = FileUtils.readFileToString(file);
+			String html = PageDownUtils.getSanitizedHtml(markdown);
 
-			map.addAttribute("aboutMarkdown", markdown);
+			map.addAttribute("aboutContent", html);
 			
 			if("index".equals(page)){
-				map.addAttribute("aboutTitle", "What is Static Void Games?");
+				//map.addAttribute("aboutTitle", "What is Static Void Games?");
+				map.addAttribute("aboutTitle", "Test <abc>123</abc> test");
 			}
 			else if("contact".equals(page)){
 				map.addAttribute("aboutTitle", "Don't be a stranger!");

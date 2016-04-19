@@ -11,15 +11,13 @@
 	        
 				<c:choose>
 				<c:when test="${isLoggedIn}">
-					<a href="<c:url value="/members/${loggedInUser}" />">${loggedInUser}</a>
+					<a href="<c:url value="/members/${urlEscapedLoggedInUser}" />">${escapedLoggedInUser}</a>
 					
 					<span id="pointsSpan" style="">[${points}]</span>
 					<script>
 					function updateMyPoints() {
 						
-						console.log("u: " + "<c:url value="/members/${loggedInUser}/points" />");
-						
-						$.ajax({url: "<c:url value="/members/${loggedInUser}/points" />", success: function(result){
+						$.ajax({url: "<c:url value="/members/${urlEscapedLoggedInUser}/points" />", success: function(result){
 								$("#pointsSpan").html("[" + result + "]");
 								setTimeout(updateMyPoints, 5000);
 					    }});
@@ -52,12 +50,7 @@
 				</c:otherwise>
 			</c:choose>
 	        
-	        
-	        
 	        </div>
-	        
-	        
-	        
 	        
 			<hr style="margin-top:0px; margin-bottom:0px;"  />
 			<div class="navigationBar" style="margin-top:5px;">

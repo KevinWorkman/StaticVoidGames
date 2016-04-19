@@ -36,6 +36,6 @@ public class BlogView {
 	}
 	
 	public String getMemberPictureUrl(){
-		return s3Endpoint + "/users/" + member.getMemberName() + "/" + member.getProfileImageUrl(); 
+		return s3Endpoint + "/users/" + member.getUrlEscapedMemberName() + "/" + member.getUrlEscapedProfileImageUrl(); 
 	}
 }

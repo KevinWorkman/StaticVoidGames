@@ -40,22 +40,22 @@
 	                	</div><div class="row">
 	            	</c:if>
 					
-						<a href="<c:url value="/games/${game.getGameName()}" />">
+						<a href="<c:url value="/games/${game.getUrlEscapedGameName()}" />">
 							<div class="col-xs-2">
 								
 								<div class="panel panel-primary">
-									<div class="panel-heading">${game.getTitle()}</div>
+									<div class="panel-heading">${game.getEscapedTitle()}</div>
 									<div class="panel-body">
 										<c:choose>
 										<c:when test="${game.getThumbnailUrl() == null}"><img src="<c:url value="${s3Endpoint}/images/staticVoidProfile3.png"/>" style="max-width:100%;" /></c:when>
-										<c:otherwise><img src="<c:url value="${s3Endpoint}/games/${game.getGameName()}/${game.getThumbnailUrl()}"/>" style="max-width:100%;" /></c:otherwise>
+										<c:otherwise><img src="<c:url value="${s3Endpoint}/games/${game.getUrlEscapedGameName()}/${game.getUrlEscapedThumbnailUrl()}"/>" style="max-width:100%;" /></c:otherwise>
 										</c:choose>
 									</div>
 								
 									<div class="panel-footer">
 										<c:choose>
 										<c:when test="${game.shortDescription == null || game.shortDescription.isEmpty() || game.shortDescription == \"null\"}"></c:when>
-										<c:otherwise><p>${game.getShortDescription()}</p></c:otherwise>
+										<c:otherwise><p>${game.getParsedShortDescription()}</p></c:otherwise>
 										</c:choose>
 									</div>
 								</div>

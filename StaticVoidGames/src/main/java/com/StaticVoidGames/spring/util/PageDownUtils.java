@@ -1,10 +1,16 @@
 package com.StaticVoidGames.spring.util;
 
+import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+
+import com.eclipsesource.v8.V8;
+import com.eclipsesource.v8.V8Array;
 
 /**
  * Utility class that contains a method that parses markdown into html.
@@ -17,21 +23,29 @@ public class PageDownUtils {
 	 */
 	public static String getSanitizedHtml(String markdown){
 		
+//		System.out.println(new File(".").getAbsolutePath());
+//		for(String f : new File(".").list()){
+//			System.out.println("\t" + f);
+//		}
+
 		if(markdown == null){
 			return null;
 		}
 
-		//TODO: going through the javascript library seems a bit hackish. If there's a PageDown Java library, we should switch to that.
-		//The other way to go would be to eliminate this altogether and do all of the PageDown parsing on the client side.
-		
 		try{
-			ScriptEngineManager manager = new ScriptEngineManager();
-			ScriptEngine engine = manager.getEngineByName("JavaScript");
-			engine.eval(new InputStreamReader(PageDownUtils.class.getResourceAsStream("pageDown.js")));
-			Invocable inv = (Invocable) engine;
-			String s = String.valueOf(inv.invokeFunction("getSanitizedHtml", markdown));
+			V8 runtime = V8.createV8Runtime();
+			
+			 runtime.executeScript( new String(Files.readAllBytes(Paths.get(PageDownUtils.class.getResource("Markdown.Converter.js").toURI()))));
+	         runtime.executeScript( new String(Files.readAllBytes(Paths.get(PageDownUtils.class.getResource("Markdown.Sanitizer.js").toURI()))));
+	         runtime.executeScript( new String(Files.readAllBytes(Paths.get(PageDownUtils.class.getResource("MarkdownParser.js").toURI()))));
 
-			return s;
+			V8Array args = new V8Array(runtime);
+			args.push(markdown);
+
+			String html = runtime.executeStringFunction("parseMarkdown", args);
+			args.release();
+			runtime.release();
+			return html;
 		}
 		catch(Exception e){
 			e.printStackTrace();

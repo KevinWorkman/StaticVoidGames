@@ -296,6 +296,10 @@ public class GameController implements GameControllerInterface{
 			return "login";
 		}
 		
+		if(gameUrlName.contains("/") || gameUrlName.contains("\\")){
+			
+		}
+		
 		Game g = gameDao.getGame(gameUrlName);
 		if(g == null){
 			

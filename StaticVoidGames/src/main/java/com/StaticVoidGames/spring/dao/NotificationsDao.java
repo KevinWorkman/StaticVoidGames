@@ -18,4 +18,5 @@ public interface NotificationsDao {
 	public Collection<TimestampedEvent> getEvents(int count);
 	public void setMemberViewedNotificationsTime(String loggedInMember, long time);
 	void updateMemberSubscription(String member, String entityId, String type, String label);
+	public List<Subscription> getAllSubscriptions();
 }

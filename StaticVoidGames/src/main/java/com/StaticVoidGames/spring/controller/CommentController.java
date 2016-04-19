@@ -19,6 +19,7 @@ import com.StaticVoidGames.spring.dao.GameDao;
 import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 
 /**
  * Controller that handles creating and deleting comments.
@@ -88,11 +89,11 @@ public class CommentController implements CommentControllerInterface{
 				valid = false;
 			}
 			else if(!ownsComment && !loggedInMember.equals(blog.getMember())){
-				redirect =  "/blog/" + blog.getMember() + "/" + thingCommentedOn;
+				redirect =  "/blog/" + thingCommentedOn;
 				valid = false;
 			}
 			else{
-				redirect =  "/blog/" + blog.getMember() + "/" + thingCommentedOn;
+				redirect =  "/blog/" + thingCommentedOn;
 				valid = true;
 			}
 		}
@@ -129,6 +130,8 @@ public class CommentController implements CommentControllerInterface{
 	@Transactional
 	public String addComment(@PathVariable(value="type") String type, @PathVariable(value="thingCommentedOn") String thingCommentedOn, @RequestParam("commentInput") String commentInput, HttpSession session){
 
+		thingCommentedOn = HtmlEscaper.unescapeUrlPart(thingCommentedOn);
+		
 		String loggedInMember = (String) session.getAttribute(AttributeNames.loggedInUser);
 
 		if(loggedInMember != null){

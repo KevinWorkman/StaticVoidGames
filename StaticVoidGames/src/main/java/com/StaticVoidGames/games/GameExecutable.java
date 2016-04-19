@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.StaticVoidGames.spring.util.PageDownUtils;
+
 /**
  * This class represents a single packaged executable file for a game. A game can have more than one of these, but most games will have none.
  * TODO: there is currently no way to create these. This hasn't been implemented in the new site yet.
@@ -37,6 +39,10 @@ public class GameExecutable {
 	 * Empty constructor needed by Hibernate.
 	 */
 	public GameExecutable(){}
+	
+	public String getParsedLabel(){
+		return PageDownUtils.getSanitizedHtml(label);
+	}
 	
 	public String getLabel(){
 		return label;

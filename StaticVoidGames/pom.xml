@@ -16,9 +16,6 @@
 		<spring-framework.version>4.0.5.RELEASE</spring-framework.version>
 		<spring-security.version>3.1.4.RELEASE</spring-security.version>
 
-		<!-- common libraries -->
-		<cglib.version>3.0</cglib.version>
-
 		<!-- Hibernate / JPA -->
 		<mysql.version>5.1.25</mysql.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
@@ -46,12 +43,8 @@
 
 	<dependencies>
 
-		<!-- common libraries -->
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>${cglib.version}</version>
-		</dependency>
+		<!-- common libraries <dependency> <groupId>cglib</groupId> <artifactId>cglib</artifactId> 
+			<version>3.0</version> </dependency> -->
 
 		<!-- Spring and Transactions -->
 		<dependency>
@@ -83,6 +76,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- querydsl -->
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
@@ -101,6 +95,7 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
+		<!-- mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -138,7 +133,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		
+
 		<!-- JSON parser, for getting forum points -->
 		<dependency>
 			<groupId>org.json</groupId>
@@ -223,7 +218,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.8.4</version>
+			<version>1.10.52</version>
 		</dependency>
 
 
@@ -252,6 +247,35 @@
 			<artifactId>recaptcha4j</artifactId>
 			<version>0.0.7</version>
 		</dependency>
+
+		<!-- j2v8 JavaScript engine for server-side markdown -->
+		 <dependency>
+			<groupId>com.eclipsesource.j2v8</groupId>
+			<artifactId>j2v8_win32_x86_64</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+
+		<!-- j2v8 linux for production server. Probably a more maven-y way to do this. -->
+		<dependency>
+			<groupId>com.eclipsesource.j2v8</groupId>
+			<artifactId>j2v8_linux_x86_64</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+		
+		<!-- owasp encoder for escaping unsafe html -->
+		<dependency>
+		        <groupId>org.owasp.encoder</groupId>
+		        <artifactId>encoder</artifactId>
+		        <version>1.2</version>
+		</dependency>
+
+		<!-- owasp taglib for escaping unsafe html in JSP -->
+		<dependency>
+		        <groupId>org.owasp.encoder</groupId>
+		        <artifactId>encoder-jsp</artifactId>
+		        <version>1.2</version>
+		</dependency>
+
 
 
 	</dependencies>

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.StaticVoidGames.TimestampedEvent;
+import com.StaticVoidGames.spring.util.HtmlEscaper;
 import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
@@ -88,7 +89,26 @@ public class Member implements TimestampedEvent{
 	 */
 	public Member(){}
 	
-
+	public String getEscapedMemberName() {
+		return HtmlEscaper.escape(memberName);
+	}
+	
+	public String getUrlEscapedMemberName() {
+		return HtmlEscaper.escapeUrlPart(memberName);
+	}
+	
+	public String getUrlEscapedProfileImageUrl() {
+		return HtmlEscaper.escapeUrlPart(imageUrl);
+	}
+	
+	public String getParsedMemberName(){
+		return PageDownUtils.getSanitizedHtml(memberName);
+	}
+	
+	public String getParsedDescription(){
+		return PageDownUtils.getSanitizedHtml(description);
+	}
+	
 	public String getMemberName() {
 		return memberName;
 	}
@@ -177,7 +197,7 @@ public class Member implements TimestampedEvent{
 	
 	@Override
 	public String getEventText() {
-		return memberName + " joined";
+		return getEscapedMemberName() + " joined";
 	}
 	
 	@Override
@@ -187,7 +207,7 @@ public class Member implements TimestampedEvent{
 
 	@Override
 	public String getRelativeUrl() {
-		return "/members/" + memberName;
+		return "/members/" + getUrlEscapedMemberName();
 	}
 
 	@Override
@@ -246,6 +266,7 @@ public class Member implements TimestampedEvent{
 	public void setNotificationCount(int notificationCount) {
 		this.notificationCount = notificationCount;
 	}
+
 }
 
 

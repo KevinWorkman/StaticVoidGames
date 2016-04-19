@@ -47,4 +47,9 @@ public class CommentJpaDao implements CommentDao{
 		return lastComment.getId() + 1;
 	}
 
+	@Override
+	public List<Comment> getAllComments() {
+		return (List<Comment>)sessionFactory.getCurrentSession().createCriteria(Comment.class).list();
+	}
+
 }

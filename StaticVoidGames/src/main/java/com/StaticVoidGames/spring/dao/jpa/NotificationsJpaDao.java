@@ -172,6 +172,9 @@ public class NotificationsJpaDao implements NotificationsDao{
 		else{
 			List<TimestampedEvent> events = new ArrayList<TimestampedEvent>();
 			for(TimestampedEvent event : allEvents){
+				
+				//System.out.println(event.getRelativeUrl());
+				
 				events.add(event);
 				
 				if(events.size() == count){
@@ -272,5 +275,10 @@ public class NotificationsJpaDao implements NotificationsDao{
 		sub.setType(type);
 		
 		sessionFactory.getCurrentSession().saveOrUpdate(sub);
+	}
+
+	@Override
+	public List<Subscription> getAllSubscriptions() {
+		return (List<Subscription>)sessionFactory.getCurrentSession().createCriteria(Subscription.class).list();
 	}
 }

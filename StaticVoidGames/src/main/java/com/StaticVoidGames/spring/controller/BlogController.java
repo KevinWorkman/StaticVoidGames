@@ -32,6 +32,7 @@ import com.StaticVoidGames.spring.dao.MemberDao;
 import com.StaticVoidGames.spring.dao.NotificationsDao;
 import com.StaticVoidGames.spring.util.AttributeNames;
 import com.StaticVoidGames.spring.util.OpenSourceLink;
+import com.StaticVoidGames.spring.util.PageDownUtils;
 
 /**
  * Controller that handles blogs.
@@ -98,7 +99,6 @@ public class BlogController implements BlogControllerInterface{
 	@RequestMapping("/{blogUrlId}")
 	public String viewBlogEntry(HttpServletRequest request, ModelMap model, @PathVariable("blogUrlId") String blogUrlId, HttpSession session) {
 		
-		
 		String s3Endpoint =  env.getProperty("s3.endpoint");
 		
 		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
@@ -108,6 +108,7 @@ public class BlogController implements BlogControllerInterface{
 		}
 		
 		model.addAttribute("blog", blog);
+		model.addAttribute("blogContent", PageDownUtils.getSanitizedHtml(blog.getText()));
 		
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 		model.addAttribute("isOwner", blog.getMember().equals(loggedInMember));
@@ -152,13 +153,12 @@ public class BlogController implements BlogControllerInterface{
 	}
 
 	@Override
-	public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, HttpSession session, @RequestParam("text") String text) {
-		
+	@RequestMapping(value="/{blogUrlId}/edit", method = RequestMethod.POST)
+	public String editBlogEntrySubmit(HttpServletRequest request, ModelMap model, @PathVariable(value="blogUrlId") String blogUrlId, HttpSession session, @RequestParam("text") String text) {
+				
 		String loggedInMember = (String) request.getSession().getAttribute(AttributeNames.loggedInUser);
 
-		String editedBlog = request.getParameter("editedBlog");
-		
-		BlogEntry blog = blogEntryDao.getBlogEntry(editedBlog);
+		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
 
 		if(!loggedInMember.equals(blog.getMember())){
 			return "redirect:" + BlogController.getFullUrl(blog);
@@ -224,14 +224,13 @@ public class BlogController implements BlogControllerInterface{
 	}
 
 	public static String getFullUrl(BlogEntry blog){
-		return "/blog/"+ blog.getUrlName();
+		return "/blog/"+ blog.getUrlEscapedUrlName();
 	}	
 	
 	//TODO: should probably just store this in the databse
 	@Transactional
 	@RequestMapping(value="/{blogUrlId}/thumbnail", method = RequestMethod.GET)
     public @ResponseBody String getBlogThumbnail(HttpServletRequest request, ModelMap model, @PathVariable(value="blogUrlId") String blogUrlId, HttpSession session){
-		
 		
 		BlogEntry blog = blogEntryDao.getBlogEntry(blogUrlId);
 		String text = blog.getParsedText();
