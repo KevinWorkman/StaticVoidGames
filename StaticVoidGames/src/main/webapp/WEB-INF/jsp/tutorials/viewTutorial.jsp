@@ -16,25 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/sunburst.css"/>">
     
 	<link rel="shortcut icon" href="<c:url value="/images/favicon.png"/>" />
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Converter.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/Markdown.Sanitizer.js"/>"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	
-	<script>var baseUrl = '<c:url value="/"/>';</script>
-	<script>
-	    function parseTutorialMarkdown(){
-	    	var converter =  new Markdown.getSanitizingConverter();
-    		converter.hooks.chain("postConversion", function (text) {
-    		    return text.replace(/<pre>/gi, "<pre class=prettyprint>");
-    		});
-    		var tutorialHtml = converter.makeHtml($("#tutorialText").html());
-    		
-    		$("#tutorialText").html(tutorialHtml);
-    		prettyPrint();
-	    }
-	    $(parseTutorialMarkdown);
-    
-    </script>
 	
 	<style>
 		.list-group-item{
@@ -69,6 +51,7 @@
 		}
 		
 		$(setTutorialNavigationTitle);
+		$(prettyPrint);
 	</script>
 	
 </head>
@@ -92,7 +75,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Have a question about this tutorial? Come talk about it on <a target="_blank" href="http://forum.staticvoidgames.com/">the forum</a>!</div>
 		
-			<div class="panel-body" id="tutorialText2">${tutorialHtml}</div>
+			<div class="panel-body">${tutorialHtml}</div>
 		</div>
 	</div>
 	

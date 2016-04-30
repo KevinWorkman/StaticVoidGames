@@ -181,8 +181,8 @@ public class EditGameController implements EditGameControllerInterface{
 
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
-				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/index.jsp"),
-				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
+						new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/index.jsp"),
+						new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
 		}
 				);
 
@@ -215,8 +215,8 @@ public class EditGameController implements EditGameControllerInterface{
 
 		boolean redoLibGdxHtml = false;
 		boolean redoProcessingJavaScript = false;
-		
-		
+
+
 		String awsAccessKey = env.getProperty("aws.accessKey");
 		String awsSecretKey = env.getProperty("aws.secretKey");
 		String bucket = env.getProperty("s3.bucket");
@@ -310,7 +310,7 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		if(gameForm.getApkFile() != null && !gameForm.getApkFile().isEmpty()){
-			
+
 			String key = "games/" + game + "/" + gameForm.getApkFile().getOriginalFilename();
 
 			ObjectMetadata meta = new ObjectMetadata();
@@ -328,8 +328,8 @@ public class EditGameController implements EditGameControllerInterface{
 
 			redoLibGdxHtml = true;
 			redoProcessingJavaScript = true;
-		
-			
+
+
 		}
 
 		if(gameForm.getAndroidText() != null && !gameForm.getAndroidText().equals(gameObj.getAndroidText())){
@@ -382,7 +382,7 @@ public class EditGameController implements EditGameControllerInterface{
 			gameObj.setJavaScriptIndex(gameForm.getJavaScriptIndex());
 		}
 
-		
+
 
 		if(gameForm.getJarFile() != null && !gameForm.getJarFile().isEmpty()){
 
@@ -495,15 +495,20 @@ public class EditGameController implements EditGameControllerInterface{
 
 		if(gameForm.getLibgdxHtmlFile() != null && !gameForm.getLibgdxHtmlFile().isEmpty()){
 
-			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
-			ObjectListing ol =s3.listObjects(bucket, "games/" + game + "/gdx/"); 
+			try{
+				ObjectListing ol =s3.listObjects(bucket, "games/" + game + "/gdx/"); 
 
-			List<String> keys = new ArrayList<String>();
-			for(S3ObjectSummary os : ol.getObjectSummaries()){
-				keys.add(os.getKey());
+				List<String> keys = new ArrayList<String>();
+				for(S3ObjectSummary os : ol.getObjectSummaries()){
+					keys.add(os.getKey());
+				}
+				DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+				deleteRequest.withKeys(keys.toArray(new String[]{}));
+				s3.deleteObjects(deleteRequest);
 			}
-			deleteRequest.withKeys(keys.toArray(new String[]{}));
-			s3.deleteObjects(deleteRequest);
+			catch(Exception e){
+				System.out.println("Error while deleting ibGDX html, continuing.");
+			}
 
 			MultipartFile cmf = gameForm.getLibgdxHtmlFile();
 
@@ -561,17 +566,22 @@ public class EditGameController implements EditGameControllerInterface{
 
 		if(gameForm.getProcessingJavaScriptFile() != null && !gameForm.getProcessingJavaScriptFile().isEmpty()){
 
-			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
-			ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/p5/"); 
+			try{
+				DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+				ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/p5/"); 
 
-			List<String> keys = new ArrayList<String>();
-			for(S3ObjectSummary os : ol.getObjectSummaries()){
-				System.out.println("key: " + os.getKey());
-				keys.add(os.getKey());
+				List<String> keys = new ArrayList<String>();
+				for(S3ObjectSummary os : ol.getObjectSummaries()){
+					System.out.println("key: " + os.getKey());
+					keys.add(os.getKey());
+				}
+				if(!keys.isEmpty()){
+					deleteRequest.withKeys(keys.toArray(new String[]{}));
+					s3.deleteObjects(deleteRequest);
+				}
 			}
-			if(!keys.isEmpty()){
-				deleteRequest.withKeys(keys.toArray(new String[]{}));
-				s3.deleteObjects(deleteRequest);
+			catch(Exception e){
+				System.out.println("Error while deleting Processing JavaScript file. Continuing.");
 			}
 			MultipartFile cmf = gameForm.getProcessingJavaScriptFile();
 
@@ -634,16 +644,21 @@ public class EditGameController implements EditGameControllerInterface{
 
 		if(gameForm.getJavaScriptFile() != null && !gameForm.getJavaScriptFile().isEmpty()){
 
-			DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
-			ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/js/"); 
+			try{
+				DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(bucket);
+				ObjectListing ol = s3.listObjects(bucket, "games/" + game + "/js/"); 
 
-			List<String> keys = new ArrayList<String>();
-			for(S3ObjectSummary os : ol.getObjectSummaries()){
-				keys.add(os.getKey());
+				List<String> keys = new ArrayList<String>();
+				for(S3ObjectSummary os : ol.getObjectSummaries()){
+					keys.add(os.getKey());
+				}
+				if(!keys.isEmpty()){
+					deleteRequest.withKeys(keys.toArray(new String[]{}));
+					s3.deleteObjects(deleteRequest);
+				}
 			}
-			if(!keys.isEmpty()){
-				deleteRequest.withKeys(keys.toArray(new String[]{}));
-				s3.deleteObjects(deleteRequest);
+			catch(Exception e){
+				System.out.println("Error deleting JavaScript file. Continuing.");
 			}
 			MultipartFile cmf = gameForm.getJavaScriptFile();
 
@@ -1120,8 +1135,8 @@ public class EditGameController implements EditGameControllerInterface{
 
 		model.addAttribute("openSourceLinks", 
 				new OpenSourceLink[]{
-				new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/editGame.jsp"),
-				new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
+						new OpenSourceLink("View this page's jsp code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/webapp/WEB-INF/jsp/editGame/editGame.jsp"),
+						new OpenSourceLink("View this page's server code.", "https://github.com/KevinWorkman/StaticVoidGames/blob/master/StaticVoidGames/src/main/java/com/StaticVoidGames/spring/controller/EditGameController.java")
 		}
 				);
 
