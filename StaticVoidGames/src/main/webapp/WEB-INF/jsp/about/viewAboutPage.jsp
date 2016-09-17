@@ -31,7 +31,7 @@
 	<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation3.jsp" %>
 	
-<div class="container" style="margin-top:10px;">
+<div class="container">
 
 		<div class="col-xs-2">
 			<div class="panel panel-default">
@@ -43,9 +43,7 @@
 		</div>
 		
 		<div class="col-xs-10" >
-			<div class="panel panel-default">
-				<div class="panel-heading"><c:out value="${aboutTitle}" /></div>
-		
+			<div class="panel panel-default">		
 				<div class="panel-body" >${aboutContent}</div>
 			</div>
 		</div>

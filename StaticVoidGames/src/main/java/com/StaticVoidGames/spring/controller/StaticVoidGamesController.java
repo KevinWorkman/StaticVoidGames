@@ -181,66 +181,69 @@ public class StaticVoidGamesController implements StaticVoidGamesControllerInter
 	@Override
 	public String registerPost(HttpServletRequest request, ModelMap model, HttpSession session, String email, String username, String password) {
 
-		if(username.contains("/") || username.contains("\\")){
-			model.addAttribute("registrationError", "Usernames can't contain slashes.");
-			return register(model, session);
-		}
+		//the registration page already contains the mothball message
+		return register(model, session);
 		
-		Member m = memberDao.getMember(username);
-		
-		model.addAttribute("username", username);
-		model.addAttribute("email", email);
-
-		if(m != null){
-			model.addAttribute("registrationError", "Somebody already took that username.");
-			return register(model, session);
-		}
-
-
-		String recaptchaPrivateKey = env.getProperty("recaptcha.privateKey");
-
-		String remoteAddr = request.getRemoteAddr();
-		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-		reCaptcha.setPrivateKey(recaptchaPrivateKey);
-
-		String challenge = request.getParameter("recaptcha_challenge_field");
-		String uresponse = request.getParameter("recaptcha_response_field");
-		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-		if (!reCaptchaResponse.isValid()) {
-			model.addAttribute("registrationError", "Please try the captcha again.");
-			return register(model, session);
-		}
-
-		m = new Member();
-		m.setJoinTimestamp(System.currentTimeMillis());
-		m.setMemberName(username);
-		m.setEmail(email);
-
-		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(10);
-		String bcryptHash = bcrypt.encode(password);
-
-		m.setBcryptHash(bcryptHash);
-		
-		m.setActivated(!Boolean.parseBoolean(env.getProperty("activation.mail.required")));
-		
-		m.setActivationId(ActivationEmailSender.generateRandomKey(32));
-
-		memberDao.updateMember(m);
-		
-		notificationsDao.updateMemberSubscription(username, username, "Account", "Comments on your profile");
-		
-		if(Boolean.parseBoolean(env.getProperty("activation.mail.required"))){
-			ActivationEmailSender aes = new ActivationEmailSender(env);
-			aes.sendActivationEmail(m);
-		
-			model.addAttribute("loginError", "Before you can login, you must activate your account by clicking the link in the activation email.");
-		}
-		else{
-			model.addAttribute("loginError", "You can now login!");
-			
-		}
-		return "login";
+//		if(username.contains("/") || username.contains("\\")){
+//			model.addAttribute("registrationError", "Usernames can't contain slashes.");
+//			return register(model, session);
+//		}
+//		
+//		Member m = memberDao.getMember(username);
+//		
+//		model.addAttribute("username", username);
+//		model.addAttribute("email", email);
+//
+//		if(m != null){
+//			model.addAttribute("registrationError", "Somebody already took that username.");
+//			return register(model, session);
+//		}
+//
+//
+//		String recaptchaPrivateKey = env.getProperty("recaptcha.privateKey");
+//
+//		String remoteAddr = request.getRemoteAddr();
+//		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+//		reCaptcha.setPrivateKey(recaptchaPrivateKey);
+//
+//		String challenge = request.getParameter("recaptcha_challenge_field");
+//		String uresponse = request.getParameter("recaptcha_response_field");
+//		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+//
+//		if (!reCaptchaResponse.isValid()) {
+//			model.addAttribute("registrationError", "Please try the captcha again.");
+//			return register(model, session);
+//		}
+//
+//		m = new Member();
+//		m.setJoinTimestamp(System.currentTimeMillis());
+//		m.setMemberName(username);
+//		m.setEmail(email);
+//
+//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(10);
+//		String bcryptHash = bcrypt.encode(password);
+//
+//		m.setBcryptHash(bcryptHash);
+//		
+//		m.setActivated(!Boolean.parseBoolean(env.getProperty("activation.mail.required")));
+//		
+//		m.setActivationId(ActivationEmailSender.generateRandomKey(32));
+//
+//		memberDao.updateMember(m);
+//		
+//		notificationsDao.updateMemberSubscription(username, username, "Account", "Comments on your profile");
+//		
+//		if(Boolean.parseBoolean(env.getProperty("activation.mail.required"))){
+//			ActivationEmailSender aes = new ActivationEmailSender(env);
+//			aes.sendActivationEmail(m);
+//		
+//			model.addAttribute("loginError", "Before you can login, you must activate your account by clicking the link in the activation email.");
+//		}
+//		else{
+//			model.addAttribute("loginError", "You can now login!");
+//			
+//		}
+//		return "login";
 
 	}
 

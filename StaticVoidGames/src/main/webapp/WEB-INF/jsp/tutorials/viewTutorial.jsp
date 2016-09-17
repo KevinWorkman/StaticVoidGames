@@ -59,7 +59,7 @@
 	<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation3.jsp" %>
 	
-	<div class="container-fluid" style="margin-top:10px;">
+	<div class="container-fluid">
 	
 	<div class="col-xs-3">
 		<div class="panel panel-default">

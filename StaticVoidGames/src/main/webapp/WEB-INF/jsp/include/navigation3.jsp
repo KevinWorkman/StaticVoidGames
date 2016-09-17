@@ -1,8 +1,8 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
-<nav class="navbar navbar-inverse navbar-fixed-top" style="height:50px; min-width:720px; overflow:hidden;">
+<nav class="navbar navbar-inverse navbar-fixed-top" style=min-width:720px; overflow:hidden;">
 	<div>
-		<a class="logo" href="<c:url value="/" />"><img alt="Static Void Games" style="height:50px; vertical-align:top;" src="<c:url value="/images/StaticVoidGamesLogo3.png" />"/></a>
+		<a class="logo" href="<c:url value="/" />"><img alt="Static Void Games" style="vertical-align:top;" src="<c:url value="/images/StaticVoidGamesLogo3.png" />"/></a>
        
         
         <div style="display:inline-block; vertical-align:top;">
@@ -56,18 +56,20 @@
 			<div class="navigationBar" style="margin-top:5px;">
 				<a href="<c:url value="/games" />">Play</a>
 				<a href="<c:url value="/tutorials" />">Tutorials</a>
-				<a href="<c:url value="/games/new" />">Upload</a>
 				<a href="<c:url value="/about" />">About</a>
 				<a href="<c:url value="/blog" />">Blog</a>
-				<a href="<c:url value="http://forum.StaticVoidGames.com" />">Forum</a>
+				<a href="<c:url value="http://forum.HappyCoding.io" />">Forum</a>
 				<a href="<c:url value="/notifications" />">Events</a>
 			</div>
         </div>
         
 		<div style="display:inline-block; float:right">
-			<a title="Static Void Games on Facebook" href="http://www.facebook.com/StaticVoidGames" target="_blank"><img style="height:50px;" src="http://s3.StaticVoidGames.com/images/FacebookLogo.png" /></a>
-			<a title="@StaticVoidGames" href="https://twitter.com/StaticVoidGames" target="_blank"><img style="height:50px;" src="http://s3.StaticVoidGames.com/images/TwitterBird.png" /></a>
+			<a title="Static Void Games on Facebook" href="http://www.facebook.com/HappyCoding.io" target="_blank"><img style="height:50px;" src="http://s3.StaticVoidGames.com/images/FacebookLogo.png" /></a>
+			<a title="@KevinAWorkman" href="https://twitter.com/KevinAWorkman" target="_blank"><img style="height:50px;" src="http://s3.StaticVoidGames.com/images/TwitterBird.png" /></a>
 		</div>
         
   </div>
-    </nav>
+  
+  <p style="text-align:center;">Static Void Games is now closed! Read <a href="http://staticvoidgames.com/blog/HappyCoding">this blog</a> for more info, and check out my new project at <a href="http://HappyCoding.io">HappyCoding.io</a>!</p>
+  
+</nav>

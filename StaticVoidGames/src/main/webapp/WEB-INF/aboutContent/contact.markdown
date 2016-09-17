@@ -1,9 +1,3 @@
-The best way to get in touch is through [our forum](http://forum.staticvoidgames.com).
+Static Void Games is in mothball mode. Check out my new project at [HappyCoding.io](http://HappyCoding.io)!
 
-You can find Static Void Games on both [facebook](https://www.facebook.com/StaticVoidGames) and [twitter](https://twitter.com/StaticVoidGames).
-
-If all else fails, please do not hesitate to send me an email at [kevin@StaticVoidGames.com](mailto:kevin@StaticVoidGames.com)!
-
-###Who are you?
-
-My name is Kevin Workman. I live and work as a programmer in the Washington DC area, and I started Static Void Games mostly as a place to upload my own little hobby projects. Then other people started using it, and it has grown slowly and steadily into the site you're looking at now.
+If you need to reach me, check out [forum.HappyCoding.io](http://forum.HappyCoding.io) or email me at [kevin@HappyCoding.io](mailto:kevin@HappyCoding.io).

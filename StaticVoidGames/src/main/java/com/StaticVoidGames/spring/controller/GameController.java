@@ -289,32 +289,34 @@ public class GameController implements GameControllerInterface{
 	@Override
 	public String newGamePost(ModelMap model, HttpSession session, @RequestParam("gameUrlName") String gameUrlName) {
 		
+		//new game page already contains mothball message
+		return "editGame/new";
 		
-		String loggedInMember = (String) session.getAttribute(AttributeNames.loggedInUser);
-		
-		if(loggedInMember == null){
-			return "login";
-		}
-		
-		if(gameUrlName.contains("/") || gameUrlName.contains("\\")){
-			
-		}
-		
-		Game g = gameDao.getGame(gameUrlName);
-		if(g == null){
-			
-			g = new Game(gameUrlName, loggedInMember);
-			
-			gameDao.updateGame(g);
-			
-			notificationDao.updateMemberSubscription(loggedInMember, gameUrlName, "Game", "Comments on " + gameUrlName);
-			
-			return "redirect:/games/" + gameUrlName + "/edit/";
-		}
-		else{
-			model.addAttribute("newError", "A game with that URL already exists.");
-			
-			return "editGame/new";
-		}
+//		String loggedInMember = (String) session.getAttribute(AttributeNames.loggedInUser);
+//		
+//		if(loggedInMember == null){
+//			return "login";
+//		}
+//		
+//		if(gameUrlName.contains("/") || gameUrlName.contains("\\")){
+//			
+//		}
+//		
+//		Game g = gameDao.getGame(gameUrlName);
+//		if(g == null){
+//			
+//			g = new Game(gameUrlName, loggedInMember);
+//			
+//			gameDao.updateGame(g);
+//			
+//			notificationDao.updateMemberSubscription(loggedInMember, gameUrlName, "Game", "Comments on " + gameUrlName);
+//			
+//			return "redirect:/games/" + gameUrlName + "/edit/";
+//		}
+//		else{
+//			model.addAttribute("newError", "A game with that URL already exists.");
+//			
+//			return "editGame/new";
+//		}
 	}
 }

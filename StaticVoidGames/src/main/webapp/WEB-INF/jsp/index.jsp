@@ -47,7 +47,7 @@
           <h4><a href="<c:url value="/tutorials" />">Learn</a></h4>
           <p>Our tutorials go from basic Processing through advanced libGDX.</p>
 
-          <h4><a href="<c:url value="/upload" />">Code</a></h4>
+          <h4>Code</h4>
           <p>Free hosting for Processing, Java, libGDX, and JavaScript games.</p>
         </div>
 
@@ -55,11 +55,11 @@
           <h4><a href="<c:url value="/blog" />">Blog</a></h4>
           <p>Read about what we're up to, or write your own blog to keep us updated on your latest projects.</p>
 
-          <h4><a href="<c:url value="http://forum.StaticVoidGames.com" />">Forum</a></h4>
+          <h4><a href="<c:url value="http://forum.HappyCoding.io" />">Forum</a></h4>
           <p>Stuck on a code problem? Just want to talk? Come say hi!</p>
 
           <h4><a href="https://github.com/KevinWorkman/StaticVoidGames">Open Source</a></h4>
-          <p>Static Void Games is completely open-source. Want to practice your web development skill? Contribute on GitHub!</p>
+          <p>Static Void Games is completely open-source. Want to practice your web development skills? Contribute on GitHub!</p>
         </div>
       </div>
       </div>

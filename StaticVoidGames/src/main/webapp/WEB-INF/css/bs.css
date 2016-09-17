@@ -22,7 +22,8 @@ h2{
 }
 
 .container, .container-fluid{
-min-width:720px;
+	margin-top:50px;
+	min-width:720px;
 }
 
 .navigationBar a{

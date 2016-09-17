@@ -51,7 +51,7 @@
 <body style="background-image:url(<c:url value="${backgroundImage}"/>);">
 	<%@ include file="../include/analytics.jsp"%>
 	<%@ include file="../include/navigation3.jsp" %>
-	<div class="container-fluid" style="margin-top:10px;">
+	<div class="container-fluid">
 
 
 		<div class="col-xs-4">

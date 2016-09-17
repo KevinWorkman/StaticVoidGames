@@ -1125,9 +1125,20 @@ public class EditGameController implements EditGameControllerInterface{
 		}
 
 		if(gameObj.getFaviconUrl() != null){
-			String s3Endpoint = env.getProperty("s3.endpoint");
-			model.addAttribute("faviconImage", s3Endpoint + "/games/" + game + "/" + gameObj.getFaviconUrl());
+			
+			if(gameObj.getFaviconUrl().startsWith("http://")){
+				model.addAttribute("faviconImage", gameObj.getFaviconUrl());
+			}
+			else{
+				String s3Endpoint = env.getProperty("s3.endpoint");
+				model.addAttribute("faviconImage", s3Endpoint + "/games/" + gameObj.getGameName() + "/" +  gameObj.getFaviconUrl());
+			}
 		}
+		else{
+			model.addAttribute("faviconImage", "http://StaticVoidGames.com/images/favicon.png");
+		}
+		
+		
 
 		model.addAttribute("gameForm", gameObj.getGameForm());
 		model.addAttribute("formFields", formFields.get(section));
