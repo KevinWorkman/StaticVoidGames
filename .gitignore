@@ -3,6 +3,7 @@ StaticVoidGames/.project
 StaticVoidGames/.classpath
 StaticVoidGames/.settings
 StaticVoidGames/target
+_site/
 
 StaticVoidGames/src/main/java/local.properties
 *.db
